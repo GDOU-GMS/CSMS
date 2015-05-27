@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+    "-//Hibernate/Hibernate Configuration DTD//EN"
+    "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+  <session-factory>
+      
+
+      <!-- 方言 -->
+      <property name="hibernate.dialect">
+          org.hibernate.dialect.MySQLDialect
+      </property>
+
+      <!-- 根据持久化类和映射文件动态生成表 -->
+      <property name="hibernate.hbm2ddl.auto">update</property>
+      <property name="show_sql">true</property>
+		
+	  <mapping class="org.blueshit.csms.entity.User"/>
+
+
+  </session-factory>
+</hibernate-configuration>
