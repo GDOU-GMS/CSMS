@@ -1,15 +1,23 @@
 package org.blueshit.csms.entity;
 
+import java.io.Serializable;
+import java.util.Set;
+
 import javax.annotation.Generated;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import org.hibernate.annotations.Type;
 
 @Entity
-public class User {
+@Table(name="tb_user")
+public class User implements Serializable{
 
 	
 	private Long id;
@@ -18,6 +26,9 @@ public class User {
 	private String loginName;
 	private String intro;
 	private int permission;
+	
+	private Set<Order> orders;
+	
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -56,6 +67,14 @@ public class User {
 	}
 	public void setPermission(int permission) {
 		this.permission = permission;
+	}
+	@OneToMany(cascade=CascadeType.ALL)
+    @JoinColumn(name="user_id")
+	public Set<Order> getOrders() {
+		return orders;
+	}
+	public void setOrders(Set<Order> orders) {
+		this.orders = orders;
 	}
 	
 	
