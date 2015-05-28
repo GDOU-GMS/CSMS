@@ -16,6 +16,8 @@
       <property name="show_sql">true</property>
 		
 	<mapping class="org.blueshit.csms.entity.User"/>
+	<mapping class="org.blueshit.csms.entity.Role"/>
+	<mapping class="org.blueshit.csms.entity.Privilege"/>
 	<mapping class="org.blueshit.csms.entity.Order"/>
 	<mapping class="org.blueshit.csms.entity.OrderList"/>
 	<mapping class="org.blueshit.csms.entity.Page"/>

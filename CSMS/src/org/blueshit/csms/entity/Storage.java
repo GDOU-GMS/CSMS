@@ -3,7 +3,9 @@ package org.blueshit.csms.entity;
 import java.io.Serializable;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -74,8 +76,7 @@ public class Storage implements Serializable{
 		this.contacts_phone = contacts_phone;
 	}
 
-	@OneToMany
-	@JoinColumn(name="storage_id")
+	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.LAZY,mappedBy="storage")
 	public Set<Order> getOrders() {
 		return orders;
 	}

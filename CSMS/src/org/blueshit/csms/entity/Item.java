@@ -5,6 +5,7 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -102,8 +103,7 @@ public class Item implements Serializable{
 		this.lining = lining;
 	}
 
-	@OneToMany(cascade=CascadeType.ALL)
-	@JoinColumn(name="item_id")
+	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.LAZY,mappedBy="item")
 	public Set<OrderList> getOrderLists() {
 		return orderLists;
 	}

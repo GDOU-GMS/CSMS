@@ -6,10 +6,12 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -22,10 +24,11 @@ public class Order implements Serializable {
 	private Date time;
 	private String site;
 	private int type;
+	private String remark;
 	
-	private Long user_id;
+	private User user;
 	private Set<OrderList> orderLists;
-	private Long storage_id;
+	private Storage storage;
 	
 
 	@Id
@@ -70,16 +73,17 @@ public class Order implements Serializable {
 		this.type = type;
 	}
 
-	public Long getUser_id() {
-		return user_id;
+	@ManyToOne
+	@JoinColumn(name="user_id")
+	public User getUser() {
+		return user;
 	}
 
-	public void setUser_id(Long user_id) {
-		this.user_id = user_id;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
-	@OneToMany(cascade=CascadeType.ALL)
-	@JoinColumn(name="order_id")
+	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.LAZY,mappedBy="order")
 	public Set<OrderList> getOrderLists() {
 		return orderLists;
 	}
@@ -88,12 +92,22 @@ public class Order implements Serializable {
 		this.orderLists = orderLists;
 	}
 
-	public Long getStorage_id() {
-		return storage_id;
+	@ManyToOne
+	@JoinColumn(name="storage_id")
+	public Storage getStorage() {
+		return storage;
 	}
 
-	public void setStorage_id(Long storage_id) {
-		this.storage_id = storage_id;
+	public void setStorage(Storage storage) {
+		this.storage = storage;
+	}
+
+	public String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
 	}
 	
 	

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+
+	<!-- 配置为开发模式 -->
+	<constant name="struts.devMode" value="true" />
+	<!-- 修改后缀名 -->
+	<constant name="struts.action.extension" value="do" />
+	<!-- 把主题改为simple -->
+	<constant name="struts.ui.theme" value="simple" />
+	
+	
+	<constant name="struts.i18n.encoding" value="UTF-8" />
+	<constant name="struts.multipart.maxSize" value="10000000" />
+	<constant name="struts.multipart.saveDir" value="/tmp" />
+	
+
+
+	<package name="base" namespace="/" extends="struts-default">
+	
+		
+		
+	</package>
+
+
+
+
+</struts>

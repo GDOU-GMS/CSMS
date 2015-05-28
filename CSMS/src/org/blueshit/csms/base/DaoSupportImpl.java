@@ -15,15 +15,14 @@ import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-@Repository
 @Transactional
-public class  DaoSupportImlp<T> implements DaoSupport<T>{
+public class  DaoSupportImpl<T> implements DaoSupport<T>{
 	@Resource
 	private SessionFactory sessionFactory;
 
 	protected Class<T> clazz = null;
 	
-	public DaoSupportImlp(){
+	public DaoSupportImpl(){
 		//通过反射获取T的真实类型.
 		ParameterizedType pt = (ParameterizedType) this.getClass().getGenericSuperclass();
 		this.clazz = (Class<T>) pt.getActualTypeArguments()[0];
