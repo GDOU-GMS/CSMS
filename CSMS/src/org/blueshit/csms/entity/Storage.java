@@ -1,5 +1,6 @@
 package org.blueshit.csms.entity;
 
+import java.io.Serializable;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -12,7 +13,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="tb_storage")
-public class Storage {
+public class Storage implements Serializable{
 
 	private Long id;
 	private String number;

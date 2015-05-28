@@ -1,5 +1,7 @@
 package org.blueshit.csms.entity;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -8,7 +10,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="tb_order_list")
-public class OrderList {
+public class OrderList implements Serializable{
 
 	private Long id;
 	private int num;
