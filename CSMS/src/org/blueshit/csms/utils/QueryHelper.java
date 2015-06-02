@@ -107,6 +107,7 @@ public class QueryHelper {
 	 * @return
 	 */
 	public String getQueryListHql() {
+		System.out.println(fromClause + whereClause + orderByClause);
 		return fromClause + whereClause + orderByClause;
 	}
 
@@ -116,6 +117,7 @@ public class QueryHelper {
 	 * @return
 	 */
 	public String getQueryCountHql() {
+		System.out.println("SELECT COUNT(*) " + fromClause + whereClause);
 		return "SELECT COUNT(*) " + fromClause + whereClause;
 	}
 
