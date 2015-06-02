@@ -73,7 +73,7 @@ public class Order implements Serializable {
 		this.type = type;
 	}
 
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="user_id")
 	public User getUser() {
 		return user;
@@ -92,7 +92,7 @@ public class Order implements Serializable {
 		this.orderLists = orderLists;
 	}
 
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="storage_id")
 	public Storage getStorage() {
 		return storage;

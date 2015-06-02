@@ -73,7 +73,7 @@ public class Privilege {
 	public void setChildren(Set<Privilege> children) {
 		this.children = children;
 	}
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="parentId")
 	public Privilege getParent() {
 		return parent;

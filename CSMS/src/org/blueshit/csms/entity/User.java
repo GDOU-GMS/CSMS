@@ -44,7 +44,7 @@ public class User implements Serializable{
 	 */
 	public boolean hasPrivilegeByName(String privilegeName){
 		//如果是超级管理员
-		if(isAdmin()){
+		if(testAdmin()){
 			return true;
 		}
 		
@@ -66,7 +66,7 @@ public class User implements Serializable{
 	 */
 	public boolean hasPrivilegeByUrl(String privilegeUrl){
 		//如果是超级管理员
-		if(isAdmin()){
+		if(testAdmin()){
 			return true;
 		}
 		int pos = privilegeUrl.indexOf("?");
@@ -97,7 +97,7 @@ public class User implements Serializable{
 	 * 判断是不是超级超级管理员
 	 * @return
 	 */
-	private boolean isAdmin() {
+	private boolean testAdmin() {
 		if("admin".equals(loginName)){
 			return true;
 		}else{

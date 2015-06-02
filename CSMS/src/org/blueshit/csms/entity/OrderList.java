@@ -3,6 +3,7 @@ package org.blueshit.csms.entity;
 import java.io.Serializable;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -34,7 +35,7 @@ public class OrderList implements Serializable{
 	public void setNum(int num) {
 		this.num = num;
 	}
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="item_id")
 	public Item getItem() {
 		return item;
@@ -42,7 +43,7 @@ public class OrderList implements Serializable{
 	public void setItem(Item item) {
 		this.item = item;
 	}
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="order_id")
 	public Order getOrder() {
 		return order;

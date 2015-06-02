@@ -20,9 +20,10 @@
 	<mapping class="org.blueshit.csms.entity.Privilege"/>
 	<mapping class="org.blueshit.csms.entity.Order"/>
 	<mapping class="org.blueshit.csms.entity.OrderList"/>
-	<mapping class="org.blueshit.csms.entity.Page"/>
 	<mapping class="org.blueshit.csms.entity.Storage"/>
 	<mapping class="org.blueshit.csms.entity.Item"/>
+	<mapping class="org.blueshit.csms.entity.Color"/>
+	<mapping class="org.blueshit.csms.entity.Size"/>
 	
   </session-factory>
 </hibernate-configuration>
