@@ -1,0 +1,1276 @@
+<!-- AUI Documentation -->
+<!DOCTYPE html>
+    <html>
+    <head>
+
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Fides Admin</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+        <!-- Favicons -->
+
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="assets/images/icons/apple-touch-icon-144-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="assets/images/icons/apple-touch-icon-114-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/images/icons/apple-touch-icon-72-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" href="assets/images/icons/apple-touch-icon-57-precomposed.png">
+        <link rel="shortcut icon" href="assets/images/icons/favicon.png">
+
+        <!--[if lt IE 9]>
+          <script src="assets/js/minified/core/html5shiv.min.js"></script>
+          <script src="assets/js/minified/core/respond.min.js"></script>
+        <![endif]-->
+
+        <!-- Fides Admin CSS Core -->
+
+        <link rel="stylesheet" type="text/css" href="assets/css/minified/aui-production.min.css">
+
+        <!-- Theme UI -->
+
+        <link id="layout-theme" rel="stylesheet" type="text/css" href="assets/themes/minified/fides/color-schemes/dark-blue.min.css">
+
+        <!-- Fides Admin Responsive -->
+
+        <link rel="stylesheet" type="text/css" href="assets/themes/minified/fides/common.min.css">
+        <!-- <link rel="stylesheet" type="text/css" href="../_assets/themes/fides/common.css"> -->
+
+        <link id="theme-animations" rel="stylesheet" type="text/css" href="assets/themes/minified/fides/animations.min.css">
+
+        <link rel="stylesheet" type="text/css" href="assets/themes/minified/fides/responsive.min.css">
+
+        <!-- Fides Admin JS -->
+
+        <script type="text/javascript" src="assets/js/minified/aui-production.min.js"></script>
+
+        <script type="text/javascript" src="assets/js/minified/core/raphael.min.js"></script>
+        <script type="text/javascript" src="assets/js/minified/widgets/charts-justgage.min.js"></script>
+
+    </head>
+    <body>
+        <div class="rm-from-production">
+            <script type="text/javascript" src="../_assets/syntax-highlighter/scripts/shCore.js"></script>
+            <script type="text/javascript" src="../_assets/syntax-highlighter/scripts/shBrushPhp.js"></script>
+            <link type="text/css" rel="stylesheet" href="../_assets/syntax-highlighter/styles/shCoreDefault.css">
+            <script type="text/javascript">SyntaxHighlighter.all();</script>
+        </div>
+
+        <div id="loading" class="ui-front loader ui-widget-overlay bg-white opacity-100">
+            <img src="assets/images/loader-dark.gif" alt="">
+        </div>
+
+        <div id="page-wrapper">
+
+            <div class="theme-customizer">
+                <a href="javascript:;" class="change-theme-btn" title="Change theme">
+                    <i class="glyph-icon icon-cog"></i>
+                </a>
+                <div class="theme-wrapper">
+
+                    <div class="popover-title">Color schemes</div>
+                    <div class="pad10A clearfix change-layout-theme">
+                        <p class="font-gray-dark font-size-11 pad0B">More color schemes will be available soon!</p>
+                        <div class="divider mrg10T mrg10B"></div>
+                        <a href="javascript:;" class="choose-theme" layout-theme="dark-blue" title="">
+                            <span style="background: #2381E9;"></span>
+                        </a>
+<!--                         <a href="javascript:;" class="choose-theme opacity-30" layout-theme="white-blue" title="">
+                            <span style="background: #2381E9;"></span>
+                        </a> -->
+                        <a href="javascript:;" class="choose-theme" layout-theme="dark-green" title="D">
+                            <span style="background: #78CE12;"></span>
+                        </a>
+<!--                         <a href="javascript:;" class="choose-theme opacity-30" layout-theme="white-green" title="D">
+                            <span style="background: #78CE12;"></span>
+                        </a> -->
+                        <a href="javascript:;" class="choose-theme" layout-theme="dark-orange" title="">
+                            <span style="background: #FF6041;"></span>
+                        </a>
+<!--                         <a href="javascript:;" class="choose-theme opacity-30" layout-theme="white-orange" title="">
+                            <span style="background: #FF6041;"></span>
+                        </a> -->
+                        <a href="javascript:;" class="choose-theme" layout-theme="inverse-blue" title="">
+                            <span style="background: #20242A;"></span>
+                        </a>
+                        <a href="javascript:;" class="choose-theme" layout-theme="dark-gray" title="">
+                            <span style="background: #646464;"></span>
+                        </a>
+                    </div>
+                    <div class="popover-title">Layout options</div>
+                    <div class="pad10A clearfix">
+                        <a class="fluid-layout-btn hidden bg-blue-alt medium btn" href="javascript:;" title=""><span class="button-content">Full width layout</span></a>
+                        <a class="boxed-layout-btn bg-blue-alt medium btn" href="javascript:;" title=""><span class="button-content">Boxed layout</span></a>
+
+                        <a class="enable-animations hidden bg-blue-alt medium btn" href="javascript:;" title=""><span class="button-content">Enable animations</span></a>
+                        <a class="disable-animations bg-blue-alt medium btn" href="javascript:;" title=""><span class="button-content">Disable animations</span></a>
+                    </div>
+                    <div class="popover-title">Boxed layout backgrounds</div>
+                    <div class="pad10A clearfix">
+                        <a href="javascript:;" class="choose-bg" boxed-bg="#000" style="background: #000;" title=""></a>
+                        <a href="javascript:;" class="choose-bg" boxed-bg="#333" style="background: #333;" title=""></a>
+                        <a href="javascript:;" class="choose-bg" boxed-bg="#666" style="background: #666;" title=""></a>
+                        <a href="javascript:;" class="choose-bg" boxed-bg="#888" style="background: #888;" title=""></a>
+                        <a href="javascript:;" class="choose-bg" boxed-bg="#383d43" style="background: #383d43;" title=""></a>
+                        <a href="javascript:;" class="choose-bg" boxed-bg="#fafafa" style="background: #fafafa; border: #ccc solid 1px;" title=""></a>
+                        <a href="javascript:;" class="choose-bg" boxed-bg="#fff" style="background: #fff; border: #eee solid 1px;" title=""></a>
+                    </div>
+
+                </div>
+            </div>
+
+            <div id="page-header" class="clearfix">
+                <div id="header-logo">Documentation</div>
+                <div class="hide" id="black-modal-60" title="Modal window example">
+                    <div class="pad20A">
+
+                        <div class="infobox notice-bg">
+                            <div class="bg-azure large btn info-icon">
+                                <i class="glyph-icon icon-bullhorn"></i>
+                            </div>
+                            <h4 class="infobox-title">Modal windows</h4>
+                            <p>Thanks to the solid modular Fides Admin arhitecture, modal windows customizations are very flexible and easy to apply.</p>
+                        </div>
+
+                        <h4 class="heading-1 mrg20T clearfix">
+                            <div class="heading-content" style="width: auto;">
+                                Icons
+                                <small>
+                                    All icons across the Fides Admin Framework use FontAwesome icons.
+                                </small>
+                            </div>
+                            <div class="clear"></div>
+                            <div class="divider"></div>
+                        </h4>
+
+                        <a class="btn medium radius-all-4 mrg5A ui-state-default tooltip-button" title="icon-compass" href="../icon/compass"><i class="glyph-icon icon-compass"></i></a>
+
+                        <a class="btn medium radius-all-4 mrg5A ui-state-default tooltip-button" title="icon-collapse" href="../icon/collapse"><i class="glyph-icon icon-collapse"></i></a>
+
+                        <a class="btn medium radius-all-4 mrg5A ui-state-default tooltip-button" title="icon-collapse-top" href="../icon/collapse-top"><i class="glyph-icon icon-collapse-top"></i></a>
+
+                        <a class="btn medium radius-all-4 mrg5A ui-state-default tooltip-button" title="icon-expand" href="../icon/expand"><i class="glyph-icon icon-expand"></i></a>
+
+                        <a class="btn medium radius-all-4 mrg5A ui-state-default tooltip-button" title="icon-eur" href="../icon/eur"><i class="glyph-icon icon-eur"></i></a>
+
+                        <a class="btn medium radius-all-4 mrg5A ui-state-default tooltip-button" title="icon-euro" href="../icon/eur"><i class="glyph-icon icon-euro"></i></a>
+
+                        <a class="btn medium radius-all-4 mrg5A ui-state-default tooltip-button" title="icon-gbp" href="javascript:;"><i class="glyph-icon icon-gbp"></i></a>
+
+                        <a class="btn medium radius-all-4 mrg5A ui-state-default tooltip-button" title="icon-usd" href="javascript:;"><i class="glyph-icon icon-usd"></i></a>
+
+                        <a class="btn medium radius-all-4 mrg5A ui-state-default tooltip-button" title="icon-dollar" href="javascript:;"><i class="glyph-icon icon-dollar"></i></a>
+
+                        <a class="btn medium radius-all-4 mrg5A ui-state-default tooltip-button" title="icon-inr" href="javascript:;"><i class="glyph-icon icon-inr"></i></a>
+
+                        <a class="btn medium radius-all-4 mrg5A ui-state-default tooltip-button" title="icon-rupee" href="javascript:;"><i class="glyph-icon icon-rupee"></i></a>
+
+                        <a class="btn medium radius-all-4 mrg5A ui-state-default tooltip-button" title="icon-jpy" href="javascript:;"><i class="glyph-icon icon-jpy"></i></a>
+
+                        <a class="btn medium radius-all-4 mrg5A ui-state-default tooltip-button" title="icon-yen" href="javascript:;"><i class="glyph-icon icon-yen"></i></a>
+
+                        <a class="btn medium radius-all-4 mrg5A ui-state-default tooltip-button" title="icon-cny" href="javascript:;"><i class="glyph-icon icon-cny"></i></a>
+
+                        <a class="btn medium radius-all-4 mrg5A ui-state-default tooltip-button" title="icon-renminbi" href="javascript:;"><i class="glyph-icon icon-renminbi"></i></a>
+
+                        <a class="btn medium radius-all-4 mrg5A ui-state-default tooltip-button" title="icon-krw" href="javascript:;"><i class="glyph-icon icon-krw"></i></a>
+
+                        <a class="btn medium radius-all-4 mrg5A ui-state-default tooltip-button" title="icon-won" href="javascript:;"><i class="glyph-icon icon-won"></i></a>
+
+                        <a class="btn medium radius-all-4 mrg5A ui-state-default tooltip-button" title="icon-btc" href="javascript:;"><i class="glyph-icon icon-btc"></i></a>
+
+                        <a class="btn medium radius-all-4 mrg5A ui-state-default tooltip-button" title="icon-bitcoin" href="javascript:;"><i class="glyph-icon icon-bitcoin"></i></a>
+
+                        <a class="btn medium radius-all-4 mrg5A ui-state-default tooltip-button" title="icon-file" href="javascript:;"><i class="glyph-icon icon-file"></i></a>
+
+                        <a class="btn medium radius-all-4 mrg5A ui-state-default tooltip-button" title="icon-file-text" href="javascript:;"><i class="glyph-icon icon-file-text"></i></a>
+
+                        <a class="btn medium radius-all-4 mrg5A ui-state-default tooltip-button" title="icon-sort-by-alphabet" href="javascript:;"><i class="glyph-icon icon-sort-by-alphabet"></i></a>
+
+                        <a class="btn medium radius-all-4 mrg5A ui-state-default tooltip-button" title="icon-sort-by-alphabet-al" href="javascript:;"><i class="glyph-icon icon-sort-by-alphabet-alt"></i>t</a>
+
+                        <a class="btn medium radius-all-4 mrg5A ui-state-default tooltip-button" title="icon-sort-by-attributes" href="javascript:;"><i class="glyph-icon icon-sort-by-attributes"></i></a>
+
+                        <a class="btn medium radius-all-4 mrg5A ui-state-default tooltip-button" title="icon-sort-by-attribu" href="javascript:;"><i class="glyph-icon icon-sort-by-attributes-alt"></i></a>
+
+                        <a class="btn medium radius-all-4 mrg5A ui-state-default tooltip-button" title="icon-sort-by-order" href="javascript:;"><i class="glyph-icon icon-sort-by-order"></i></a>
+
+                        <a class="btn medium radius-all-4 mrg5A ui-state-default tooltip-button" title="icon-sort-by-order-alt" href="javascript:;"><i class="glyph-icon icon-sort-by-order-alt"></i></a>
+
+                        <a class="btn medium radius-all-4 mrg5A ui-state-default tooltip-button" title="icon-thumbs-up" href="javascript:;"><i class="glyph-icon icon-thumbs-up"></i></a>
+
+                        <a class="btn medium radius-all-4 mrg5A ui-state-default tooltip-button" title="icon-thumbs-down" href="javascript:;"><i class="glyph-icon icon-thumbs-down"></i></a>
+
+                    </div>
+                </div>
+
+                <div class="hide" id="white-modal-80" title="Dialog with tabs">
+                    <div class="tabs pad15A remove-border opacity-80">
+                        <ul class="opacity-80">
+                            <li><a href="#example-tabs-1">First</a></li>
+                            <li><a href="#example-tabs-2">Second</a></li>
+                            <li><a href="#example-tabs-3">Third</a></li>
+                        </ul>
+                        <div id="example-tabs-1">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                            </p>
+                            <p>Nam dui erat, auctor a, dignissim quis, sollicitudin eu, felis. Pellentesque nisi urna, interdum eget, sagittis et, consequat vestibulum, lacus. Mauris porttitor ullamcorper augue.
+                            </p>
+                        </div>
+                        <div id="example-tabs-2">
+                            <p>Phasellus mattis tincidunt nibh. Cras orci urna, blandit id, pretium vel, aliquet ornare, felis. Maecenas scelerisque sem non nisl. Fusce sed lorem in enim dictum bibendum.
+                            </p>
+                            <p>Nam dui erat, auctor a, dignissim quis, sollicitudin eu, felis. Pellentesque nisi urna, interdum eget, sagittis et, consequat vestibulum, lacus. Mauris porttitor ullamcorper augue.
+                            </p>
+                        </div>
+                        <div id="example-tabs-3">
+                            <p>Nam dui erat, auctor a, dignissim quis, sollicitudin eu, felis. Pellentesque nisi urna, interdum eget, sagittis et, consequat vestibulum, lacus. Mauris porttitor ullamcorper augue.
+                            </p>
+                            <p>Nam dui erat, auctor a, dignissim quis, sollicitudin eu, felis. Pellentesque nisi urna, interdum eget, sagittis et, consequat vestibulum, lacus. Mauris porttitor ullamcorper augue.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="pad10A">
+                        <div class="infobox success-bg radius-all-4">
+                            <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque</p>
+                        </div>
+                    </div>
+                    <div class="ui-dialog-buttonpane clearfix">
+
+                        <a href="dropdown_menus.html" class="btn medium float-left bg-azure">
+                            <span class="button-content text-transform-upr font-size-11">Dropdown menus</span>
+                        </a>
+                        <div class="button-group float-right">
+                            <a href="buttons.html" class="btn medium bg-black" title="View more buttons examples">
+                                <i class="glyph-icon icon-star"></i>
+                            </a>
+                            <a href="buttons.html" class="btn medium bg-black" title="View more buttons examples">
+                                <i class="glyph-icon icon-random"></i>
+                            </a>
+                            <a href="buttons.html" class="btn medium bg-black" title="View more buttons examples">
+                                <i class="glyph-icon icon-map-marker"></i>
+                            </a>
+                        </div>
+                        <a href="javascript:;" class="medium btn bg-blue-alt float-right mrg10R tooltip-button" data-placement="left" title="Remove comment">
+                            <i class="glyph-icon icon-plus"></i>
+                        </a>
+
+                    </div>
+                </div>
+                
+                
+                
+                <div class="top-icon-bar">
+                    
+                    
+                    
+                    
+                </div>
+
+            </div><!-- #page-header -->
+
+            <div id="page-sidebar" class="scrollable-content">
+
+                <div id="sidebar-menu">
+                    <ul>
+                        <li>
+                            <a href="index.html" title="Dashboard">
+                                <i class="glyph-icon icon-dashboard"></i>
+                                Dashboard
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:;" title="Components">
+                                <i class="glyph-icon icon-code"></i>
+                                Components
+                            </a>
+                            <ul>
+                                <li>
+                                    <a href="dashboard_panels.html" title="Dashboard panels">
+                                        <i class="glyph-icon icon-chevron-right"></i>
+                                        Dashboard panels
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="tile_buttons.html" title="Tile buttons">
+                                        <i class="glyph-icon icon-chevron-right"></i>
+                                        Tile buttons
+                                        <span class="label bg-green float-right tooltip-button" title="New feature added in v1.2">NEW</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="timeline.html" title="Timeline">
+                                        <i class="glyph-icon icon-chevron-right"></i>
+                                        Timeline
+                                        <span class="label bg-orange float-right tooltip-button" title="New feature added in v1.2">NEW</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="todo_list.html" title="Todo list">
+                                        <i class="glyph-icon icon-chevron-right"></i>
+                                        Todo list
+                                        <span class="label bg-red float-right tooltip-button" title="New feature added in v1.2">NEW</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="social_boxes.html" title="Social boxes">
+                                        <i class="glyph-icon icon-chevron-right"></i>
+                                        Social boxes
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="information_boxes.html" title="Information boxes">
+                                        <i class="glyph-icon icon-chevron-right"></i>
+                                        Information boxes
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="calendar.html" title="Calendar">
+                                        <i class="glyph-icon icon-chevron-right"></i>
+                                        Calendar
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="other_components.html" title="Other components">
+                                        <i class="glyph-icon icon-chevron-right"></i>
+                                        Other components
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="javascript:;" title="Pages">
+                                <i class="glyph-icon icon-folder-open"></i>
+                                Example Pages
+                            </a>
+                            <ul>
+                                <li>
+                                    <a href="grid.html" title="Grid Layouts">
+                                        <i class="glyph-icon icon-chevron-right"></i>
+                                        Grid Layouts
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="helper_classes.html" title="Helpers">
+                                        <i class="glyph-icon icon-chevron-right"></i>
+                                        Helpers
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="login.html" title="Login">
+                                        <i class="glyph-icon icon-chevron-right"></i>
+                                        Login example 1
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="login-alt.html" title="Login">
+                                        <i class="glyph-icon icon-chevron-right"></i>
+                                        Login example 2
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="javascript:;" title="Widgets">
+                                <i class="glyph-icon icon-tags"></i>
+                                Widgets &amp; Plugins
+                            </a>
+                            <ul>
+                                <li>
+                                    <a href="tabs.html" title="Tabs">
+                                        <i class="glyph-icon icon-chevron-right"></i>
+                                        Tabs
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="accordions.html" title="Accordions">
+                                        <i class="glyph-icon icon-chevron-right"></i>
+                                        Accordions
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="datepicker.html" title="Datepicker">
+                                        <i class="glyph-icon icon-chevron-right"></i>
+                                        Datepicker
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="timepicker.html" title="Timepicker">
+                                        <i class="glyph-icon icon-chevron-right"></i>
+                                        Timepicker
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="colorpicker.html" title="Colorpicker">
+                                        <i class="glyph-icon icon-chevron-right"></i>
+                                        Colorpicker
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="slider.html" title="Sliders">
+                                        <i class="glyph-icon icon-chevron-right"></i>
+                                        Sliders
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="jgrowl_notifications.html" title="JGrowl Notifications">
+                                        <i class="glyph-icon icon-chevron-right"></i>
+                                        JGrowl Notifications
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="noty_notifications.html" title="Noty Notifications">
+                                        <i class="glyph-icon icon-chevron-right"></i>
+                                        Noty Notifications
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="modal_windows.html" title="Modal Windows">
+                                        <i class="glyph-icon icon-chevron-right"></i>
+                                        Modal Windows
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="loading_bar.html" title="Loading bars">
+                                        <i class="glyph-icon icon-chevron-right"></i>
+                                        Loading bars
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="tooltips.html" title="Tooltips">
+                                        <i class="glyph-icon icon-chevron-right"></i>
+                                        Tooltips
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="popovers.html" title="Popovers">
+                                        <i class="glyph-icon icon-chevron-right"></i>
+                                        Popovers
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="sortable.html" title="Sortable Elements">
+                                        <i class="glyph-icon icon-chevron-right"></i>
+                                        Sortable Elements
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="dropdown_menus.html" title="Dropdown Menus">
+                                        <i class="glyph-icon icon-chevron-right"></i>
+                                        Dropdown Menus
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="javascript:;" title="Elements">
+                                <i class="glyph-icon icon-laptop"></i>
+                                Advanced Elements
+                            </a>
+                            <ul>
+                                <li>
+                                    <a href="content_boxes.html" title="Content Boxes">
+                                        <i class="glyph-icon icon-chevron-right"></i>
+                                        Content Boxes
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="response_messages.html" title="Response Messages">
+                                        <i class="glyph-icon icon-chevron-right"></i>
+                                        Response Messages
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="badges.html" title="Badges &amp; Labels">
+                                        <i class="glyph-icon icon-chevron-right"></i>
+                                        Badges &amp; Labels
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="overlays.html" title="Overlays">
+                                        <i class="glyph-icon icon-chevron-right"></i>
+                                        Overlays
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="navigation_menus.html" title="Navigation Menus">
+                                        <i class="glyph-icon icon-chevron-right"></i>
+                                        Navigation Menus
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="icons.html" title="Icons">
+                                        <i class="glyph-icon icon-chevron-right"></i>
+                                        Icons
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="buttons.html" title="Buttons">
+                                        <i class="glyph-icon icon-chevron-right"></i>
+                                        Buttons
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="pagination.html" title="Pagination">
+                                        <i class="glyph-icon icon-chevron-right"></i>
+                                        Pagination
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="typography.html" title="Typography">
+                                        <i class="glyph-icon icon-chevron-right"></i>
+                                        Typography
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="animations.html" title="Animations">
+                                        <i class="glyph-icon icon-chevron-right"></i>
+                                        Animations
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="javascript:;" title="Charts">
+                                <i class="glyph-icon icon-bar-chart-o"></i>
+                                Data visualization
+                            </a>
+                            <ul>
+                                <li>
+                                    <a href="charts_piegauges.html" title="Pie Gauges">
+                                        <i class="glyph-icon icon-chevron-right"></i>
+                                        Pie Gauges
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="charts_xcharts.html" title="xCharts">
+                                        <i class="glyph-icon icon-chevron-right"></i>
+                                        xCharts
+                                        <span class="label bg-green float-right tooltip-button" title="New feature added in v1.2">NEW</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="charts_justgage.html" title="JustGage">
+                                        <i class="glyph-icon icon-chevron-right"></i>
+                                        JustGage
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="charts_sparklines.html" title="Sparklines">
+                                        <i class="glyph-icon icon-chevron-right"></i>
+                                        Sparklines
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="charts_morris.html" title="Morris Charts">
+                                        <i class="glyph-icon icon-chevron-right"></i>
+                                        Morris Charts
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="javascript:;" title="Tables">
+                                <i class="glyph-icon icon-table"></i>
+                                Data Tables
+                            </a>
+                            <ul>
+                                <li>
+                                    <a href="tables.html" title="Normal tables">
+                                        <i class="glyph-icon icon-chevron-right"></i>
+                                        Normal tables
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="tables_dynamic.html" title="Dynamic tables">
+                                        <i class="glyph-icon icon-chevron-right"></i>
+                                        Dynamic tables
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="javascript:;" title="Forms">
+                                <i class="glyph-icon icon-sort-amount-asc"></i>
+                                Forms components
+                            </a>
+                            <ul>
+                                <li>
+                                    <a href="forms.html" title="Layouts &amp; Elements">
+                                        <i class="glyph-icon icon-chevron-right"></i>
+                                        Layouts &amp; Elements
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="forms_validation.html" title="Forms validation">
+                                        <i class="glyph-icon icon-chevron-right"></i>
+                                        Forms validation
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="forms_masks.html" title="Forms input masks">
+                                        <i class="glyph-icon icon-chevron-right"></i>
+                                        Forms input masks
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="forms_knobs.html" title="Input knobs">
+                                        <i class="glyph-icon icon-chevron-right"></i>
+                                        Input knobs
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="form_wizard.html" title="Form wizard">
+                                        <i class="glyph-icon icon-chevron-right"></i>
+                                        Form wizard
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="forms_inline.html" title="Inline editor">
+                                        <i class="glyph-icon icon-chevron-right"></i>
+                                        Inline editor
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="image_editor.html" title="Image crop">
+                                        <i class="glyph-icon icon-chevron-right"></i>
+                                        Image crop
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="file_upload.html" title="Files uploader">
+                                        <i class="glyph-icon icon-chevron-right"></i>
+                                        Files uploader
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="dropzone_uploader.html" title="Dropzone uploader">
+                                        <i class="glyph-icon icon-chevron-right"></i>
+                                        Dropzone uploader
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="javascript:;" title="Maps">
+                                <i class="glyph-icon icon-map-marker"></i>
+                                Maps API
+                            </a>
+                            <ul>
+                                <li>
+                                    <a href="google_maps.html" title="Google Maps">
+                                        <i class="glyph-icon icon-chevron-right"></i>
+                                        Google maps
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="vector_maps.html" title="Vector maps">
+                                        <i class="glyph-icon icon-chevron-right"></i>
+                                        Vector maps
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <div class="divider mrg5T mobile-hidden"></div>
+                    <div class="text-center mobile-hidden">
+                        <div class="button-group display-inline">
+                            <a href="javascript:;" class="btn medium bg-green tooltip-button" data-placement="top" title="Messages">
+                                <i class="glyph-icon icon-flag"></i>
+                            </a>
+                            <a href="javascript:;" class="btn medium bg-green tooltip-button" data-placement="top" title="Mailbox">
+                                <i class="glyph-icon icon-inbox"></i>
+                            </a>
+                            <a href="javascript:;" class="btn medium bg-green tooltip-button" data-placement="top" title="Content">
+                                <i class="glyph-icon icon-hdd"></i>
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div><!-- #page-sidebar -->
+            <div id="menu-right" class="scrollable-content hidden">
+                <a href="javascript:;" title="Get Source" class="popover-title button-toggle-open">
+                    Cloud status
+                    <i class="glyph-icon icon-caret-right icon-caret-down"></i>
+                </a>
+                <div class="toggle-content-open pad20T pad20B">
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="text-center font-gray-dark pad5B text-transform-upr font-size-11">New visits</div>
+                            <div class="chart-alt-2" data-percent="55"><span>55</span>%</div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="text-center font-gray-dark pad5B text-transform-upr font-size-11">Bounce rate</div>
+                            <div class="chart-alt-2" data-percent="46"><span>46</span>%</div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="text-center font-gray-dark pad5B text-transform-upr font-size-11">Server load</div>
+                            <div class="chart-alt-2" data-percent="92"><span>92</span>%</div>
+                        </div>
+                    </div>
+                    <div class="divider"></div>
+                    <div class="text-center">
+                        <a href="javascript:;" class="btn center-div ui-state-default small text-transform-upr updateEasyPieChart">
+                            <span class="button-content font-normal">
+                                <i class="glyph-icon icon-refresh float-left"></i>
+                                Refresh all pie charts
+                            </span>
+                        </a>
+                    </div>
+                </div>
+                <div class="clear"></div>
+                <a href="javascript:;" title="Get Source" class="popover-title button-toggle-open">
+                    Realtime server load
+                    <i class="glyph-icon icon-caret-right icon-caret-down"></i>
+                </a>
+                <div class="toggle-content-open clearfix">
+
+                    <div id="g10" class="small-gauge float-left"></div>
+                    <div id="g11" class="small-gauge float-right"></div>
+
+                </div>
+                <div class="clear"></div>
+                <a href="javascript:;" title="Get Source" class="popover-title button-toggle-open">
+                    Tasks for today
+                    <i class="glyph-icon icon-caret-right icon-caret-down"></i>
+                </a>
+                <div class="toggle-content-open">
+
+                    <ul class="progress-box progress-box-alt">
+                        <li>
+                            <div class="progress-title">
+                                New features development
+                                <b>87%</b>
+                            </div>
+                            <div class="progressbar-smaller progressbar" data-value="87">
+                                <div class="progressbar-value bg-azure">
+                                    <div class="progressbar-overlay"></div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="progress-title">
+                                Finishing uploading files
+                                <b>66%</b>
+                            </div>
+                            <div class="progressbar-smaller progressbar" data-value="66">
+                                <div class="progressbar-value bg-red">
+                                    <div class="progressbar-overlay"></div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="progress-title">
+                                Creating tutorials
+                                <b>58%</b>
+                            </div>
+                            <div class="progressbar-smaller progressbar" data-value="58">
+                                <div class="progressbar-value bg-blue-alt"></div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="progress-title">
+                                Frontend bonus theme
+                                <b>74%</b>
+                            </div>
+                            <div class="progressbar-smaller progressbar" data-value="74">
+                                <div class="progressbar-value bg-purple"></div>
+                            </div>
+                        </li>
+                    </ul>
+
+                </div>
+                <div class="clear"></div>
+                <a href="javascript:;" title="Get Source" class="popover-title button-toggle-open">
+                    Pending notifications
+                    <span class="badge bg-orange tooltip-button" title="Orange badge">4</span>
+                    <i class="glyph-icon icon-caret-right icon-caret-down"></i>
+                </a>
+                <div class="toggle-content-open">
+
+                    <ul class="notifications-box remove-border">
+                        <li>
+                            <span class="btn bg-red radius-all-100 icon-notification glyph-icon icon-glass"></span>
+                            <span class="notification-text">You have to buy milk</span>
+                        </li>
+                        <li>
+                            <span class="btn bg-blue-alt radius-all-100 icon-notification glyph-icon icon-leaf"></span>
+                            <span class="notification-text">Don't forget about new features</span>
+                        </li>
+                        <li>
+                            <span class="btn bg-yellow radius-all-100 icon-notification glyph-icon icon-trophy"></span>
+                            <span class="notification-text">Eat some donuts</span>
+                        </li>
+                    </ul>
+
+                </div>
+                <div class="clear"></div>
+                <a href="javascript:;" title="Get Source" class="popover-title button-toggle-open">
+                    Sales for today
+                    <i class="glyph-icon icon-caret-right icon-caret-down"></i>
+                </a>
+                <div class="toggle-content-open">
+                    <div class="info-box mrg10B bg-white remove-border radius-all-4 tooltip-button" title="4px border radius">
+                        <div class="chart-icon">
+                            <div class="sprk-1-dash">5,6,7,5,9,8,6,3,2,1,2,4,2,2,4,6,7</div>
+                        </div>
+                        <b>Current growth</b>
+                        <span class="stats font-blue">
+                            <i class="glyph-icon icon-chevron-down font-red"></i>
+                            765
+                            <span class="font-orange">-8.1</span>
+                        </span>
+                    </div>
+                </div>
+                <div class="clear"></div>
+                <a href="javascript:;" title="Get Source" class="popover-title button-toggle-open">
+                    Tabs example
+                    <i class="glyph-icon icon-caret-right icon-caret-down"></i>
+                </a>
+                <div class="toggle-content-open">
+
+                    <div class="tabs">
+                        <ul>
+                            <li>
+                                <a href="#core-helpers-tabs-1" title="Tab 1">
+                                    <i class="glyph-icon icon-archive font-blue font-size-23"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#core-helpers-tabs-2" title="Tab 2">
+                                    <i class="glyph-icon icon-beaker font-black font-size-23"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#core-helpers-tabs-3" title="Tab 3">
+                                    <i class="glyph-icon icon-cogs font-green font-size-23"></i>
+                                </a>
+                            </li>
+                        </ul>
+                        <div id="core-helpers-tabs-1">
+                            tab 1 content
+                        </div>
+                        <div id="core-helpers-tabs-2">
+                            tab 2 content
+                        </div>
+                        <div id="core-helpers-tabs-3">
+                            tab 3 content
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <script type="text/javascript">
+
+
+
+            </script>
+            <div id="page-content-wrapper">
+                <div id="page-title">
+
+<h3>
+    Sliders
+    <small>
+        The slider widget transforms selected elements into sliders. There are various options such as multiple handles and ranges. The handle can be moved with the mouse or the arrow keys.
+    </small>
+</h3>
+                    <div id="breadcrumb-right">
+                        
+                        <div class="float-right">
+                            <a href="javascript:;" class="btn medium bg-white tooltip-button black-modal-60 mrg5R" data-placement="bottom" title="Open modal window">
+                                <span class="button-content">
+                                    <i class="glyph-icon icon-question"></i>
+                                </span>
+                            </a>
+
+                            <div class="dropdown">
+                                <a href="javascript:;" class="btn medium bg-white" title="Example dropdown" data-toggle="dropdown">
+                                    <span class="button-content">
+                                        <i class="glyph-icon icon-cog float-left"></i>
+                                        <i class="glyph-icon icon-caret-down float-right"></i>
+                                    </span>
+                                </a>
+                                <div class="dropdown-menu pad0A float-right">
+                                    <div class="medium-box">
+                                        <div class="bg-gray text-transform-upr font-size-12 font-bold font-gray-dark pad10A">Form example</div>
+                                        <div class="pad10A">
+                                            <p class="font-gray-dark pad0B">This <span class="label bg-blue-alt">dropdown box</span> uses the Twitter Bootstrap dropdown plugin.</p>
+                                            <div class="divider mrg10T mrg10B"></div>
+
+                                                <form id="demo-form" action="" class="col-md-12" method="">
+                                                    <div class="form-row">
+                                                        <div class="form-label col-md-4">
+                                                            <label for="">
+                                                                Name:
+                                                                <span class="required">*</span>
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-input col-md-8">
+                                                            <input type="text" id="email" name="email" data-type="email" data-trigger="change" data-required="true" class="parsley-validated">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-row">
+                                                        <div class="form-label col-md-4">
+                                                            <label for="">
+                                                                Email:
+                                                                <span class="required">*</span>
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-input col-md-8">
+                                                            <input type="text" id="email" name="email" data-type="email" data-trigger="change" data-required="true" class="parsley-validated">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-row">
+                                                        <div class="form-label col-md-4">
+                                                            <label for="">
+                                                                Website:
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-input col-md-8">
+                                                            <input type="text" id="website" name="website" data-trigger="change" data-type="url" class="parsley-validated">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-row">
+                                                        <div class="form-label col-md-4">
+                                                            <label for="" class="label-description">
+                                                                Message:
+                                                                <span>20 chars min, 200 max</span>
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-input col-md-8">
+                                                            <textarea id="message" name="message" data-trigger="keyup" data-rangelength="[20,200]" class="parsley-validated"></textarea>
+                                                        </div>
+                                                    </div>
+                                                    <div class="divider"></div>
+                                                    <div class="form-row">
+                                                        <input type="hidden" name="superhidden" id="superhidden">
+                                                        <div class="form-input col-md-8 col-md-offset-4">
+                                                            <a href="javascript:;" class="btn medium primary-bg radius-all-4" id="demo-form-valid" onclick="javascript:$(&apos;#demo-form&apos;).parsley( &apos;validate&apos; );" title="Validate!">
+                                                                <span class="button-content">
+                                                                    Validate the form above
+                                                                </span>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+
+                                                </form>
+
+                                        </div>
+
+                                        <div class="bg-black font-size-12 font-orange pad10A mrg5L mrg5R">Custom header example</div>
+                                        <div class="pad15A">
+                                            <p class="font-green text-center font-size-14 pad0B">Fides Admin comes with powerful helpers that you can use to create virtually any style you want. Read the documentation about helper classes to find out more!</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+</div><!-- #page-title -->
+<div id="page-content">
+
+<div class="infobox warning-bg rm-from-production">
+    <div class="bg-yellow large btn info-icon">
+        <i class="glyph-icon icon-thumbs-up-alt"></i>
+    </div>
+    <h4 class="infobox-title">Documentation</h4>
+    <p>To see all the available options &amp; configurations, we suggest reading the <a href="http://api.jqueryui.com/slider/" target="_blank" title="jQueryUI sliders documentation">jQueryUI sliders documentation</a>.</p>
+</div>
+
+<h3>
+    Basic example
+</h3>
+<p class="font-gray-dark">
+    The basic slider is horizontal and has a single handle that can be moved with the mouse or by using the arrow keys.
+</p>
+<div class="example-box">
+    <div class="example-code">
+
+        <div id="slider" class="mrg15T mrg25L mrg25R"></div>
+
+    </div>
+    <div class="source-btn rm-from-production">
+        <a href="javascript:;" title="Get Source" class="btn bg-blue small button-toggle">
+            <span class="button-content">
+                <i class="glyph-icon icon-source"></i>
+                Get source
+            </span>
+        </a>
+        <div class="toggle-content">
+            <pre class="brush: php;">
+
+                <div id="slider-basic-example"></div>
+
+                <script type="text/javascript">
+
+                    $(function() {
+
+                        //UNCOMMENT THE NEXT LINE: (and delete this one)
+
+                        // $( "#slider-basic-example" ).slider();
+
+                    });
+
+                </script>
+
+            </pre>
+        </div>
+    </div>
+</div>
+<div class="infobox notice-bg rm-from-production">
+    <p><i class="glyph-icon icon-exclamation mrg10R"></i>To view more sliders examples, you can visit the <a href="http://jqueryui.com/slider/" target="_blank" title="View more jQueryUI sliders demos">jQueryUI sliders demos</a> page.</p>
+</div>
+
+<h3>
+    Horizontal slider
+</h3>
+<p class="font-gray-dark">
+    This slider example has a horizontal orientation and shows the selected value in a different color for easier reading.
+</p>
+<div class="example-box">
+    <div class="example-code">
+
+        <div id="horizontal-slider" class="mrg15T mrg25L mrg25R"></div>
+
+    </div>
+    <div class="source-btn rm-from-production">
+        <a href="javascript:;" title="Get Source" class="btn bg-blue small button-toggle">
+            <span class="button-content">
+                <i class="glyph-icon icon-source"></i>
+                Get source
+            </span>
+        </a>
+        <div class="toggle-content">
+            <pre class="brush: php;">
+
+                <div id="horizontal-slider-example"></div>
+
+                <script type="text/javascript">
+
+                    $(function() {
+
+                        //UNCOMMENT THE NEXT LINE: (and delete this one)
+
+                        // $( "#horizontal-slider-example" ).slider();
+
+                    });
+
+                </script>
+
+            </pre>
+        </div>
+    </div>
+</div>
+
+<h3>
+    Range slider
+</h3>
+<p class="font-gray-dark">
+    Set the range option to true to capture a range of values with two drag handles. The space between the handles is filled with the secondary color from the selected layout color scheme to indicate those values are selected.
+</p>
+<div class="example-box">
+    <div class="example-code">
+
+        <div class="mrg15T mrg25L mrg25R">
+
+            <div id="slider-range"></div>
+
+            <div class="form-row">
+                <div class="form-label">
+                    <label for="amount">Price range:</label>
+                </div>
+                <div class="form-input col-lg-2">
+                    <input type="text" id="amount" class="text-center float-left">
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <div class="source-btn rm-from-production">
+        <a href="javascript:;" title="Get Source" class="btn bg-blue small button-toggle">
+            <span class="button-content">
+                <i class="glyph-icon icon-source"></i>
+                Get source
+            </span>
+        </a>
+        <div class="toggle-content">
+            <pre class="brush: php;">
+
+                <div id="slider-range-example"></div>
+
+                <div class="form-row">
+                    <div class="form-label">
+                        <label for="amount-example">Price range:</label>
+                    </div>
+                    <div class="form-input col-lg-2">
+                        <input type="text" id="amount-example" class="text-center float-left">
+                    </div>
+                </div>
+
+                <script type="text/javascript">
+
+                    $(function() {
+
+                        //UNCOMMENT THE NEXT LINES: (and delete this one)
+
+                        // $( "#slider-range-example" ).slider({
+                        // range: true,
+                        // min: 0,
+                        // max: 500,
+                        // values: [ 75, 300 ],
+                        // slide: function( event, ui ) {
+                        //   $( "#amount-example" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
+                        // }
+                        // });
+                        // $( "#amount-example" ).val( "$" + $( "#slider-range-example" ).slider( "values", 0 ) +
+                        // " - $" + $( "#slider-range-example" ).slider( "values", 1 ) );
+
+                    });
+
+                </script>
+
+            </pre>
+        </div>
+    </div>
+</div>
+
+<h3>
+    Vertical slider
+</h3>
+<p class="font-gray-dark">
+    This example shows a vertical orietantion slider. You can assign a height value via <b>.height()</b> or by setting the height through CSS, and set the orientation option to "vertical."
+</p>
+<div class="example-box">
+    <div class="example-code">
+
+        <div class="mrg15T mrg25L clearfix mrg25R">
+
+            <div id="slider-vertical" class="float-left"></div>
+
+            <div class="form-row mrg25L form-vertical mrg20T float-left">
+                <div class="form-label">
+                    <label for="amount3">Horizontal range:</label>
+                </div>
+                <div class="form-input">
+                    <input type="text" id="amount3">
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <div class="source-btn rm-from-production">
+        <a href="javascript:;" title="Get Source" class="btn bg-blue small button-toggle">
+            <span class="button-content">
+                <i class="glyph-icon icon-source"></i>
+                Get source
+            </span>
+        </a>
+        <div class="toggle-content">
+            <pre class="brush: php;">
+
+                <div id="slider-vertical-example"></div>
+                <input type="text" id="amount3-example">
+
+                <script type="text/javascript">
+
+                    $(function() {
+
+                        //UNCOMMENT THE NEXT LINES: (and delete this one)
+
+                        // $( "#slider-vertical-example" ).slider({
+                        //   orientation: "vertical",
+                        //   range: "min",
+                        //   min: 0,
+                        //   max: 100,
+                        //   value: 60,
+                        //   slide: function( event, ui ) {
+                        //     $( "#amount3-example" ).val( ui.value );
+                        //   }
+                        // });
+                        // $( "#amount3-example" ).val( $( "#slider-vertical-example" ).slider( "value" ) );
+
+                    });
+
+                </script>
+
+            </pre>
+        </div>
+    </div>
+</div>
+
+<h3>
+    Vertical range slider
+</h3>
+<p class="font-gray-dark">
+    Just like the horizontal range slider above, but only with vertical orientation.
+</p>
+<div class="example-box">
+    <div class="example-code">
+
+        <div class="mrg15T mrg25L clearfix mrg25R">
+
+            <div id="slider-range-vertical" style="height: 200px;" class="float-left"></div>
+
+            <div class="form-row mrg25L form-vertical mrg20T float-left">
+                <div class="form-label">
+                    <label for="amount-vertical-range">Vertical range:</label>
+                </div>
+                <div class="form-input">
+                    <input type="text" id="amount-vertical-range" class="text-center">
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <div class="source-btn rm-from-production">
+        <a href="javascript:;" title="Get Source" class="btn bg-blue small button-toggle">
+            <span class="button-content">
+                <i class="glyph-icon icon-source"></i>
+                Get source
+            </span>
+        </a>
+        <div class="toggle-content">
+            <pre class="brush: php;">
+
+                <div id="slider-range-vertical-example"></div>
+                <input type="text" id="amount-vertical-range-example">
+
+                <script type="text/javascript">
+
+                    $(function() {
+
+                        //UNCOMMENT THE NEXT LINES: (and delete this one)
+
+                        // $( "#slider-range-vertical-example" ).slider({
+                        //   orientation: "vertical",
+                        //   range: true,
+                        //   values: [ 17, 67 ],
+                        //   slide: function( event, ui ) {
+                        //     $( "#amount-vertical-range-example" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
+                        //   }
+                        // });
+                        // $( "#amount-vertical-range" ).val( "$" + $( "#slider-range-vertical-example" ).slider( "values", 0 ) +
+                        //   " - $" + $( "#slider-range-vertical-example" ).slider( "values", 1 ) );
+
+                    });
+
+                </script>
+
+            </pre>
+        </div>
+    </div>
+</div>
+
+
+                	</div><!-- #page-content -->
+            </div><!-- #page-main -->
+        </div><!-- #page-wrapper -->
+
+    </body>
+</html>
