@@ -146,12 +146,12 @@
 									class="glyph-icon icon-chevron-right"></i> 仓库 </a></li>
 
 						</ul></li>
-					<li><a href="javascript:;" title="Components"> <i
+					<li><a href="javascript:;" title="Components" > <i
 							class="glyph-icon icon-folder-open"></i> 库存管理 </a>
 						<ul>
-							<li><a href="rkgl.jsp" title="Dashboard panels">
+							<li><a href="rkgl.jsp" title="Dashboard panels"  target="main-frame">
 									<i class="glyph-icon icon-chevron-right"></i> 入库管理 </a></li>
-							<li><a href="ckgl.jsp" title="Tile buttons"> <i
+							<li><a href="ckgl.jsp" title="Tile buttons"  target="main-frame"> <i
 									class="glyph-icon icon-chevron-right"></i> 出库管理 </a></li>
 
 						</ul></li>
