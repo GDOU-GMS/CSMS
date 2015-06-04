@@ -5,9 +5,11 @@
 			+ request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
 %>
+<!-- AUI Documentation -->
 <!DOCTYPE html>
 <html>
-<head>
+
+	<head>
 
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -16,7 +18,9 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
 		<!-- Favicons -->
+
 		<link rel="stylesheet" href="css/bootstrap.min.css">
+
 		<link rel="apple-touch-icon-precomposed" sizes="144x144" href="assets/images/icons/apple-touch-icon-144-precomposed.png">
 		<link rel="apple-touch-icon-precomposed" sizes="114x114" href="assets/images/icons/apple-touch-icon-114-precomposed.png">
 		<link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/images/icons/apple-touch-icon-72-precomposed.png">
@@ -39,38 +43,46 @@
 		<!-- Fides Admin Responsive -->
 
 		<link rel="stylesheet" type="text/css" href="assets/themes/minified/fides/common.min.css">
-		<!-- <link rel="stylesheet" type="text/css" href="../_assets/themes/fides/common.css"> -->
 
 		<link id="theme-animations" rel="stylesheet" type="text/css" href="assets/themes/minified/fides/animations.min.css">
 
 		<link rel="stylesheet" type="text/css" href="assets/themes/minified/fides/responsive.min.css">
 
+		<link rel="stylesheet" type="text/css" href="css/style.css">
+		<link rel="stylesheet" type="text/css" href="css/DialogBySHF.css">
+		<link rel="stylesheet" href="css/bootstrap.min.css">
 		<!-- Fides Admin JS -->
 
 		<script type="text/javascript" src="assets/js/minified/aui-production.min.js"></script>
 
 		<script type="text/javascript" src="assets/js/minified/core/raphael.min.js"></script>
 		<script type="text/javascript" src="assets/js/minified/widgets/charts-justgage.min.js"></script>
-		<script src="js/bootstrap.min.js"></script>
-	</head>
-	<body >
-		<!--<div class="rm-from-production">
-		<script type="text/javascript"
-			src="../_assets/syntax-highlighter/scripts/shCore.js"></script>
-		<script type="text/javascript"
-			src="../_assets/syntax-highlighter/scripts/shBrushPhp.js"></script>
-		<link type="text/css" rel="stylesheet"
-			href="../_assets/syntax-highlighter/styles/shCoreDefault.css">
-		<script type="text/javascript">
-			SyntaxHighlighter.all();
-		</script>
-		
-	</div>
 
-	<div id="loading"
-		class="ui-front loader ui-widget-overlay bg-white opacity-100">
-		<img src="assets/images/loader-dark.gif" alt="">
-	</div>-->
+		<script type="text/javascript" src="assets/js/DialogBySHF.js"></script>
+		<!--<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>-->
+		<script src="js/bootstrap.min.js"></script>
+		<!-- <script src="js/jquery.min.js"></script>-->
+		<!-- 自定义的js函数 -->
+		<script>
+			function addUser(){
+			$.DialogBySHF.Dialog({ Width: 650, Height: 500, Title: "添加", URL: 'addUser.jsp' });
+			}
+			function deleteUser(){
+			 /*$.DialogBySHF.Confirm({ Width: 350, Height: 200, Title: "提示信息", });*/
+			$.DialogBySHF.Dialog({ Width: 350, Height: 200, Title: "删除用户", URL: 'confirm.jsp' });
+		        
+			}
+			function updateUser(){
+			 /*$.DialogBySHF.Confirm({ Width: 350, Height: 200, Title: "提示信息", });*/
+			$.DialogBySHF.Dialog({ Width: 650, Height: 500, Title: "更新用户", URL: 'updateUser.jsp' });
+		        
+			}
+		</script>
+
+	</head>
+
+	<body>
+
 		<div id="page-title">
 				<h3>
 					Welcome to 用户管理 <small></small>
@@ -152,6 +164,7 @@
 									<i class="glyph-icon icon-edit"></i> </a>
 									<a data-toggle="modal"  data-target="#deleteModal" href="#" class="btn small bg-red tooltip-button" data-placement="top" title="删除" >
 									<i class="glyph-icon icon-remove"></i> </a>
+								
 									</td>
 								</tr>
 								<tr>
@@ -297,10 +310,7 @@
 		</div>
 		<!-- #page-main -->
 		
-		
-		
-		
-		
+		<!-- #page-content -->
 		
 <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -414,6 +424,7 @@
   </div>
 </div>
 	</body>
+
 </html>
 
 

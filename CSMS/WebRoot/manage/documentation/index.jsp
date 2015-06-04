@@ -122,7 +122,7 @@
 	<div id="page-wrapper">
 
 
-		<div id="page-header" class="clearfix">
+		<div id="page-header" class="clearfix"  style="z-index: -2;">
 			<!-- <div id="header-logo">Documentation</div> -->
 				<div id="header-logo"><img src="images/toplogo.png"alt=""></div>
 			<div class="top-icon-bar"></div>
@@ -140,9 +140,9 @@
 						<ul>
 							<li><a href="yhgl.jsp" title="Dashboard panels" target="main-frame">
 							<i class="glyph-icon icon-chevron-right"></i> 用户管理 </a></li>
-							<li><a href="hhgl.jsp" title="Tile buttons"> <i
+							<li><a href="hhgl.jsp" title="Tile buttons" target="main-frame"> <i
 									class="glyph-icon icon-chevron-right"></i> 货号管理 </a></li>
-							<li><a href="ck.jsp" title="Timeline"> <i
+							<li><a href="ck.jsp" title="Timeline"  target="main-frame"> <i
 									class="glyph-icon icon-chevron-right"></i> 仓库 </a></li>
 
 						</ul></li>
@@ -326,7 +326,7 @@
 		<script type="text/javascript">
 			
 		</script>
-		<div id="page-content-wrapper"  style="height: 700px;" >
+		<div id="page-content-wrapper"  style="height: 680px;" >
 			
 			<iframe src="yhgl.jsp" id="main-frame" name="main-frame" frameborder="no" width=100% height=100%></iframe>
 				
