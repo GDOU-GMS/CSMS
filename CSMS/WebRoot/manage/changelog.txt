@@ -1,0 +1,57 @@
+-----------------------------------
+
+	Fides Admin Framework
+
+-----------------------------------
+
+Initial release: 1.0 - released 25 October 2013
+
+-----------------------------------
+
+Version: 1.1 - released 1 November 2013
+
+-----------------------------------
+
+New features:
+	- Wizard
+	- WYSIWYG texture
+	- Image cropper
+	- Multifile uploader
+	- Dropzone uploader
+	- Google maps api
+	- Vector maps
+	- Forms input masks
+	- Full width calendar
+	- Input Knobs
+	- Youtube like loading bar
+	- Enable/Disable theme animations
+	- New theme
+
+-----------------------------------
+
+Bug fixes:
+
+	- Removed drop down a border radius - common.css
+	- Removed page-wrapper width - common.css
+	- Fixed right style switcher panel flipping - style-switcher.js
+	- Fixed style switcher flickering - style-switcher.js
+	- Fixed sidebar position when switching from boxed to fluid - layout.js
+	- Added custom scrollbar spacing - widgets.js
+	- Added #page-content white bg for all /themes/dark-THEMENAME.css
+	- Removed #page-header from login pages (no need for it there)
+	- Fixed vertical login-box alignment
+	- Fixed some page header issues for mobile
+
+-----------------------------------
+
+Version: 1.2 - released 10 November 2013
+
+Various bug fixes
+
+New features:
+	- Added timeline component
+	- Added tile buttons component
+	- Added new charts widget
+	- Added custom toggle checkboxes
+	- Added custom multiselect inputs
+	- Changed the drop downs/popovers animation
