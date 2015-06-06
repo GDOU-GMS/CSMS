@@ -2,7 +2,6 @@ package org.blueshit.csms.base;
 
 import java.lang.reflect.ParameterizedType;
 
-import javax.annotation.Resource;
 
 import org.apache.struts2.ServletActionContext;
 

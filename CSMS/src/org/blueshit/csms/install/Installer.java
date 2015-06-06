@@ -38,6 +38,7 @@ public class Installer {
 		menu1 = new Privilege("用户管理", "/user_list", menu);
 		menu2 = new Privilege("货号", "/item_list", menu);
 		menu3 = new Privilege("仓库", "/storage_list", menu);
+		menu4 = new Privilege("角色管理","/role_list",menu);
 
 		session.save(menu);
 		session.save(menu1);
@@ -61,7 +62,11 @@ public class Installer {
 		session.save(new Privilege("仓库删除","/storage_delete",menu3));
 		session.save(new Privilege("仓库添加","/storage_add",menu3));
 		session.save(new Privilege("仓库查询","/storage_query",menu3));
-		
+			//角色管理
+		session.save(new Privilege("角色列表", "/role_list", menu4));
+		session.save(new Privilege("角色删除", "/role_delete", menu4));
+		session.save(new Privilege("角色添加", "/role_add", menu4));
+		session.save(new Privilege("角色修改", "/role_edit", menu4));
 		
 		//库存管理总菜单
 		menu = new Privilege("库存管理", null, null);
@@ -111,7 +116,8 @@ public class Installer {
 	 */
 	public static void main(String args []){
 		System.out.println("正在初始化数据......");
-
+		
+		@SuppressWarnings("resource")
 		ApplicationContext ac = new ClassPathXmlApplicationContext("applicationContext.xml");
 		Installer installer = (Installer) ac.getBean("installer");
 		installer.install();
