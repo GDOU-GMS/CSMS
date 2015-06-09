@@ -3,10 +3,21 @@ package org.blueshit.csms.base;
 import java.lang.reflect.ParameterizedType;
 
 
+
+
+
+
+
+import javax.annotation.Resource;
+
 import org.apache.struts2.ServletActionContext;
 
 
 import org.blueshit.csms.entity.User;
+import org.blueshit.csms.service.PrivilegeService;
+import org.blueshit.csms.service.RoleService;
+import org.blueshit.csms.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
@@ -20,7 +31,12 @@ public class BaseAction<T> extends ActionSupport implements ModelDriven<T>{
 	 */
 	private static final long serialVersionUID = 4891416074548081771L;
 	//==============声明service====================
-
+	@Autowired
+	protected RoleService roleService;
+	@Autowired
+	protected PrivilegeService privilegeService;
+	@Autowired
+	protected UserService userService;
 	
 	//声明model
 	protected T model;

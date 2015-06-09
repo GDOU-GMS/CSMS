@@ -7,4 +7,6 @@ public interface UserService extends DaoSupport<User>{
 	
 	public abstract User findByLoginNameAndPwd(String loginName,String password);
 	
+	public abstract void resetPwd(User u);
+	
 }

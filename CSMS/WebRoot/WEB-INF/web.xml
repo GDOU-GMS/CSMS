@@ -2,7 +2,7 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
   <display-name>CSMS</display-name>
   
-  <!-- 整合Spring -->
+  	<!-- 整合Spring -->
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
@@ -11,16 +11,27 @@
 		<param-value>classpath:applicationContext.xml</param-value>
 	</context-param>
 	 
+	 <!-- 初始化listener -->
+	<listener>
+		<listener-class>org.blueshit.csms.listener.InitListener</listener-class>
+	</listener>
+	
 	<!-- 配置Spring的OpenSessionInViewFilter，以解决懒加载异常 -->
 	<filter>
 		<filter-name>OpenSessionInViewFilter</filter-name>
 		<filter-class>org.springframework.orm.hibernate4.support.OpenSessionInViewFilter</filter-class>
+		<!-- <init-param>
+   			<param-name>singleSession</param-name>
+   			<param-value>false</param-value>
+  		</init-param>  -->
 	</filter>
 	<filter-mapping>
 		<filter-name>OpenSessionInViewFilter</filter-name>
 		<url-pattern>*.do</url-pattern>
 	</filter-mapping>
-
+	
+	
+	
 	<!-- 加入struts2的过滤器 -->
 	<filter>
         <filter-name>struts2</filter-name>

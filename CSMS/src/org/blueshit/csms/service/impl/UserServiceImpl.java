@@ -22,5 +22,22 @@ public class UserServiceImpl extends DaoSupportImpl<User> implements UserService
 				.uniqueResult();
 	}
 
+	/**
+	 * 重写保存方法.
+	 */
+	public void save(User u) {
+		u.setPassword(DigestUtils.md5Hex(u.getPassword()));
+		super.save(u);
+	}
+	
+	/**
+	 * 重置密码.
+	 * @param u
+	 */
+	public void resetPwd(User u){
+		u.setPassword(DigestUtils.md5Hex("123456"));
+	}
+
+	
 	
 }

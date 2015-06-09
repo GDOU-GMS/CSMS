@@ -78,7 +78,7 @@ public class  DaoSupportImpl<T> implements DaoSupport<T>{
 		}
 		return getSession()
 				.createQuery("from " + clazz.getSimpleName() + " where id IN(:ids)")
-				.setParameter(0, ids)
+				.setParameterList("ids", ids)
 				.list();
 	}
 
@@ -96,7 +96,8 @@ public class  DaoSupportImpl<T> implements DaoSupport<T>{
 		
 
 		//获取pageSize信息
-		int pageSize = Configuration.getPageSize();
+		Configuration conf = new Configuration();
+		int pageSize = conf.getPageSize();
 		
 		//获取数据列表
 		Query query  = getSession().createQuery(queryHelper.getQueryListHql());
@@ -110,6 +111,10 @@ public class  DaoSupportImpl<T> implements DaoSupport<T>{
 		query.setFirstResult((pageNum -1)*pageSize);
 		query.setMaxResults(pageSize);
 		List list = query.list();
+		/*//如果为空.
+		if(list.isEmpty()){
+			return null;
+		}*/
 		
 		//获得总记录数
 		query = getSession().createQuery(queryHelper.getQueryCountHql());
@@ -122,7 +127,7 @@ public class  DaoSupportImpl<T> implements DaoSupport<T>{
 		
 		Long count = (Long)query.uniqueResult();
 		
-		Page page = new Page(pageNum, pageSize, count.intValue());
+		Page page = new Page(pageSize,pageNum,count.intValue());
 		
 		page.setList(list);
 		

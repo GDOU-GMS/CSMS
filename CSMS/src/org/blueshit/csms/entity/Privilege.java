@@ -59,22 +59,22 @@ public class Privilege {
 	public void setUrl(String url) {
 		this.url = url;
 	}
-	@ManyToMany(mappedBy="privileges",cascade=CascadeType.ALL)
+	@ManyToMany(mappedBy="privileges",cascade={CascadeType.MERGE, CascadeType.PERSIST})
 	public Set<Role> getRoles() {
 		return roles;
 	}
 	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
 	}
-	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="parent")
+	@OneToMany(cascade={CascadeType.MERGE, CascadeType.PERSIST}, fetch=FetchType.EAGER, mappedBy="parent")
 	public Set<Privilege> getChildren() {
 		return children;
 	}
 	public void setChildren(Set<Privilege> children) {
 		this.children = children;
 	}
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="parentId")
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="parentId",nullable = false)
 	public Privilege getParent() {
 		return parent;
 	}

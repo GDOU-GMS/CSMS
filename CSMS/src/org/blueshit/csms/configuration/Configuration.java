@@ -4,18 +4,20 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+import org.junit.Test;
+
 public class Configuration {
 
-	private static int pageSize;
+	private static int pageSize = 10;
 
-
-
-	private static InputStream in;
+	
 	static{
-		Properties props = new Properties();
-		Configuration.class.getClassLoader();
-		in = ClassLoader.getSystemResourceAsStream("default.properties");
+		InputStream in = null;
 		try {
+			
+			in = Configuration.class.getClassLoader().getResourceAsStream("default.properties");
+			Properties props = new Properties();
+			
 			props.load(in);
 			pageSize = Integer.parseInt(props.getProperty("pageSize"));
 		} catch (IOException e) {
@@ -32,12 +34,18 @@ public class Configuration {
 			}
 		}
 	}
+	
 	public static int getPageSize() {
 		return pageSize;
 	}
 
 	public static void setPageSize(int pageSize) {
 		Configuration.pageSize = pageSize;
+	}
+	
+	@Test
+	public void test(){
+		System.out.println(getPageSize());
 	}
 	
 }

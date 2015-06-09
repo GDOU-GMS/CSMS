@@ -137,7 +137,7 @@ public class User implements Serializable{
 	public void setIntro(String intro) {
 		this.intro = intro;
 	}
-	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.LAZY,mappedBy="user")
+	@OneToMany(cascade={CascadeType.MERGE, CascadeType.PERSIST},fetch=FetchType.LAZY,mappedBy="user")
 	public Set<Order> getOrders() {
 		return orders;
 	}
@@ -145,7 +145,7 @@ public class User implements Serializable{
 		this.orders = orders;
 	}
 
-	@ManyToMany(cascade=CascadeType.ALL)
+	@ManyToMany(cascade={CascadeType.MERGE, CascadeType.PERSIST})
 	@JoinTable(name="tb_user_role",
 				joinColumns=@JoinColumn(name="user_id"),
 				inverseJoinColumns = @JoinColumn(name="role_id"))

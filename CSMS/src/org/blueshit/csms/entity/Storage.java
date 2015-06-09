@@ -76,7 +76,7 @@ public class Storage implements Serializable{
 		this.contacts_phone = contacts_phone;
 	}
 
-	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.LAZY,mappedBy="storage")
+	@OneToMany(cascade={CascadeType.MERGE, CascadeType.PERSIST},fetch=FetchType.LAZY,mappedBy="storage")
 	public Set<Order> getOrders() {
 		return orders;
 	}

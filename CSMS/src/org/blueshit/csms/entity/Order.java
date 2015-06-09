@@ -83,7 +83,7 @@ public class Order implements Serializable {
 		this.user = user;
 	}
 
-	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.LAZY,mappedBy="order")
+	@OneToMany(cascade={CascadeType.MERGE, CascadeType.PERSIST},fetch=FetchType.LAZY,mappedBy="order")
 	public Set<OrderList> getOrderLists() {
 		return orderLists;
 	}

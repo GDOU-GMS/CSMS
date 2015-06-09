@@ -44,7 +44,7 @@ public class Role implements Serializable{
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	@ManyToMany(mappedBy = "roles",cascade=CascadeType.ALL)
+	@ManyToMany(mappedBy = "roles",cascade={CascadeType.MERGE, CascadeType.PERSIST})
 	public Set<User> getUsers() {
 		return users;
 	}
@@ -52,7 +52,7 @@ public class Role implements Serializable{
 		this.users = users;
 	}
 	
-	@ManyToMany(cascade=CascadeType.ALL)
+	@ManyToMany(cascade={CascadeType.MERGE, CascadeType.PERSIST})
 	@JoinTable(name="tb_role_privilege",
 			joinColumns = @JoinColumn(name="role_id"),
 			inverseJoinColumns = @JoinColumn(name="privilege_id"))
