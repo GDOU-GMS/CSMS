@@ -5,8 +5,6 @@
 			+ request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
 %>
-
-
 <!-- AUI Documentation -->
 <!DOCTYPE html>
 <html>
@@ -158,7 +156,7 @@
 						<li><a href="javascript:;" title="Components"> <i
 							class="glyph-icon icon-folder-open"></i> 辅助管理 </a>
 						<ul>
-							<li><a href="fzgl.jsp" title="Dashboard panels">
+							<li><a href="fzgl.jsp" title="Dashboard panels"  target="main-frame">
 									<i class="glyph-icon icon-chevron-right"></i> 修改密码 </a></li>
 
 						</ul></li>
