@@ -62,6 +62,7 @@
 	<form class="form-horizontal" action="${pageContext.request.contextPath }/role_setPrivilege.do" method="post" >
      <div class="modal-body" style="margin:20px;">
      <input type="hidden" name="id" value="${id }"/>
+      <input type="hidden" class="form-control" name="pageNum" value="${pageNum }" >
      <ul id="PrivilegeTree">
      	<s:iterator value="topPrivilegeList">
      		<%-- 第一层 --%>

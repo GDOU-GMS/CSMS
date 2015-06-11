@@ -51,7 +51,7 @@ public class CheckPrivilegeInterceptor implements Interceptor{
 		}else{
 			//2、已经登录，判断权限
 			if(user.hasPrivilegeByUrl(url)){
-				return ai.invoke();
+				ai.invoke();
 			}else{
 				return "noPrivilegeUI";
 			}

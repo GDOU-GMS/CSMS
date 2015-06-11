@@ -73,6 +73,7 @@ public class RoleAction extends BaseAction<Role>{
 	 */
 	public String add() throws Exception{
 		roleService.save(model);
+		ActionContext.getContext().put("pageNum", pageNum);
 		return "toList";
 	}
 	
@@ -88,6 +89,7 @@ public class RoleAction extends BaseAction<Role>{
 		role.setDescription(model.getDescription());
 		
 		roleService.update(role);
+		ActionContext.getContext().put("pageNum", pageNum);
 		return "toList";
 	}
 	
@@ -99,6 +101,7 @@ public class RoleAction extends BaseAction<Role>{
 	 */
 	public String delete() throws Exception{
 		roleService.delete(model.getId());
+		ActionContext.getContext().put("pageNum", pageNum);
 		return "toList";
 	}
 	
@@ -121,6 +124,7 @@ public class RoleAction extends BaseAction<Role>{
 			privilegeIds[index++] = privilege.getId();
 		}
 		ActionContext.getContext().put("privilegeIds", privilegeIds);
+		ActionContext.getContext().put("pageNum", pageNum);
 		return "setPrivilegeUI";
 	}
 	
@@ -137,6 +141,7 @@ public class RoleAction extends BaseAction<Role>{
 		role.setPrivileges(new HashSet<Privilege>(privilegeList));
 		//3.更新数据库.
 		roleService.update(role);
+		ActionContext.getContext().put("pageNum", pageNum);
 		return "toList";
 	}
 	

@@ -11,7 +11,7 @@
 		
 		<action name="user_*" class="userAction" method="{1}">
 			<result name="list">/WEB-INF/jsp/UserAction/list.jsp</result>
-			<result name="toList" type="redirectAction">user_list</result>
+			<result name="toList" type="redirectAction">user_list?pageNum=${pageNum}</result>
 		</action>
 		
 	</package>

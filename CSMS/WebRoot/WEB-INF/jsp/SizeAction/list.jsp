@@ -8,7 +8,7 @@
 
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-		<title>角色管理</title>
+		<title>尺码管理</title>
 		<meta name="description" content="">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
@@ -46,7 +46,6 @@
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/manage/documentation/css/style.css">
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/manage/documentation/css/DialogBySHF.css">
 		<link rel="stylesheet" href="${pageContext.request.contextPath }/manage/documentation/css/bootstrap.min.css">
-		<link rel="stylesheet" href="${pageContext.request.contextPath }/manage/jquery_treeview/jquery.treeview.css">
 		<!-- Fides Admin JS -->
 
 		<script type="text/javascript" src="${pageContext.request.contextPath }/manage/documentation/assets/js/minified/aui-production.min.js"></script>
@@ -58,22 +57,6 @@
 		<!--<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>-->
 		<script src="${pageContext.request.contextPath }/manage/documentation/js/bootstrap.min.js"></script>
 		<script src="${pageContext.request.contextPath }/manage/documentation/js/jquery.min.js"></script>
-		<!-- 自定义的js函数 -->
-		<script>
-			function addUser(){
-			$.DialogBySHF.Dialog({ Width: 650, Height: 500, Title: "添加", URL: 'addUser.jsp' });
-			}
-			function deleteUser(){
-			 /*$.DialogBySHF.Confirm({ Width: 350, Height: 200, Title: "提示信息", });*/
-			$.DialogBySHF.Dialog({ Width: 350, Height: 200, Title: "删除用户", URL: 'confirm.jsp' });
-		        
-			}
-			function updateUser(){
-			 /*$.DialogBySHF.Confirm({ Width: 350, Height: 200, Title: "提示信息", });*/
-			$.DialogBySHF.Dialog({ Width: 650, Height: 500, Title: "更新用户", URL: 'updateUser.jsp' });
-		        
-			}
-		</script>
 
 	</head>
 
@@ -81,7 +64,7 @@
 
 		<div id="page-title">
 				<h3>
-					Welcome to 角色管理 <small></small>
+					Welcome to 尺码管理 <small></small>
 				</h3>
 
 			</div>
@@ -104,7 +87,6 @@
 								<tr>
 									<th>序号</th>
 									<th>名称</th>
-									<th>描述</th>
 									<th>操作</th>
 								</tr>
 							</thead>
@@ -112,32 +94,31 @@
 								<s:iterator value="list" status="status" >
 									<tr>
 									<td>${(pageNum-1)*10+status.count }</td>
-									<td class="font-bold text-left" id="name_${id }">${name}</td>
-									<td id="description_${id}">${description}</td>
+									<td class="font-bold text-left" id="name_${id }">${num}</td>
 									<td>
 									<a data-toggle="modal"  data-target="#updateModal" href="#" class="btn small bg-blue-alt tooltip-button" data-placement="top"  title="更新" onclick="reshow(${id})">  
 									<i class="glyph-icon icon-edit"></i> </a>
 									<a data-toggle="modal"  data-target="#deleteModal" href="#" class="btn small bg-red tooltip-button" data-placement="top" title="删除" onclick="getId(${id})">
 									<i class="glyph-icon icon-remove"></i> </a>
-									<a href="${pageContext.request.contextPath }/role_setPrivilegeUI.do?id=${id}&pageNum=${pageNum}" class="btn small bg-red tooltip-button" data-placement="top" title="设置权限">
-									<i class="glyph-icon icon-sun-o"></i> </a>
-									
 									</td>
 								</tr>
 								</s:iterator>
 							</tbody>
 						</table>
 						
+						<!-- start分页,有数据的时候才显示分页. -->
 						<s:if test="totalRecord>0">
 							<div class="col-md-3" style="float:right; margin-bottom:20px; width:500px;">
 								<div class="button-group center-div">
-									<a href="${pageContext.request.contextPath }/role_list.do?pageNum=${pageNum-1}" class="btn large ui-state-default" <s:if test="pageNum == 1 ">disabled="disabled"</s:if>>
-									<i class="glyph-icon icon-chevron-left"></i> </a>
+									<a href="${pageContext.request.contextPath }/size_list.do?pageNum=${pageNum-1}" class="btn large ui-state-default" <s:if test="pageNum == 1">disabled="disabled"</s:if>>
+										<i class="glyph-icon icon-chevron-left"></i> 
+									</a>
 									<s:iterator begin="%{startPage}" end="%{endPage}" var="i">
-										<a href="${pageContext.request.contextPath }/role_list.do?pageNum=${i}" class="btn large ui-state-default" <s:if test="pageNum==#i">disabled="disabled"</s:if>>${i }</a>
+										<a href="${pageContext.request.contextPath }/size_list.do?pageNum=${i}" class="btn large ui-state-default" <s:if test="pageNum==#i">disabled="disabled"</s:if>>${i }</a>
 									</s:iterator>
-									<a href="${pageContext.request.contextPath }/role_list.do?pageNum=${pageNum+1}" class="btn large ui-state-default" <s:if test="pageNum == totalPage">disabled="disabled"</s:if>>
-									<i class="glyph-icon icon-chevron-right"></i> </a>
+									<a href="${pageContext.request.contextPath }/size_list.do?pageNum=${pageNum+1}" class="btn large ui-state-default" <s:if test="pageNum == totalPage">disabled="disabled"</s:if>>
+										<i class="glyph-icon icon-chevron-right"></i> 
+									</a>
 								</div>
 							</div>
 						</s:if>
@@ -156,23 +137,18 @@
 <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
-      <form class="form-horizontal" action="${pageContext.request.contextPath }/role_add.do" method="post">
+      <form class="form-horizontal" action="${pageContext.request.contextPath }/size_add.do" method="post">
       <div class="modal-header" >
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">添加角色</h4>
+        <h4 class="modal-title" id="myModalLabel">添加尺码</h4>
       </div>
       <div class="modal-body" style="margin:20px;">
-      <input type="hidden" class="form-control" name="pageNum" value="${pageNum }" >
+       	  <input type="hidden" class="form-control" name="pageNum" value="${pageNum }" >
 		  <div class="form-group">
 		    <label for="exampleInputEmail1">名称</label>
-		    <input type="text" class="form-control" name="name" placeholder="请输入角色名称">
+		    <input type="text" class="form-control" name="num" placeholder="请输入尺码">
 		  </div>
 		  </br>
-		  <div class="form-group">
-		    <label for="exampleInputEmail1">描述</label>
-		    <input type="text" class="form-control" name="description" placeholder="请数据该角色的描述信息">
-		  </div>
-		   </br>
       </div>
       <div class="modal-footer">
        	<button type="submit"class="btn medium primary-bg" style="margin-left:10px;" title="">
@@ -193,28 +169,22 @@
 <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
-      <form class="form-horizontal" action="${pageContext.request.contextPath }/role_edit.do" method="post">
+      <form class="form-horizontal" action="${pageContext.request.contextPath }/size_edit.do" method="post">
       <div class="modal-header" >
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">更新角色</h4>
+        <h4 class="modal-title" id="myModalLabel">更新尺码</h4>
       </div>
       <div class="modal-body" style="margin:20px;">
-      <input type="hidden" class="form-control" name="pageNum" value="${pageNum }" >
+       <input type="hidden" class="form-control" name="pageNum" value="${pageNum }" >
 		  <div class="form-group">
 		    <label for="updateId">序号</label>
 		    <input type="text" class="form-control" readonly="readonly" name="id" id="updateId">
 		  </div>
 		  </br>
 		  <div class="form-group">
-		    <label for="updateName">角色名称</label>
-		    <input type="text" class="form-control" placeholder="角色名" id="updateName" name="name">
+		    <label for="updateName">尺码名称</label>
+		    <input type="text" class="form-control" placeholder="角色名" id="updateName" name="num">
 		  </div>
-		   </br>
-		  <div class="form-group">
-		    <label for="updateDescription">角色描述</label>
-		    <input type="text" class="form-control" id="updateDescription" placeholder="描述" name="description">
-		  </div>
-		   </br>
       </div>
       <div class="modal-footer">
        	<button type="submit"class="btn medium primary-bg" style="margin-left:10px;" title="">
@@ -233,10 +203,10 @@
 <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
-      <form class="form-horizontal" action="${pageContext.request.contextPath }/role_delete.do" method="post">
+      <form class="form-horizontal" action="${pageContext.request.contextPath }/size_delete.do" method="post">
       <div class="modal-header" >
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">删除角色</h4>
+        <h4 class="modal-title" id="myModalLabel">删除尺码</h4>
       </div>
       <div class="modal-body" style="margin:20px;">
       <input type="hidden" class="form-control" name="id" id="deleteId" >
@@ -254,78 +224,19 @@
   </div>
 </div>
 
-<div class="modal fade" id="privilegeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <form class="form-horizontal" method="post" action="${pageContext.request.contextPath }/role_setPrivilege.do">
-      <div class="modal-header" >
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">设置权限</h4>
-      </div>
-      <div class="modal-body" style="margin:20px;">
-      <input type="hidden" class="form-control" name="pageNum" value="${pageNum }" >
-     <ul id="PrivilegeTree">
-     	<s:iterator value="#application.topPrivilegeList">
-     		<%-- 第一层 --%>
-			<li>
-				<input type="checkbox" style="width: 13px;" name="privilegeIds" value="${id}" id="cb_${id}" <s:property value="%{id in privilegeIds ? 'checked' : ''}"/> />
-				<label for="cb_${id}"><span class="folder">${name}</span></label>
-				<ul>
-					<%-- 第二层 --%>
-					<s:iterator value="children">
-						<li>
-							<input type="checkbox" style="width: 13px;" name="privilegeIds"
-							value="${id}" id="cb_${id}"
-							<s:property value="%{id in privilegeIds ? 'checked' : ''}"/> />
-							<label for="cb_${id}"><span class="folder">${name}</span></label>
-							<ul>
-								<!--  第三层 -->
-								<s:iterator value="children">
-									<li>
-										<input type="checkbox" style="width: 13px;" name="privilegeIds"
-										value="${id}" id="cb_${id}"
-										<s:property value="%{id in privilegeIds ? 'checked' : ''}"/> />
-										<label for="cb_${id}"><span class="folder">${name}</span></label>
-									</li>
-								</s:iterator>
-							</ul>
-						</li>
-					</s:iterator>
-				</ul>
-			</li>		
-     	</s:iterator>
-     </ul>
-      </div>
-      <div class="modal-footer">
-       	<button type="submit"class="btn medium primary-bg" style="margin-left:10px;" title="">
-		<span class="button-content">确定</span></button>
-		<button type="reset"class="btn medium primary-bg"  data-dismiss="modal" aria-label="Close" style="margin-left:10px;" title="">
-		<span class="button-content">取消</span></button>
-      </div>
-      </form>
-    </div>
-  </div>
-</div>
 
-<script type="text/javascript" src="${pageContext.request.contextPath }/manage/jquery_treeview/jquery.treeview.min.js"></script>
 <script type="text/javascript">
 	
 	//用于更新回显
 	function reshow(id){
 		var name = $("#name_"+id).text();
-		var description = $("#description_"+id).text();
 		$("#updateId").val(id);
 		$("#updateName").val(name);
-		$("#updateDescription").val(description);
 	}
 	//用户删除
 	function getId(id){
 		$("#deleteId").val(id);
 	}
-	//显示权限树
-	$(function(){
-		$("#PrivilegeTree").treeview();
-	});
 </script>
 </body>
 

@@ -12,20 +12,47 @@
 	<!-- 把主题改为simple -->
 	<constant name="struts.ui.theme" value="simple" />
 	
-	
 	<constant name="struts.i18n.encoding" value="UTF-8" />
 	<constant name="struts.multipart.maxSize" value="10000000" />
 	<constant name="struts.multipart.saveDir" value="/tmp" />
 	
-
-
 	<package name="base" namespace="/" extends="struts-default">
 	
+		<!-- 配置拦截器 -->
+		<interceptors>
+			<interceptor name="checkPrivilegeInterceptor" class="org.blueshit.csms.interceptor.CheckPrivilegeInterceptor"></interceptor>
+			<interceptor-stack name="myDefaultStack">
+				<interceptor-ref name="checkPrivilegeInterceptor"></interceptor-ref>
+				<interceptor-ref name="defaultStack"></interceptor-ref><!-- 引入strut本身的拦截器栈 -->
+			</interceptor-stack>
+		</interceptors>
+		<!-- 配置自己拦截器栈 -->
+		<default-interceptor-ref name="myDefaultStack"></default-interceptor-ref>
+	
+		<global-results>
+			<result name="message">/WEB-INF/jsp/Base/message.jsp</result>
+			<result name="loginUI">/WEB-INF/jsp/LoginoutAction/loginUI.jsp</result>
+			<result name="noPrivilege">/WEB-INF/jsp/Base/noPrivilege.jsp</result>
+		</global-results>
 		
+		<!-- homeAction -->
+		<action name="home_*" class="homeAction" method="{1}">
+			<result name="index">/WEB-INF/jsp/HomeAction/index.jsp</result>
+		</action>
+		
+		<!-- loginoutAction -->
+		<action name="loginout_*" class="loginoutAction" method="{1}">
+			<result name="logout">/WEB-INF/jsp/LoginoutAction/logout.jsp</result>
+			<result name="toIndex" type="redirectAction">home_index</result>
+		</action>
 		
 	</package>
-
-
-
-
+	
+	<!-- include -->
+	<include file="struts/struts-test.xml"></include>
+	<include file="struts/struts-role.xml"></include>
+	<include file="struts/struts-user.xml"></include>
+	<include file="struts/struts-size.xml"></include>
+	<include file="struts/struts-color.xml"></include>
+	<include file="struts/struts-storage.xml"></include>
 </struts>

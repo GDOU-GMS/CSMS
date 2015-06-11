@@ -8,14 +8,20 @@ import java.lang.reflect.ParameterizedType;
 
 
 
+
+
+
 import javax.annotation.Resource;
 
 import org.apache.struts2.ServletActionContext;
 
 
 import org.blueshit.csms.entity.User;
+import org.blueshit.csms.service.ColorService;
 import org.blueshit.csms.service.PrivilegeService;
 import org.blueshit.csms.service.RoleService;
+import org.blueshit.csms.service.SizeService;
+import org.blueshit.csms.service.StorageService;
 import org.blueshit.csms.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -37,6 +43,12 @@ public class BaseAction<T> extends ActionSupport implements ModelDriven<T>{
 	protected PrivilegeService privilegeService;
 	@Autowired
 	protected UserService userService;
+	@Autowired
+	protected ColorService colorService;
+	@Autowired
+	protected SizeService sizeService;
+	@Autowired
+	protected StorageService storageService;
 	
 	//声明model
 	protected T model;

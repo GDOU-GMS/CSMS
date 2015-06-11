@@ -52,6 +52,7 @@
 	<include file="struts/struts-test.xml"></include>
 	<include file="struts/struts-role.xml"></include>
 	<include file="struts/struts-user.xml"></include>
-
-
+	<include file="struts/struts-size.xml"></include>
+	<include file="struts/struts-color.xml"></include>
+	<include file="struts/struts-storage.xml"></include>
 </struts>

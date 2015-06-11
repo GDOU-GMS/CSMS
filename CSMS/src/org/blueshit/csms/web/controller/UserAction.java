@@ -68,6 +68,7 @@ public class UserAction extends BaseAction<User>{
 		List<Role> roleList = roleService.findByIds(roleIds);
 		model.setRoles(new HashSet<Role>(roleList));
 		userService.save(model);
+		ActionContext.getContext().put("pageNum", pageNum);
 		return "toList";
 	}
 	
@@ -86,6 +87,7 @@ public class UserAction extends BaseAction<User>{
 		user.setUserName(model.getUserName());
 		//更新到数据库
 		userService.save(user);
+		ActionContext.getContext().put("pageNum", pageNum);
 		return "toList";
 	}
 	
@@ -95,6 +97,7 @@ public class UserAction extends BaseAction<User>{
 	 */
 	public String delete() throws Exception{
 		userService.delete(model.getId());
+		ActionContext.getContext().put("pageNum", pageNum);
 		return "toList";
 	}
 	
@@ -105,6 +108,7 @@ public class UserAction extends BaseAction<User>{
 	public String resetPwd() throws Exception{
 		User user = userService.findById(model.getId());
 		userService.resetPwd(user);
+		ActionContext.getContext().put("pageNum", pageNum);
 		return "toList";
 	}
 	
@@ -122,6 +126,10 @@ public class UserAction extends BaseAction<User>{
 		//准备角色数据
 		List<Role> roleList = roleService.findAll();
 		ActionContext.getContext().put("roleList", roleList);
+		//回传参数，解决分页链接异常
+		ActionContext.getContext().put("querystatue", "querystatue");
+		ActionContext.getContext().put("userName", model.getUserName());
+		ActionContext.getContext().put("loginName", model.getLoginName());
 		return "list";
 	}
 	
