@@ -55,7 +55,79 @@
 		<script type="text/javascript" src="${pageContext.request.contextPath}/manage/documentation/assets/js/DialogBySHF.js"></script>
 		<script src="${pageContext.request.contextPath }/manage/documentation/js/bootstrap.min.js"></script>
 		<script src="${pageContext.request.contextPath }/manage/documentation/js/jquery.min.js"></script>
-	
+		<script type="text/javascript">
+			//添加的时候获取颜色和尺码.
+			function getColorAndSize(){
+				var url = "json_getColorAndSize.do";
+				$.getJSON(url,{date:new Date()},function(data){
+					//颜色
+					$.each(data.colors,function(k,v){
+						var option = "<option>"+v.name+"</option>";
+						$("#addColor").append(option)
+					});
+					//尺码
+					$.each(data.sizes,function(k,v){
+						var option = "<option>"+v.num+"</option>";
+						$("#addSize").append(option);
+					});
+				});
+			}
+			//根据Id获取实体.
+			function getItemById(id){
+				var url = "item_getItemById.do";
+				var params = {
+						date:new Date(),
+						id:id
+				};
+				
+				$.getJSON(url,params,function(data){
+					var item = data.item;
+					var flag = false;
+					//颜色
+					$.each(data.colors,function(k,v){
+						var option = "<option>"+v.name+"</option>";
+						var selectoption = "<option selected='selected'>"+v.name+"</option>";
+						if(v.name == item.color_number){
+							$("#editColor").append(selectoption);
+							flag = true;//证明有存在相同的值
+						}else{
+							$("#editColor").append(option);
+						}
+					});
+					if(!flag){
+						$("#editColor").append("<option selected='selected'>"+item.color_number+"</option>");
+					}
+					flag = false;
+					//尺码
+					$.each(data.sizes,function(k,v){
+						var option = "<option>"+v.num+"</option>";
+						var selectoption = "<option selected='selected'>"+v.num+"</option>";
+						if(v.num == item.size){
+							$("#editSize").append(selectoption);
+							flag = true;//证明有存在相同的值
+						}else{
+							$("#editSize").append(option);
+						}
+					});
+					if(!flag){
+						$("#editSize").append("<option selected='selected'>"+item.size+"</option>");
+					}
+					//回显
+					$("#editNumber").val(item.item_number);//货号
+					$("#editBrand").val(item.brand);//品名
+					$("#editLining").val(item.lining);//里料
+					$("#editShell").val(item.shell);//面料
+					$("#editFactory").val(item.factory_price);//出厂价格
+					$("#editRetail").val(item.retail_price);//零售价
+					$("#editId").val(item.id)//id
+					
+				});
+			}
+			//删除用
+			function getDeleteId(id){
+				$("#deleteId").val(id);
+			}
+		</script>
 
 	</head>
 
@@ -77,51 +149,46 @@
 			<!-- 表格 -->
 			<div class="example-box">
 				<div class="example-code">
-					<form action="" method="">
+					<form action="${pageContext.request.contextPath }/item_query.do" method="post">
 						<div class="form-row">
 							<div class="form-label col-md-1 labelstyle" style="margin-right:5px;">
-								<label for=""> 货号: </label>
+								<label for="querynumber"> 货号: </label>
 							</div>
 							<div class="form-input col-md-3 textstyle">
-								<input style="width:200px;height:28px;" type="text" name="" id="">
+								<input style="width:200px;height:28px;" type="text" name="item_number" id="querynumber">
 							</div>
 							<div class="form-label col-md-2 labelstyle" style="margin-right:5px;">
-								<label for=""> 品名: </label>
+								<label for="querybrand"> 品名: </label>
 							</div>
 							<div style="width:200px;height:28px;" class="form-input col-md-3 textstyle">
-								<input type="text" name="" id="">
+								<input type="text" name="brand" id="querybrand">
 							</div>
-
 						</div>
 						<div class="form-row">
 							<div class="form-label col-md-1 labelstyle" style="margin-right:5px;">
-								<label for=""> 色号: </label>
+								<label for="querycolor_number"> 色号: </label>
 							</div>
 							<div class="form-input col-md-3 textstyle">
-								<input style="width:200px;height:28px;" type="text" name="" id="">
+								<input style="width:200px;height:28px;" type="text" name="color_number" id="querycolor_number">
 							</div>
 							<div class="form-label col-md-2 labelstyle" style="margin-right:5px;">
-								<label for=""> 尺码: </label>
+								<label for="querysize"> 尺码: </label>
 							</div>
 							<div style="width:200px;height:28px;" class="form-input col-md-3 textstyle">
-								<input type="text" name="" id="">
+								<input type="text" name="size" id="querysize">
 							</div>
-							<!-- <a href="#" class="btn medium primary-bg" style="margin-left:10px;" title=""> <span
-									class="button-content">查询</span> </a> -->
 							<button type="submit" class="btn medium primary-bg" style="margin-left:10px;" title="">
 								<span class="button-content">查询</span>
 							</button>
 
 						</div>
-						<div>
-
-							<!--  <a href="#" class="btn medium ui-state-default" title="">
-					            <span class="button-content">取消</span>
-					        	</a> -->
-						</div>
 					</form>
 				</div>
 				<div class="example-code">
+				
+					<a data-toggle="modal" data-target="#addModal" title=".icon-plus-square-o" class="tooltip-button btn small bg-yellow" title="添加" href="#" onclick="getColorAndSize()">
+						<i class="glyph-icon icon-plus-square-o"></i>
+					</a><br><br>
 
 					<table class="table table-condensed">
 						<thead>
@@ -138,233 +205,70 @@
 							</tr>
 						</thead>
 						<tbody>
+							<s:iterator value="list" status="status">
 							<tr>
-								<td>1</td>
-								<td class="font-bold text-left">John Clark</td>
-								<td><a href="javascript:;">Sales</a>
+								<td>${(pageNum-1)*10+status.count }</td>
+								<td class="font-bold text-left">${item_number}</td>
+								<td><a href="javascript:;">${color_number }</a>
 								</td>
-								<td class="font-bold text-left">John Clark</td>
-								<td><a href="javascript:;">Sales</a>
+								<td class="font-bold text-left">${size}</td>
+								<td><a href="javascript:;">${brand }</a>
 								</td>
-								<td class="font-bold text-left">John Clark</td>
-								<td><a href="javascript:;">Sales</a>
+								<td class="font-bold text-left">${factory_price }</td>
+								<td><a href="javascript:;">${retail_price }</a>
 								</td>
 
 								<td>
-									<!-- 	<a href="javascript:;" class="btn small bg-yellow tooltip-button" data-placement="top" title="Flag">
-									<i class="glyph-icon icon-flag"></i> </a>  -->
-									<a data-toggle="modal" data-target="#addModal" title=".icon-plus-square-o" class="tooltip-button btn small bg-yellow" title="添加" href="#">
-										<i class="glyph-icon icon-plus-square-o"></i>
-									</a>
-									<a data-toggle="modal" data-target="#updateModal" href="#" class="btn small bg-blue-alt tooltip-button" data-placement="top" title="更新">
+									
+									<a data-toggle="modal" data-target="#updateModal" href="#" class="btn small bg-blue-alt tooltip-button" data-placement="top" title="更新" onclick="getItemById(${id})">
 										<i class="glyph-icon icon-edit"></i> </a>
-									<a data-toggle="modal" data-target="#deleteModal"  class="btn small bg-red tooltip-button" data-placement="top" title="删除"  href="#">
+									<a data-toggle="modal" data-target="#deleteModal"  class="btn small bg-red tooltip-button" data-placement="top" title="删除"  href="#" onclick="getDeleteId(${id})">
 										<i class="glyph-icon icon-remove"></i> </a>
 								</td>
 							</tr>
-							<tr>
-								<td>2</td>
-								<td class="font-bold text-left">Kenny Davis</td>
-								<td class="font-bold text-left">John Clark</td>
-								<td class="font-bold text-left">John Clark</td>
-								<td><a href="javascript:;">Sales</a>
-								</td>
-								<td class="font-bold text-left">John Clark</td>
-								<td><a href="javascript:;">Sales</a>
-								</td>
-								<td>
-									<a data-toggle="modal" data-target="#addModal" title=".icon-plus-square-o" class="tooltip-button btn small bg-yellow" title="添加" href="#">
-										<i class="glyph-icon icon-plus-square-o"></i>
-									</a>
-									<a data-toggle="modal" data-target="#updateModal" href="#" class="btn small bg-blue-alt tooltip-button" data-placement="top" title="更新">
-										<i class="glyph-icon icon-edit"></i> </a>
-									<a data-toggle="modal" data-target="#deleteModal"  class="btn small bg-red tooltip-button" data-placement="top" title="删除"  href="#">
-										<i class="glyph-icon icon-remove"></i> </a>
-								</td>
-							</tr>
-							<tr>
-								<td>3</td>
-								<td class="font-bold text-left">Kenny Davis</td>
-								<td><a href="javascript:;">Development</a> </td>
-								<td class="font-bold text-left">John Clark</td>
-								<td><a href="javascript:;">Sales</a>
-								</td>
-								<td class="font-bold text-left">John Clark</td>
-								<td><a href="javascript:;">Sales</a>
-								</td>
-								<td>
-									<a data-toggle="modal" data-target="#addModal" title=".icon-plus-square-o" class="tooltip-button btn small bg-yellow" title="添加" href="#">
-										<i class="glyph-icon icon-plus-square-o"></i>
-									</a>
-									<a data-toggle="modal" data-target="#updateModal" href="#" class="btn small bg-blue-alt tooltip-button" data-placement="top" title="更新">
-										<i class="glyph-icon icon-edit"></i> </a>
-									<a data-toggle="modal" data-target="#deleteModal"  class="btn small bg-red tooltip-button" data-placement="top" title="删除"  href="#">
-										<i class="glyph-icon icon-remove"></i> </a>
-								</td>
-							</tr>
-							<tr>
-								<td>4</td>
-								<td class="font-bold text-left">Kenny Davis</td>
-								<td><a href="javascript:;">Development</a> </td>
-								<td class="font-bold text-left">John Clark</td>
-								<td><a href="javascript:;">Sales</a>
-								</td>
-								<td class="font-bold text-left">John Clark</td>
-								<td><a href="javascript:;">Sales</a>
-								</td>
-								<td>
-									<a data-toggle="modal" data-target="#addModal" title=".icon-plus-square-o" class="tooltip-button btn small bg-yellow" title="添加" href="#">
-										<i class="glyph-icon icon-plus-square-o"></i>
-									</a>
-									<a data-toggle="modal" data-target="#updateModal" href="#" class="btn small bg-blue-alt tooltip-button" data-placement="top" title="更新">
-										<i class="glyph-icon icon-edit"></i> </a>
-									<a data-toggle="modal" data-target="#deleteModal"  class="btn small bg-red tooltip-button" data-placement="top" title="删除"  href="#">
-										<i class="glyph-icon icon-remove"></i> </a>
-								</td>
-
-							</tr>
-							<tr>
-								<td>5</td>
-								<td class="font-bold text-left">Kenny Davis</td>
-								<td><a href="javascript:;">Development</a> </td>
-								<td class="font-bold text-left">John Clark</td>
-								<td><a href="javascript:;">Sales</a>
-								</td>
-								<td class="font-bold text-left">John Clark</td>
-								<td><a href="javascript:;">Sales</a>
-								</td>
-								<td>
-									<a data-toggle="modal" data-target="#addModal" title=".icon-plus-square-o" class="tooltip-button btn small bg-yellow" title="添加" href="#">
-										<i class="glyph-icon icon-plus-square-o"></i>
-									</a>
-									<a data-toggle="modal" data-target="#updateModal" href="#" class="btn small bg-blue-alt tooltip-button" data-placement="top" title="更新">
-										<i class="glyph-icon icon-edit"></i> </a>
-									<a data-toggle="modal" data-target="#deleteModal"  class="btn small bg-red tooltip-button" data-placement="top" title="删除"  href="#">
-										<i class="glyph-icon icon-remove"></i> </a>
-								</td>
-							</tr>
-							<tr>
-								<td>6</td>
-								<td class="font-bold text-left">Kenny Davis</td>
-								<td><a href="javascript:;">Development</a>
-								</td>
-								<td class="font-bold text-left">John Clark</td>
-								<td><a href="javascript:;">Sales</a>
-								</td>
-								<td class="font-bold text-left">John Clark</td>
-								<td><a href="javascript:;">Sales</a>
-								</td>
-								<td>
-									<a data-toggle="modal" data-target="#addModal" title=".icon-plus-square-o" class="tooltip-button btn small bg-yellow" title="添加" href="#">
-										<i class="glyph-icon icon-plus-square-o"></i>
-									</a>
-									<a data-toggle="modal" data-target="#updateModal" href="#" class="btn small bg-blue-alt tooltip-button" data-placement="top" title="更新">
-										<i class="glyph-icon icon-edit"></i> </a>
-									<a data-toggle="modal" data-target="#deleteModal"  class="btn small bg-red tooltip-button" data-placement="top" title="删除"  href="#">
-										<i class="glyph-icon icon-remove"></i> </a>
-								</td>
-							</tr>
-							<tr>
-								<td>7</td>
-								<td class="font-bold text-left">Kenny Davis</td>
-								<td><a href="javascript:;">Development</a> </td>
-								<td class="font-bold text-left">John Clark</td>
-								<td><a href="javascript:;">Sales</a>
-								</td>
-								<td class="font-bold text-left">John Clark</td>
-								<td><a href="javascript:;">Sales</a>
-								</td>
-								<td>
-									<a data-toggle="modal" data-target="#addModal" title=".icon-plus-square-o" class="tooltip-button btn small bg-yellow" title="添加" href="#">
-										<i class="glyph-icon icon-plus-square-o"></i>
-									</a>
-									<a data-toggle="modal" data-target="#updateModal" href="#" class="btn small bg-blue-alt tooltip-button" data-placement="top" title="更新">
-										<i class="glyph-icon icon-edit"></i> </a>
-									<a data-toggle="modal" data-target="#deleteModal"  class="btn small bg-red tooltip-button" data-placement="top" title="删除"  href="#">
-										<i class="glyph-icon icon-remove"></i> </a>
-								</td>
-							</tr>
-							<tr>
-								<td>8</td>
-								<td class="font-bold text-left">Kenny Davis</td>
-								<td><a href="javascript:;">Development</a> </td>
-								<td class="font-bold text-left">John Clark</td>
-								<td><a href="javascript:;">Sales</a>
-								</td>
-								<td class="font-bold text-left">John Clark</td>
-								<td><a href="javascript:;">Sales</a>
-								</td>
-								<td>
-									<a data-toggle="modal" data-target="#addModal" title=".icon-plus-square-o" class="tooltip-button btn small bg-yellow" title="添加" href="#">
-										<i class="glyph-icon icon-plus-square-o"></i>
-									</a>
-									<a data-toggle="modal" data-target="#updateModal" href="#" class="btn small bg-blue-alt tooltip-button" data-placement="top" title="更新">
-										<i class="glyph-icon icon-edit"></i> </a>
-									<a data-toggle="modal" data-target="#deleteModal"  class="btn small bg-red tooltip-button" data-placement="top" title="删除"  href="#">
-										<i class="glyph-icon icon-remove"></i> </a>
-								</td>
-							</tr>
-							<tr>
-								<td>9</td>
-								<td class="font-bold text-left">Kenny Davis</td>
-								<td><a href="javascript:;">Development</a> </td>
-								<td class="font-bold text-left">John Clark</td>
-								<td><a href="javascript:;">Sales</a>
-								</td>
-								<td class="font-bold text-left">John Clark</td>
-								<td><a href="javascript:;">Sales</a>
-								</td>
-								<td>
-									<a data-toggle="modal" data-target="#addModal" title=".icon-plus-square-o" class="tooltip-button btn small bg-yellow" title="添加" href="#">
-										<i class="glyph-icon icon-plus-square-o"></i>
-									</a>
-									<a data-toggle="modal" data-target="#updateModal" href="#" class="btn small bg-blue-alt tooltip-button" data-placement="top" title="更新">
-										<i class="glyph-icon icon-edit"></i> </a>
-									<a data-toggle="modal" data-target="#deleteModal"  class="btn small bg-red tooltip-button" data-placement="top" title="删除"  href="#">
-										<i class="glyph-icon icon-remove"></i> </a>
-								</td>
-							</tr>
-							<tr>
-								<td>10</td>
-								<td class="font-bold text-left">Kenny Davis</td>
-								<td><a href="javascript:;">Development</a> </td>
-								<td class="font-bold text-left">John Clark</td>
-								<td><a href="javascript:;">Sales</a>
-								</td>
-								<td class="font-bold text-left">John Clark</td>
-								<td><a href="javascript:;">Sales</a>
-								</td>
-								<td>
-									<a data-toggle="modal" data-target="#addModal" title=".icon-plus-square-o" class="tooltip-button btn small bg-yellow" title="添加" href="#">
-										<i class="glyph-icon icon-plus-square-o"></i>
-									</a>
-									<a data-toggle="modal" data-target="#updateModal" href="#" class="btn small bg-blue-alt tooltip-button" data-placement="top" title="更新">
-										<i class="glyph-icon icon-edit"></i> </a>
-									<a data-toggle="modal" data-target="#deleteModal"  class="btn small bg-red tooltip-button" data-placement="top" title="删除"  href="#">
-										<i class="glyph-icon icon-remove"></i> </a>
-								</td>
-							</tr>
+							
+							</s:iterator>
+							
+							
 						</tbody>
 					</table>
 
-					<div class="col-md-3" style="float:right; margin-bottom:20px; width:500px;">
-						<div class="button-group center-div">
-							<a href="javascript:;" class="btn large ui-state-default">
-								<i class="glyph-icon icon-chevron-left"></i> </a>
-							<a href="javascript:;" class="btn large ui-state-default"> 1 </a>
-							<a href="javascript:;" class="btn large disabled ui-state-default"> 2 </a>
-							<a href="javascript:;" class="btn large ui-state-default"> 3 </a>
-							<a href="javascript:;" class="btn large ui-state-default"> 4 </a>
-							<a href="javascript:;" class="btn large ui-state-default"> 5 </a>
-							<a href="javascript:;" class="btn large ui-state-default"> 6 </a>
-							<a href="javascript:;" class="btn large ui-state-default"> 7</a>
-							<a href="javascript:;" class="btn large ui-state-default"> 8 </a>
-							<a href="javascript:;" class="btn large ui-state-default"> 9 </a>
-							<a href="javascript:;" class="btn large ui-state-default"> 10 </a>
-							<a href="javascript:;" class="btn large ui-state-default">
-								<i class="glyph-icon icon-chevron-right"></i> </a>
-						</div>
-					</div>
+					<!-- 如果是查询结果 -->
+						<s:if test="#querystatue != null">
+							<!-- start分页,有数据的时候才显示分页. -->
+							<s:if test="totalRecord>0">
+								<div class="col-md-3" style="float:right; margin-bottom:20px; width:500px;">
+									<div class="button-group center-div">
+										<a href="${pageContext.request.contextPath }/item_query.do?pageNum=${pageNum-1}&item_number=${item_number}&brand=${brand}&color_number=${color_number}&size=${size}" class="btn large ui-state-default" <s:if test="pageNum == 1 ">disabled="disabled"</s:if>>
+										<i class="glyph-icon icon-chevron-left"></i> </a>
+										<s:iterator begin="%{startPage}" end="%{endPage}" var="i">
+											<a href="${pageContext.request.contextPath }/item_query.do?pageNum=${i}&item_number=${item_number}&brand=${brand}&color_number=${color_number}&size=${size}" class="btn large ui-state-default" <s:if test="pageNum==#i">disabled="disabled"</s:if>>${i }</a>
+										</s:iterator>
+										<a href="${pageContext.request.contextPath }/item_query.do?pageNum=${pageNum+1}&item_number=${item_number}&brand=${brand}&color_number=${color_number}&size=${size}" class="btn large ui-state-default" <s:if test="pageNum == totalPage">disabled="disabled"</s:if>>
+										<i class="glyph-icon icon-chevron-right"></i> </a>
+									</div>
+								</div>
+							</s:if>
+							<!-- end 分页 -->
+						</s:if>
+						<!-- 如果不是查询结果，而是原始分页 -->
+						<s:else>
+							<!-- start分页,有数据的时候才显示分页. -->
+							<s:if test="totalRecord>0">
+								<div class="col-md-3" style="float:right; margin-bottom:20px; width:500px;">
+									<div class="button-group center-div">
+										<a href="${pageContext.request.contextPath }/item_list.do?pageNum=${pageNum-1}" class="btn large ui-state-default" <s:if test="pageNum == 1 ">disabled="disabled"</s:if>>
+										<i class="glyph-icon icon-chevron-left"></i> </a>
+										<s:iterator begin="%{startPage}" end="%{endPage}" var="i">
+											<a href="${pageContext.request.contextPath }/item_list.do?pageNum=${i}" class="btn large ui-state-default" <s:if test="pageNum==#i">disabled="disabled"</s:if>>${i }</a>
+										</s:iterator>
+										<a href="${pageContext.request.contextPath }/item_list.do?pageNum=${pageNum+1}" class="btn large ui-state-default" <s:if test="pageNum == totalPage">disabled="disabled"</s:if>>
+										<i class="glyph-icon icon-chevron-right"></i> </a>
+									</div>
+								</div>
+							</s:if>
+							<!-- end 分页 -->
+						</s:else>
 				</div>
 
 			</div>
@@ -375,20 +279,56 @@
 		<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
-					<form class="form-horizontal">
+					<form class="form-horizontal" action="${pageContext.request.contextPath }/item_add.do" method="post">
 						<div class="modal-header">
 							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
 							</button>
 							<h4 class="modal-title" id="myModalLabel">添加货号</h4>
 						</div>
 						<div class="modal-body" style="margin:20px;">
-							内容
+							<input type="hidden" name="pageNum" value="${pageNum }">
+							  <div class="form-group">
+							    <label for="storageNum">货号</label>
+							    <input type="text" class="form-control" id="" name="item_number" placeholder="请输入货号">
+							  </div>
+							  <div class="form-group">
+							    <label for="storageName">品名</label>
+							    <input type="text" class="form-control" id="" name="brand" placeholder="请输入品名">
+							  </div>
+							   <div class="form-group">
+							    <label for="contactsName">色号</label>
+							    <select  class="form-control" id="addColor" name="color_number">
+							    
+							    </select>
+							  </div>
+							   <div class="form-group">
+							    <label for="contacts_phone">尺码</label>
+							    <select class="form-control" id="addSize" name="size">
+							    	
+							    </select>
+							  </div>
+						    	<div class="form-group">
+							    	<label for="storage_num">面料</label>
+							    	<input type="text" class="form-control" id="" name="shell" placeholder="请输入面料">
+							  	</div> 
+							  	<div class="form-group">
+							    	<label for="storage_num">里料</label>
+							    	<input type="text" class="form-control" id="" name="lining" placeholder="请输入里料">
+							  	</div> 
+							  	<div class="form-group">
+							    	<label for="storage_num">出厂价</label>
+							    	<input type="text" class="form-control" id="" name="factory_price" placeholder="请输入出厂价">
+							  	</div> 
+							  	<div class="form-group">
+							    	<label for="storage_num">零售价</label>
+							    	<input type="text" class="form-control" id="" name="retail_price" placeholder="请输入零售价">
+							  	</div> 
 						</div>
 						<div class="modal-footer">
 							<button type="submit" class="btn medium primary-bg" style="margin-left:10px;" title="">
-								<span class="button-content">查询 </span>
+								<span class="button-content">添加</span>
 							</button>
-							<button type="reset" class="btn medium primary-bg" style="margin-left:10px;" title="">
+							<button type="reset" class="btn medium primary-bg" style="margin-left:10px;" data-dismiss="modal" aria-label="Close">
 								<span class="button-content">取消</span>
 							</button>
 						</div>
@@ -400,52 +340,89 @@
 		<div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
-					<form class="form-horizontal">
+					<form class="form-horizontal" action="${pageContext.request.contextPath }/item_edit.do" method="post">
 						<div class="modal-header">
 							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
 							</button>
 							<h4 class="modal-title" id="myModalLabel">更新货号</h4>
 						</div>
 						<div class="modal-body" style="margin:20px;">
-							内容
-							<div class="modal-footer">
-								<button type="submit" class="btn medium primary-bg" style="margin-left:10px;" title="">
-									<span class="button-content">查询 </span>
-								</button>
-								<button type="reset" class="btn medium primary-bg" style="margin-left:10px;" title="">
-									<span class="button-content">取消</span>
-								</button>
-							</div>
+							<input type="hidden" name="pageNum" value="${pageNum }">
+							<input type="hidden" name="id" id="editId">
+							  <div class="form-group">
+							    <label for="storageNum">货号</label>
+							    <input type="text" class="form-control" id="editNumber" name="item_number" placeholder="请输入货号">
+							  </div>
+							  <div class="form-group">
+							    <label for="storageName">品名</label>
+							    <input type="text" class="form-control" id="editBrand" name="brand" placeholder="请输入品名">
+							  </div>
+							   <div class="form-group">
+							    <label for="contactsName">色号</label>
+							    <select  class="form-control" id="editColor" name="color_number">
+							    
+							    </select>
+							  </div>
+							   <div class="form-group">
+							    <label for="contacts_phone">尺码</label>
+							    <select class="form-control" id="editSize" name="size">
+							    	
+							    </select>
+							  </div>
+							  	<div class="form-group">
+							    	<label for="storage_num">面料</label>
+							    	<input type="text" class="form-control" id="editShell" name="shell" placeholder="请输入里料">
+							  	</div> 
+						    	<div class="form-group">
+							    	<label for="storage_num">里料</label>
+							    	<input type="text" class="form-control" id="editLining" name="lining" placeholder="请输入面料">
+							  	</div> 
+							  	<div class="form-group">
+							    	<label for="storage_num">出厂价</label>
+							    	<input type="text" class="form-control" id="editFactory" name="factory_price" placeholder="请输入出厂价">
+							  	</div> 
+							  	<div class="form-group">
+							    	<label for="storage_num">零售价</label>
+							    	<input type="text" class="form-control" id="editRetail" name="retail_price" placeholder="请输入零售价">
+							  	</div> 
+						  </div>
+						<div class="modal-footer">
+							<button type="submit" class="btn medium primary-bg" style="margin-left:10px;" title="">
+								<span class="button-content">更新</span>
+							</button>
+							<button type="reset" class="btn medium primary-bg" style="margin-left:10px;" data-dismiss="modal" aria-label="Close">
+								<span class="button-content">取消</span>
+							</button>
+						</div>
 					</form>
 					</div>
 				</div>
 			</div>
-		</div>
 		<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
-					<form class="form-horizontal">
+					<form class="form-horizontal" action="${pageContext.request.contextPath }/item_delete.do">
 						<div class="modal-header">
 							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
 							</button>
 							<h4 class="modal-title" id="myModalLabel">更新货号</h4>
 						</div>
 						<div class="modal-body" style="margin:20px;">
+							<input type="hidden" name="id" id="deleteId">
 							<p>确定删除吗？</p>
 							<div class="modal-footer">
 								<button type="submit" class="btn medium primary-bg" style="margin-left:10px;" title="">
-									<span class="button-content">查询 </span>
+									<span class="button-content">删除 </span>
 								</button>
-								<button type="reset" class="btn medium primary-bg" style="margin-left:10px;" title="">
+								<button type="reset" class="btn medium primary-bg" style="margin-left:10px;" data-dismiss="modal" aria-label="Close">
 									<span class="button-content">取消</span>
 								</button>
 							</div>
+						</div>
 					</form>
 					</div>
 				</div>
 			</div>
-		</div>
-
 			
 	</body>
 

@@ -120,8 +120,8 @@ public class UserAction extends BaseAction<User>{
 	public String query() throws Exception{
 		//准备分页数据,模糊查询.
 		new QueryHelper(User.class, "u")
-			.addWhereCondition(model.getUserName()!=null||"".equals(model.getUserName()),"u.userName like ?", "%"+model.getUserName()+"%")
-			.addWhereCondition(model.getLoginName()!=null||"".equals(model.getLoginName()),"u.loginName like ?", "%"+model.getLoginName()+"%")
+			.addWhereCondition(model.getUserName()!=null&&!"".equals(model.getUserName()),"u.userName like ?", "%"+model.getUserName()+"%")
+			.addWhereCondition(model.getLoginName()!=null&&!"".equals(model.getLoginName()),"u.loginName like ?", "%"+model.getLoginName()+"%")
 			.preparePageBean(userService, pageNum);
 		//准备角色数据
 		List<Role> roleList = roleService.findAll();

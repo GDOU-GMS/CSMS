@@ -14,9 +14,7 @@ public class MyTest {
 /*	@Test
 	public void test() throws Exception, SecurityException{
 		setFinalStatic(Color.class.getDeclaredField("绿色"), "红色");
-		for(Color c : Color.values()){
-			System.out.println(c);
-		}
+		
 	}
 	
 	void setFinalStatic(Field field,Object newValue) throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException{

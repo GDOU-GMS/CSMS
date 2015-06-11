@@ -7,12 +7,13 @@
 
 	
 	
-	<package name="itemAction" namespace="/" extends="base">
+	<package name="jsonAction" namespace="/" extends="base">
 		
-		<action name="item_*" class="itemAction" method="{1}">
-			<result name="list">/WEB-INF/jsp/ItemAction/list.jsp</result>
-			<result name="toList" type="redirectAction">item_list?pageNum=${pageNum}</result>
-			<result name="getItemById" type="json">
+		<action name="json_*" class="jsonAction" method="{1}">
+			<result name="colorAndSize" type="json">
+				<param name="root">jsonMap</param>
+			</result>
+			<result name="getObjectById" type="json">
 				<param name="root">jsonMap</param>
 			</result>
 		</action>

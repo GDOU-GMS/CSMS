@@ -90,8 +90,8 @@ public class StorageAction extends BaseAction<Storage> {
 	public String query() throws Exception{
 		//准备分页数据,模糊查询.
 		new QueryHelper(Storage.class, "s")
-			.addWhereCondition(model.getName()!=null||"".equals(model.getName()),"s.name like ?", "%"+model.getName()+"%")
-			.addWhereCondition(model.getNumber()!=null||"".equals(model.getNumber()),"s.number like ?", "%"+model.getNumber()+"%")
+			.addWhereCondition(model.getName()!=null&&!"".equals(model.getName()),"s.name like ?", "%"+model.getName()+"%")
+			.addWhereCondition(model.getNumber()!=null&&!"".equals(model.getNumber()),"s.number like ?", "%"+model.getNumber()+"%")
 			.preparePageBean(storageService, pageNum);
 		//参数重传，解决分页链接问题.
 		ActionContext.getContext().put("querystatue", "querystatue");
