@@ -74,7 +74,7 @@ public class Privilege {
 		this.children = children;
 	}
 	@ManyToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name="parentId",nullable = false)
+	@JoinColumn(name="parentId")
 	public Privilege getParent() {
 		return parent;
 	}
