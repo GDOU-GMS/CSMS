@@ -20,6 +20,7 @@ import org.apache.struts2.ServletActionContext;
 import org.blueshit.csms.entity.User;
 import org.blueshit.csms.service.ColorService;
 import org.blueshit.csms.service.ItemService;
+import org.blueshit.csms.service.OrderInService;
 import org.blueshit.csms.service.PrivilegeService;
 import org.blueshit.csms.service.RoleService;
 import org.blueshit.csms.service.SizeService;
@@ -53,6 +54,8 @@ public class BaseAction<T> extends ActionSupport implements ModelDriven<T>{
 	protected StorageService storageService;
 	@Autowired
 	protected ItemService itemService;
+	@Autowired
+	protected OrderInService orderInService;
 	
 	//声明model
 	protected T model;

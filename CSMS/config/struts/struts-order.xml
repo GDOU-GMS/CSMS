@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+
+	
+	<package name="orderInAcion" namespace="/" extends="base">
+		
+		<action name="orderin_*" class="orderInAction" method="{1}">
+			<result name="list">/WEB-INF/jsp/OrderInAction/list.jsp</result>
+		    <result name="detailList">/WEB-INF/jsp/OrderInAction/detailList.jsp</result>
+		</action>
+		
+		
+	</package>
+
+
+</struts>
