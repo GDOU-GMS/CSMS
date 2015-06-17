@@ -13,6 +13,7 @@ import org.blueshit.csms.entity.Order;
 import org.blueshit.csms.entity.OrderList;
 import org.blueshit.csms.entity.Page;
 import org.blueshit.csms.entity.Role;
+import org.blueshit.csms.entity.Storage;
 import org.blueshit.csms.entity.User;
 import org.blueshit.csms.utils.QueryHelper;
 import org.hibernate.ejb.criteria.expression.function.AggregationFunction.MAX;
@@ -61,12 +62,12 @@ public class OrderInAction extends BaseAction<Order> {
 		new QueryHelper(Order.class, "o")
 		.addWhereCondition(true,"o.remark = ?", "入库")
 		.preparePageBean(userService, pageNum);
+		List<Storage> storages=orderInService.queryStorages();
+		ActionContext.getContext().put("storages", storages);
 		//准备角色数据
 //		List<Order> orderList = orderInService.findAll();
 //		ActionContext.getContext().put("orderList", orderList);
 		return "list";
-		
-		
 	}
 	
 	/**
@@ -120,6 +121,7 @@ public class OrderInAction extends BaseAction<Order> {
 		
 	}
 	
+    
 
 
 	

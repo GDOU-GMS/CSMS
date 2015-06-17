@@ -84,6 +84,17 @@ public class Storage implements Serializable{
 	public void setOrders(Set<Order> orders) {
 		this.orders = orders;
 	}
+
+	@Override
+	public String toString() {
+		return "Storage [id=" + id + ", number=" + number + ", name=" + name
+				+ ", storage_num=" + storage_num + ", contacts=" + contacts
+				+ ", contacts_phone=" + contacts_phone + "]";
+	}
+
+	
+	
+	
 	
 	
 }

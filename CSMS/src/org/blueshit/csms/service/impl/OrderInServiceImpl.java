@@ -7,6 +7,7 @@ import org.blueshit.csms.configuration.Configuration;
 import org.blueshit.csms.entity.Order;
 import org.blueshit.csms.entity.OrderList;
 import org.blueshit.csms.entity.Page;
+import org.blueshit.csms.entity.Storage;
 import org.blueshit.csms.service.OrderInService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,6 +32,14 @@ public class OrderInServiceImpl extends DaoSupportImpl<Order> implements OrderIn
 	    ActionContext.getContext().getValueStack().push(page);
 		
 	}
+	/**
+	 * 获得所有的仓库
+	 */
+	@Override
+	public List<Storage> queryStorages() {
+		return (List<Storage>) getSession().createQuery("from Storage").list();
+	}
+	
 	
 
 }

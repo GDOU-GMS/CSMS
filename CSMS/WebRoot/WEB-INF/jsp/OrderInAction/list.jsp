@@ -99,10 +99,14 @@
 							</div>
 							<div class="form-input col-md-3" style="width:220px;display:inline;float:left;">
 								<select id="" class="" name="storage.name">
-									<option value="仓库一">仓库一</option>
+									<!-- <option value="仓库一">仓库一</option>
 									<option value="仓库二">仓库二</option>
 									<option value="仓库三">仓库三</option>
-									<option value="仓库四">仓库四</option>
+									<option value="仓库四">仓库四</option> -->
+									<s:iterator value="storages" status="status" >
+									<option value="${name}">${name}</option>
+									</s:iterator>
+									
 								</select>
 							</div>
 							<div class="form-label col-md-2 labelstyle" style="margin-left: 30px;">
