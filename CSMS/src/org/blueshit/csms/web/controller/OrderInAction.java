@@ -133,6 +133,10 @@ public class OrderInAction extends BaseAction<Order> {
 	 */
 	public String add(){
 		model.setRemark("入库");
+		String storageName=model.getStorage().getName();
+		Storage storage=storageService.getStorageByName(storageName);
+		model.setStorage(storage);
+		String userName=model.getUser().getUserName();
 		orderInService.save(model);
 		ActionContext.getContext().put("pageNum", pageNum);
 		return "toList";
@@ -159,8 +163,8 @@ public class OrderInAction extends BaseAction<Order> {
 	
      public String detailQuery(){
     	 
-    	System.out.println(model.getId());
-    	 return "";
+    	System.out.println("测试"+model.getId());
+    	 return "list";
      }
 
 

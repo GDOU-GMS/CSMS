@@ -93,7 +93,7 @@
 				<!-- 表格 -->
 				<div class="example-box">
 					<div class="example-code">
-						<form action="${pageContext.request.contextPath }/orderin_query.do" method="post">
+						<form action="${pageContext.request.contextPath }/orderin_detailQuery.do" method="post">
 						<div class="form-row">
 							<div class="form-label col-md-2 width:100px;" >
 								<label for="" >单据号 :</label>
