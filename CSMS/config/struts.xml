@@ -57,4 +57,5 @@
 	<include file="struts/struts-storage.xml"></include>
 	<include file="struts/struts-item.xml"></include>
 	<include file="struts/struts-json.xml"></include>
+	<include file="struts/struts-order.xml"></include>
 </struts>
