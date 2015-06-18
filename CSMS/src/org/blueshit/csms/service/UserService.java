@@ -9,4 +9,6 @@ public interface UserService extends DaoSupport<User>{
 	
 	public abstract void resetPwd(User u);
 	
+	public User getUserByUserName(String userName);
+	
 }

@@ -18,6 +18,7 @@ public class StroageServiceImpl extends DaoSupportImpl<Storage> implements
 	public Storage getStorageByName(String name) {
 		return (Storage) getSession()
 				.createQuery("from Storage s where s.name = ?")
+				.setParameter(0, name)
 				.uniqueResult();
 	}
 

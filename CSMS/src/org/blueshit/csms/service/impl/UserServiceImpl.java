@@ -38,6 +38,15 @@ public class UserServiceImpl extends DaoSupportImpl<User> implements UserService
 		u.setPassword(DigestUtils.md5Hex("123456"));
 	}
 
+	/**
+	 * 根据用户名获取用户.
+	 */
+	public User getUserByUserName(String userName) {
+		return (User) getSession().createQuery("from User u where u.username = ?")
+				.setParameter(0, userName)
+				.uniqueResult();
+	}
+
 	
 	
 }
