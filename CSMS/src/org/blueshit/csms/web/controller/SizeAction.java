@@ -1,5 +1,8 @@
 package org.blueshit.csms.web.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.blueshit.csms.base.BaseAction;
 import org.blueshit.csms.entity.Size;
 import org.blueshit.csms.utils.QueryHelper;
@@ -18,6 +21,16 @@ public class SizeAction extends BaseAction<Size>{
 	private static final long serialVersionUID = -255572815746850918L;
 	
 	private int pageNum = 1;
+	
+	public Map<String, Object> jsonMap;
+	
+	public Map<String, Object> getJsonMap() {
+		return jsonMap;
+	}
+
+	public void setJsonMap(Map<String, Object> jsonMap) {
+		this.jsonMap = jsonMap;
+	}
 
 	public int getPageNum() {
 		return pageNum;
@@ -76,5 +89,19 @@ public class SizeAction extends BaseAction<Size>{
 		return "toList";
 	}
 	
+	/**
+	 * 根据ID查找.
+	 * @return
+	 * @throws Exception
+	 */
+	public String getJsonById() throws Exception{
+		//根据ID查找
+		Size size = sizeService.findById(model.getId());
+		//封装到map
+		Map<String, Object> map = new HashMap<String,Object>();
+		map.put("size", size);
+		this.setJsonMap(map);
+		return "getJsonById";
+	}
 
 }

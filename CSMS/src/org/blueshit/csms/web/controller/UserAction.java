@@ -1,7 +1,9 @@
 package org.blueshit.csms.web.controller;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 
 import org.blueshit.csms.base.BaseAction;
 import org.blueshit.csms.entity.Role;
@@ -24,6 +26,16 @@ public class UserAction extends BaseAction<User>{
 	 */
 	private Long[] roleIds;
 	
+	public Map<String, Object> jsonMap;
+	
+	public Map<String, Object> getJsonMap() {
+		return jsonMap;
+	}
+
+	public void setJsonMap(Map<String, Object> jsonMap) {
+		this.jsonMap = jsonMap;
+	}	
+	
 	public Long[] getRoleIds() {
 		return roleIds;
 	}
@@ -31,6 +43,8 @@ public class UserAction extends BaseAction<User>{
 	public void setRoleIds(Long[] roleIds) {
 		this.roleIds = roleIds;
 	}
+	
+	
 
 	/**
 	 * 当前页.
@@ -132,6 +146,17 @@ public class UserAction extends BaseAction<User>{
 		ActionContext.getContext().put("loginName", model.getLoginName());
 		return "list";
 	}
-	
+	/**
+	 * 根据ID获取json'数据.
+	 * @return
+	 * @throws Exception
+	 */
+	public String getJsonById() throws Exception{
+		User user = userService.findById(model.getId());
+		Map<String , Object> map = new HashMap<String, Object>();
+		map.put("user", user);
+		this.setJsonMap(map);
+		return "getJsonById";
+	}
 
 }

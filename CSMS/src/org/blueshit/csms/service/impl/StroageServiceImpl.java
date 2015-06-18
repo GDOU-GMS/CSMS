@@ -12,4 +12,13 @@ import org.springframework.transaction.annotation.Transactional;
 public class StroageServiceImpl extends DaoSupportImpl<Storage> implements
 		StorageService {
 
+	/**
+	 * 根据名字获取仓库.
+	 */
+	public Storage getStorageByName(String name) {
+		return (Storage) getSession()
+				.createQuery("from Storage s where s.name = ?")
+				.uniqueResult();
+	}
+
 }

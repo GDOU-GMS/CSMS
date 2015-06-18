@@ -335,6 +335,41 @@
 </div>
 
 <script type="text/javascript">
+
+	function getDetail(id){
+		var url = "user_getJsonById.do";
+		var params = {
+				date:new Date(),
+				id:id
+		}
+		$.getJSON(url,params,function(data){
+			var user = data.user;
+			var roles = user.roles;
+			
+			$("#showid").val(id);
+			$("#showloginName").val(user.loginName);
+			$("#showuserName").val(user.userName);
+			$("#showintro").val(user.intro);
+			
+			$.each($(".roleNames > option"),function(i,n){
+				$(n).removeAttr("selected");
+			});
+			$.each(roles,function(i,r){
+				$.each($(".roleNames > option"),function(i,n){
+					if(r.name.indexOf($(n).text())>=0){
+						$(n).attr("selected","selected");
+					}
+				});
+			});
+		});
+		
+		
+		
+		
+		
+	}
+	
+	/* 
 	function getDetail(id,intro){
 		var loginName = $("#loginName_"+id).text();
 		var userName = $("#userName_"+id).text();
@@ -354,6 +389,7 @@
 			}
 		});
 	}
+	*/
 	function showDeleteId(id){
 		$("#deleteId").val(id);
 	}

@@ -12,6 +12,9 @@
 		<action name="storage_*" class="storageAction" method="{1}">
 			<result name="list">/WEB-INF/jsp/StorageAction/list.jsp</result>
 			<result name="toList" type="redirectAction">storage_list?pageNum=${pageNum}</result>
+			<result name="getJsonById" type="json">
+				<param name="root">jsonMap</param>
+			</result>
 		</action>
 		
 	</package>

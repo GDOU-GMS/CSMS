@@ -12,6 +12,9 @@
 		<action name="size_*" class="sizeAction" method="{1}">
 			<result name="list">/WEB-INF/jsp/SizeAction/list.jsp</result>
 			<result name="toList" type="redirectAction">size_list</result>
+			<result name="getJsonById" type="json">
+				<param name="root">jsonMap</param>
+			</result>
 		</action>
 		
 	</package>
