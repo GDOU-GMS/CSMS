@@ -183,7 +183,7 @@
 		  </br>
 		  <div class="form-group">
 		    <label for="updateName">尺码名称</label>
-		    <input type="text" class="form-control" placeholder="角色名" id="updateName" name="num">
+		    <input type="text" class="form-control" placeholder="尺码" id="updateName" name="num">
 		  </div>
       </div>
       <div class="modal-footer">
@@ -229,9 +229,12 @@
 	
 	//用于更新回显
 	function reshow(id){
-		var name = $("#name_"+id).text();
-		$("#updateId").val(id);
-		$("#updateName").val(name);
+		var url = "size_getJsonById.do";
+		$.getJSON(url,{date:new Date(),id:id},function(data){
+			var size = data.size;
+			$("#updateId").val(id);
+			$("#updateName").val(size.num);
+		});
 	}
 	//用户删除
 	function getId(id){

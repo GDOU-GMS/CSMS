@@ -186,9 +186,9 @@
 				</div>
 				<div class="example-code">
 				
-					<a data-toggle="modal" data-target="#addModal" title=".icon-plus-square-o" class="tooltip-button btn small bg-yellow" title="添加" href="#" onclick="getColorAndSize()">
+				<!-- 	<a data-toggle="modal" data-target="#addModal" title=".icon-plus-square-o" class="tooltip-button btn small bg-yellow" title="添加" href="#" onclick="getColorAndSize()">
 						<i class="glyph-icon icon-plus-square-o"></i>
-					</a><br><br>
+					</a><br><br> -->
 
 					<table class="table table-condensed">
 						<thead>

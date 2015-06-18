@@ -312,7 +312,26 @@
 	function showId(id){
 		$("#deleteId").val(id);
 	}
-	function showText(id,contacts,contacts_phone){
+	function showText(id){
+		var url = "storage_getJsonById.do";
+		var params = {
+				date:new Date(),
+				id:id
+		};
+		$.getJSON(url,params,function(data){
+			var storage = data.storage;
+			
+			$("#editId").val(id);
+			$("#shownumber").val(storage.number);
+			$("#showname").val(storage.name);
+			$("#shownum").val(storage.storage_num);
+			$("#showcontactsName").val(storage.contacts);
+			$("#showphone").val(storage.contacts_phone);
+		});
+		
+		
+	}
+	/* function showText(id,contacts,contacts_phone){
 		var number = $("#numberText_"+id).text();
 		var name = $("#nameText_"+id).text();
 		var storage_num = $("#storageNumText_"+id).text();
@@ -322,7 +341,7 @@
 		$("#editId").val(id);
 		$("#showcontactsName").val(contacts);
 		$("#showphone").val(contacts_phone);
-	}
+	} */
 </script>
 
 </html>

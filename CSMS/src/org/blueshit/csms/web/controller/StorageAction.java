@@ -1,5 +1,8 @@
 package org.blueshit.csms.web.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.blueshit.csms.base.BaseAction;
 import org.blueshit.csms.entity.Storage;
 import org.blueshit.csms.utils.QueryHelper;
@@ -18,6 +21,16 @@ public class StorageAction extends BaseAction<Storage> {
 	private static final long serialVersionUID = 85512103025545563L;
 	
 	private int pageNum = 1;
+	
+	public Map<String, Object> jsonMap;
+	
+	public Map<String, Object> getJsonMap() {
+		return jsonMap;
+	}
+
+	public void setJsonMap(Map<String, Object> jsonMap) {
+		this.jsonMap = jsonMap;
+	}
 	
 
 	public int getPageNum() {
@@ -98,5 +111,20 @@ public class StorageAction extends BaseAction<Storage> {
 		ActionContext.getContext().put("name", model.getName());
 		ActionContext.getContext().put("number", model.getNumber());
 		return "list";
+	}
+	
+	/**
+	 * 根据ID获取json数据.
+	 * @return
+	 * @throws Exception
+	 */
+	public String getJsonById() throws Exception{
+		//获取数据.
+		Storage storage = storageService.findById(model.getId());
+		//封装到map
+		Map<String, Object> map = new HashMap<String,Object>();
+		map.put("storage", storage);
+		this.setJsonMap(map);
+		return "getJsonById";
 	}
 }

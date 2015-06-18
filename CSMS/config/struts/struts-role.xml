@@ -13,6 +13,9 @@
 			<result name="list">/WEB-INF/jsp/RoleAction/list.jsp</result>
 			<result name="setPrivilegeUI">/WEB-INF/jsp/RoleAction/setPrivilegeUI.jsp</result>
 			<result name="toList" type="redirectAction">role_list?pageNum=${pageNum}</result>
+			<result name="getJsonById" type="json">
+				<param name="root">jsonMap</param>
+			</result>
 		</action>
 		
 	</package>

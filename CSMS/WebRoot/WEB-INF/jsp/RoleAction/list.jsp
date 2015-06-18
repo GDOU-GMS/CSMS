@@ -312,12 +312,29 @@
 	
 	//用于更新回显
 	function reshow(id){
+		var url = "role_getJsonById.do";
+		var params = {
+				date:new Date(),
+				id:id
+		};
+		
+		$.getJSON(url,params,function(data){
+			var role = data.role;
+			$("#updateId").val(id);
+			$("#updateName").val(role.name);
+			$("#updateDescription").val(role.description);
+		});
+		
+	}
+	/* 
+	function reshow(id){
 		var name = $("#name_"+id).text();
 		var description = $("#description_"+id).text();
 		$("#updateId").val(id);
 		$("#updateName").val(name);
 		$("#updateDescription").val(description);
 	}
+	*/
 	//用户删除
 	function getId(id){
 		$("#deleteId").val(id);

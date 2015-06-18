@@ -229,9 +229,16 @@
 	
 	//用于更新回显
 	function reshow(id){
-		var name = $("#name_"+id).text();
-		$("#updateId").val(id);
-		$("#updateName").val(name);
+		var url = "color_getJsonById.do";
+		var params ={
+			date:new Date(),
+			id:id
+		};
+		$.getJSON(url,params,function(data){
+			var color = data.color;
+			$("#updateId").val(id);
+			$("#updateName").val(color.name);
+		});
 	}
 	//用户删除
 	function getId(id){

@@ -1,5 +1,8 @@
 package org.blueshit.csms.web.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.blueshit.csms.base.BaseAction;
 import org.blueshit.csms.entity.Color;
 import org.blueshit.csms.utils.QueryHelper;
@@ -17,6 +20,16 @@ public class ColorAction extends BaseAction<Color>{
 	
 	
 	private int pageNum = 1;
+	
+	public Map<String, Object> jsonMap;
+	
+	public Map<String, Object> getJsonMap() {
+		return jsonMap;
+	}
+
+	public void setJsonMap(Map<String, Object> jsonMap) {
+		this.jsonMap = jsonMap;
+	}	
 	
 	public int getPageNum() {
 		return pageNum;
@@ -74,5 +87,18 @@ public class ColorAction extends BaseAction<Color>{
 		colorService.delete(model.getId());
 		ActionContext.getContext().put("pageNum", pageNum);
 		return "toList";
+	}
+	
+	/**
+	 * 根据ID获取json
+	 * @return
+	 * @throws Exception
+	 */
+	public String getJsonById() throws Exception{
+		Color color =  colorService.findById(model.getId());
+		Map<String,Object> map = new HashMap<String, Object>();
+		map.put("color", color);
+		this.setJsonMap(map);;
+		return "getJsonById";
 	}
 }
