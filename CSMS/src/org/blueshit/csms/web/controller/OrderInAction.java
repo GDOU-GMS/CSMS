@@ -9,10 +9,13 @@ import java.util.Set;
 
 import org.blueshit.csms.base.BaseAction;
 import org.blueshit.csms.configuration.Configuration;
+import org.blueshit.csms.entity.Color;
+import org.blueshit.csms.entity.Item;
 import org.blueshit.csms.entity.Order;
 import org.blueshit.csms.entity.OrderList;
 import org.blueshit.csms.entity.Page;
 import org.blueshit.csms.entity.Role;
+import org.blueshit.csms.entity.Size;
 import org.blueshit.csms.entity.Storage;
 import org.blueshit.csms.entity.User;
 import org.blueshit.csms.utils.QueryHelper;
@@ -29,8 +32,7 @@ public class OrderInAction extends BaseAction<Order> {
 	
 	private Date timeDate;
 	private int pageNum = 1;
-	
-	
+    private Item item;	
 	
 	public Date getTimeDate() {
 		return timeDate;
@@ -47,9 +49,14 @@ public class OrderInAction extends BaseAction<Order> {
 	public void setPageNum(int pageNum) {
 		this.pageNum = pageNum;
 	}
-	
-	
-	
+
+	public Item getItem() {
+		return item;
+	}
+
+	public void setItem(Item item) {
+		this.item = item;
+	}
 
 	/**获取入库列表
 	 * 
@@ -62,11 +69,10 @@ public class OrderInAction extends BaseAction<Order> {
 		new QueryHelper(Order.class, "o")
 		.addWhereCondition(true,"o.remark = ?", "入库")
 		.preparePageBean(userService, pageNum);
-		List<Storage> storages=orderInService.queryStorages();
-		ActionContext.getContext().put("storages", storages);
-		//准备角色数据
-//		List<Order> orderList = orderInService.findAll();
-//		ActionContext.getContext().put("orderList", orderList);
+		List<Storage> storages=storageService.findAll();
+		ActionContext.getContext().getSession().put("storages", storages);
+		List<User> users=userService.findAll();
+		ActionContext.getContext().getSession().put("users", users);
 		return "list";
 	}
 	
@@ -76,13 +82,13 @@ public class OrderInAction extends BaseAction<Order> {
 	 * @throws Exception
 	 */
 	public String query() throws Exception{
-		
+	    if(model.getStorage().getName()==null){
+	    	System.out.println("为空");
+	    }
 		//准备分页数据,模糊查询.
 	    Object[] dateAll=new Object[2];
-	    System.out.println("time="+model.getTime());
 		dateAll[0]=model.getTime();
 		dateAll[1]=getTimeDate();
-		System.out.println("日期"+dateAll[0]);
 		if(dateAll[0]!=null){
 			new QueryHelper(Order.class, "o")
 			.addWhereCondition(model.getStorage().getName()!=null||"".equals(model.getStorage().getName()),"o.storage.name like ?", "%"+model.getStorage().getName()+"%")
@@ -108,20 +114,56 @@ public class OrderInAction extends BaseAction<Order> {
 		
 	}
 	public String detailList(){
-		
 		Order order=orderInService.findById(model.getId());
-		if(order.getOrderLists()==null){
-			System.out.println("获得list为空");
-		}
 		Set<OrderList> set=order.getOrderLists();
 		List<OrderList> list=new ArrayList<>(set);
 		orderInService.detailList(list, pageNum);
-		ActionContext.getContext().getSession().put("orderId", model.getId());
+        List<Color> colors=colorService.findAll();
+        List<Size> sizes=sizeService.findAll();
+        System.out.println("size="+sizes);
+		ActionContext.getContext().put("orderId", model.getId());
+		ActionContext.getContext().put("order", order);
+		ActionContext.getContext().getSession().put("colors", colors);
+		ActionContext.getContext().getSession().put("sizes", sizes);
 		return "detailList";
+	}
+	/**
+	 * 添加订单
+	 * @return
+	 */
+	public String add(){
+		model.setRemark("入库");
+		orderInService.save(model);
+		ActionContext.getContext().put("pageNum", pageNum);
+		return "toList";
 		
 	}
+	/**
+	 * 删除订单
+	 * @return
+	 */
+	public String delete(){
+		orderInService.delete(model.getId());
+		ActionContext.getContext().put("pageNum", pageNum);
+		return "toList";
+	}
+	/**
+	 * 更新订单
+	 * @return
+	 */
+	public String update(){
+		orderInService.save(model);
+		return "toList";
+	}
 	
+	
+     public String detailQuery(){
+    	 
+    	 
     
+    	 
+    	 return "";
+     }
 
 
 	

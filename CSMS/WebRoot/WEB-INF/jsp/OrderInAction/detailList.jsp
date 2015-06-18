@@ -99,13 +99,13 @@
 								<label for="" >单据号 :</label>
 							</div>
 							<div class="form-input col-md-3 textstyle">
-								<input style="width:200px;height:28px;" type="text" name="number" id="">
+								<input style="width:200px;height:28px;" type="text" name="number" id="" value="${order.number}" readonly="readonly">
 							</div>
 							<div class="form-label col-md-2 labelstyle" >
 								<label for=""> 入库日期: </label>
 							</div>
 							<div class="form-input col-md-3">
-								<input type="text" style="width:200px;height:28px;" name="time" id="dateFirst">
+								<input type="text" style="width:200px;height:28px;" name="time" id="dateFirst" value="${order.time}" readonly="readonly">
 							</div>
 
 						</div>
@@ -114,24 +114,49 @@
 								<label for=""> 所入仓库: </label>
 							</div>
 							<div class="form-input col-md-3">
-								<input type="text" style="width:200px;height:28px;" name="time" id="dateFirst">
+								<input type="text" style="width:200px;height:28px;" name="time" id="dateFirst" value="${order.storage.name}"  readonly="readonly">
 							</div>
 							<div class="form-label  col-md-2 labelstyle">
 								<label for=""> 来源: </label>
 							</div>
 							<div class="form-input col-md-3">
-								<input type="text" style="width:200px;height:28px;" name="time" id="dateFirst">
+								<input type="text" style="width:200px;height:28px;" name="time" id="dateFirst"value="${order.site}"  readonly="readonly">
 							</div>
-						</div>	
-						<div class="form-row">	
+								<%-- <button type="submit" class="btn medium primary-bg" style="margin-left:10px;" title="">
+								<span class="button-content">查询</span>
+								</button> --%>
+							
+						</div>
+						<div class="form-row">
 							<div class="form-label col-md-2 labelstyle">
-								<label for=""> 备注: </label>
+								<label for=""> 色号: </label>
 							</div>
 							<div class="form-input col-md-3">
-								<textarea rows="3" cols="20" name="" id="">
-
-								</textarea>
+								 <select  class="form-control"  name="color_number">
+								    <option value="">请选择色号</option>
+								    <s:iterator value="#session.colors" status="status" >
+									<option value="${name}">${name}</option>
+									</s:iterator>
+								</select> 
 							</div>
+							<div class="form-label  col-md-2 labelstyle">
+								<label for=""> 尺码: </label>
+							</div>
+							<div class="form-input col-md-3">
+								 <select  class="form-control"  name="size">
+								    <option value="">请选择尺码</option>
+								    <s:iterator value="#session.sizes" status="status" >
+									<option value="${num}">${num}</option>
+									</s:iterator>
+								</select> 
+							</div>
+								<button type="submit" class="btn medium primary-bg" style="margin-left:10px;" title="">
+								<span class="button-content">查询</span>
+								</button>
+							
+						</div>		
+						<%-- <div class="form-row">	
+							
 							<!-- <a href="#" class="btn medium primary-bg"
 									style="margin-left:10px;" title=""> <span
 									class="button-content">查询</span> </a> --> 
@@ -145,7 +170,7 @@
 							<!--  <a href="#" class="btn medium ui-state-default" title="">
 					            <span class="button-content">取消</span>
 					        	</a> -->
-						</div>
+						</div> --%>
 					</form>
 					</div>
 					<div class="example-code">
@@ -353,6 +378,7 @@
 	
 	$(document).ready(function() { 
 		$( "#dateFirst" ).datepicker({format: 'yyyy-mm-dd'});
+		$( "#dateFirst" ).datepicker('hide');
 		//$( "#dateSecond" ).datepicker({format: 'yyyy-mm-dd'});
 	}); 
 	

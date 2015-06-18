@@ -11,6 +11,7 @@
 		<action name="orderin_*" class="orderInAction" method="{1}">
 			<result name="list">/WEB-INF/jsp/OrderInAction/list.jsp</result>
 		    <result name="detailList">/WEB-INF/jsp/OrderInAction/detailList.jsp</result>
+		    <result name="toList" type="redirectAction">orderin_list?pageNum=${pageNum}</result>
 		</action>
 		
 		
