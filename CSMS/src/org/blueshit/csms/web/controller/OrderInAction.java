@@ -159,9 +159,7 @@ public class OrderInAction extends BaseAction<Order> {
 	
      public String detailQuery(){
     	 
-    	 
-    
-    	 
+    	System.out.println(model.getId());
     	 return "";
      }
 
