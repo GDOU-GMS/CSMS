@@ -116,12 +116,15 @@
 	<div id="page-wrapper">
 
 
-		<div id="page-header" class="clearfix"  style="z-index: -2;">
+		<div id="page-header" class="clearfix">
 			<!-- <div id="header-logo">Documentation</div> -->
-				<div id="header-logo"><img src="${pageContext.request.contextPath }/manage/documentation/images/toplogo.png"alt=""></div>
-			<div class="top-icon-bar"></div>
-
+			<div id="header-logo"><img src="${pageContext.request.contextPath }/manage/documentation/images/toplogo.png"alt=""></div>
+			<div style="margin-top: 20px;margin-left:90%;font-family: '微软雅黑';z-index: 100000">
+				<a>欢迎${user.userName }</a>
+				<a href="${pageContext.request.contextPath }/loginout_logout.do">退出</a>
+			</div>
 		</div>
+		
 		<!-- #page-header -->
 		<!--侧栏菜单 -->
 		<div id="page-sidebar" class="scrollable-content">

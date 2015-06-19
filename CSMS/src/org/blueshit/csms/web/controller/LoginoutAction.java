@@ -64,6 +64,7 @@ public class LoginoutAction extends ActionSupport {
 	 * @return
 	 */
 	public String logout(){
+		ActionContext.getContext().getSession().remove("user");
 		return "logout";
 	}
 	

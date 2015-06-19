@@ -15,10 +15,12 @@ import com.opensymphony.xwork2.ActionContext;
 @Controller
 @Scope("prototype")
 public class ColorAction extends BaseAction<Color>{
+	
+	/**
+	 * serialVersionUID
+	 */
+	private static final long serialVersionUID = 157873341114363556L;
 
-	
-	
-	
 	private int pageNum = 1;
 	
 	public Map<String, Object> jsonMap;
@@ -39,7 +41,6 @@ public class ColorAction extends BaseAction<Color>{
 	}
 
 
-
 	/**
 	 * 颜色列表.
 	 * @return
@@ -58,11 +59,10 @@ public class ColorAction extends BaseAction<Color>{
 	 */
 	public String add() throws Exception{
 		colorService.save(model);
-		System.out.println(pageNum+"===============================");
 		ActionContext.getContext().put("pageNum", pageNum);
 		return "toList";
 	}
-	
+
 	/**
 	 * 修改.
 	 * @return
