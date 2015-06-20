@@ -120,6 +120,9 @@
 			<!-- <div id="header-logo">Documentation</div> -->
 				<div id="header-logo"><img src="${pageContext.request.contextPath }/manage/documentation/images/toplogo.png"alt=""></div>
 			<div class="top-icon-bar"></div>
+			
+			
+			</div>
 
 		</div>
 		<!-- #page-header -->

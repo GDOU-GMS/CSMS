@@ -4,9 +4,16 @@ package org.blueshit.csms.web.controller;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Random;
 import java.util.Set;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.struts2.ServletActionContext;
 import org.blueshit.csms.base.BaseAction;
 import org.blueshit.csms.configuration.Configuration;
 import org.blueshit.csms.entity.Color;
@@ -32,8 +39,26 @@ public class OrderInAction extends BaseAction<Order> {
 	
 	private Date timeDate;
 	private int pageNum = 1;
-    private Item item;	
+    private Item item;
+    private int num;
+    
+    public int getNum() {
+		return num;
+	}
+
+	public void setNum(int num) {
+		this.num = num;
+	}
+
+	public Map<String, Object> jsonMap;
 	
+	public Map<String, Object> getJsonMap() {
+		return jsonMap;
+	}
+
+	public void setJsonMap(Map<String, Object> jsonMap) {
+		this.jsonMap = jsonMap;
+	}	
 	public Date getTimeDate() {
 		return timeDate;
 	}
@@ -114,32 +139,48 @@ public class OrderInAction extends BaseAction<Order> {
 		
 	}
 	public String detailList(){
-		Order order=orderInService.findById(model.getId());
-		Set<OrderList> set=order.getOrderLists();
-		List<OrderList> list=new ArrayList<>(set);
-		orderInService.detailList(list, pageNum);
+
+		Map request = (Map)ActionContext.getContext().get("request");
+        String number=(String) request.get("number");
+        Order order=orderInService.getOrderByNumber(number);
+        ActionContext.getContext().put("order", order);
+        new QueryHelper(Order.class, "o")
+		.addWhereCondition(number!=null||number!="","o.number = ? ", number)
+		.preparePageBean(orderInService, pageNum);
         List<Color> colors=colorService.findAll();
+        ActionContext.getContext().put("colors", colors);
         List<Size> sizes=sizeService.findAll();
-        System.out.println("size="+sizes);
-		ActionContext.getContext().put("orderId", model.getId());
-		ActionContext.getContext().put("order", order);
-		ActionContext.getContext().getSession().put("colors", colors);
-		ActionContext.getContext().getSession().put("sizes", sizes);
+        ActionContext.getContext().put("sizes", sizes);
 		return "detailList";
+		
 	}
 	/**
 	 * 添加订单
 	 * @return
 	 */
 	public String add(){
+		Date date=new Date();
+		String number=new SimpleDateFormat("yyyymmdd").format(date);
+		String all=new String();
+		for(int i=0;i<3;i++){
+			Random random=new Random();
+			int one=random.nextInt(9);
+			all=all+one;
+		}
+		number=all+number;
+		model.setNumber(number);
 		model.setRemark("入库");
 		String storageName=model.getStorage().getName();
 		Storage storage=storageService.getStorageByName(storageName);
 		model.setStorage(storage);
 		String userName=model.getUser().getUserName();
+		User user=userService.getUserByUserName(userName);
+		model.setUser(user);
+		model.setOrderLists(null);
 		orderInService.save(model);
 		ActionContext.getContext().put("pageNum", pageNum);
-		return "toList";
+		ActionContext.getContext().put("number",number);
+		return "toDetailList";
 		
 	}
 	/**
@@ -155,19 +196,60 @@ public class OrderInAction extends BaseAction<Order> {
 	 * 更新订单
 	 * @return
 	 */
-	public String update(){
-		orderInService.save(model);
-		return "toList";
+	public String edit(){
+		
+		System.out.println(model.getNumber());
+	    Order order=orderInService.getOrderByNumber(model.getNumber());
+	    order.setTime(model.getTime());
+	    order.setSite(model.getSite());
+		String storageName=model.getStorage().getName();
+		Storage storage=storageService.getStorageByName(storageName);
+		order.setStorage(storage);
+		String userName=model.getUser().getUserName();
+		User user=userService.getUserByUserName(userName);
+		order.setUser(user);
+		orderInService.save(order);
+		ActionContext.getContext().put("number", model.getNumber());
+		return "toDetailList";
+	    		
 	}
+	 
 	
-	
+	 
+     public String getJsonById() throws Exception{
+    	 
+    	Order order=orderInService.findById(model.getId());
+    	Map<String,Object> map = new HashMap<String, Object>();
+    	map.put("order", order);
+    	this.setJsonMap(map);
+    	return "getJsonById";
+    	 
+     }
+     
      public String detailQuery(){
     	 
-    	System.out.println("测试"+model.getId());
-    	 return "list";
+     	System.out.println("测试"+model.getId());
+     	return "list";
+      }
+     
+     public String detailAdd(){
+       System.out.println("货物添加");
+       String number=model.getNumber();
+       Order order=orderInService.getOrderByNumber(number);
+       Set<OrderList> orderLists=new HashSet<OrderList>();
+       orderLists=order.getOrderLists();
+       OrderList orderList=new OrderList();
+       orderList.setNum(num);
+       orderList.setOrder(order);
+       orderLists.add(orderList);
+       item.setOrderLists(orderLists);
+       itemService.save(item);
+   	   return "todetailList";
      }
-
-
+     
+     public String  detailPage(){
+    	 return "detailPage";
+     }
 	
 	
 }

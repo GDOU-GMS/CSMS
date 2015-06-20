@@ -11,4 +11,14 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class ItemServiceImpl extends DaoSupportImpl<Item> implements ItemService {
 
+	/**
+	 * 根据订单号查找
+	 */
+	public Item getByItemNumber(String itemNumber) {
+		return (Item) getSession()
+				.createQuery("from Item i where i.item_number = ?")
+				.setParameter(0, itemNumber)
+				.uniqueResult();
+	}
+
 }
