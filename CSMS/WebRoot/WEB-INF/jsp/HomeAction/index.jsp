@@ -118,27 +118,11 @@
 
 		<div id="page-header" class="clearfix">
 			<!-- <div id="header-logo">Documentation</div> -->
-
-
-				<div id="header-logo"><img src="${pageContext.request.contextPath }/manage/documentation/images/toplogo.png"alt=""></div>
-			<div class="top-icon-bar"></div>
-			
-			
-			</div>
-
-
 			<div id="header-logo"><img src="${pageContext.request.contextPath }/manage/documentation/images/toplogo.png"alt=""></div>
 			<div style="margin-top: 20px;margin-left:90%;font-family: '微软雅黑';z-index: 100000">
 				<a>欢迎${user.userName }</a>
 				<a href="${pageContext.request.contextPath }/loginout_logout.do">退出</a>
 			</div>
-
-			<div id="header-logo"><img src="${pageContext.request.contextPath }/manage/documentation/images/toplogo.png"alt=""></div>
-			<div style="margin-top: 20px;margin-left:90%;font-family: '微软雅黑';z-index: 100000">
-				<a>欢迎${user.userName }</a>
-				<a href="${pageContext.request.contextPath }/loginout_logout.do">退出</a>
-			</div>
-
 		</div>
 		
 		<!-- #page-header -->
