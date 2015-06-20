@@ -42,7 +42,7 @@
 		
 		<!-- loginoutAction -->
 		<action name="loginout_*" class="loginoutAction" method="{1}">
-			<result name="logout">/WEB-INF/jsp/LoginoutAction/logout.jsp</result>
+			<result name="logout">/WEB-INF/jsp/LoginoutAction/loginUI.jsp</result>
 			<result name="toIndex" type="redirectAction">home_index</result>
 		</action>
 		
