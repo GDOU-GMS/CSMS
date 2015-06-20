@@ -52,6 +52,13 @@ public class OrderInServiceImpl extends DaoSupportImpl<Order> implements OrderIn
 	    ActionContext.getContext().getValueStack().push(page);
 		
 	}
+
+	@Override
+	public Order getOrderByNumber(String number) {
+		return (Order) getSession().createQuery("from Order o where o.number =? ")
+		.setParameter(0, number)
+		.uniqueResult();
+	}
 	
 	
 	

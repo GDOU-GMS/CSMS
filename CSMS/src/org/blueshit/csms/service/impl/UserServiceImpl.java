@@ -42,7 +42,7 @@ public class UserServiceImpl extends DaoSupportImpl<User> implements UserService
 	 * 根据用户名获取用户.
 	 */
 	public User getUserByUserName(String userName) {
-		return (User) getSession().createQuery("from User u where u.username = ?")
+		return (User) getSession().createQuery("from User u where u.userName = ?")
 				.setParameter(0, userName)
 				.uniqueResult();
 	}

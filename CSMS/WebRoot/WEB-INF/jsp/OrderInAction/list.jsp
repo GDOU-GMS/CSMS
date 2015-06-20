@@ -148,10 +148,12 @@
 					</div>
 					<div class="example-code">
 					
-						<a data-toggle="modal"  data-target="#addModal" title=".icon-plus-square-o" class="tooltip-button btn small bg-yellow" title="添加" href="#">
+					<!-- 	<a data-toggle="modal"  data-target="#addModal" title=".icon-plus-square-o" class="tooltip-button btn small bg-yellow" title="添加" href="#">
+							<i class="glyph-icon icon-plus-square-o"></i>
+						</a><br><br> -->
+					    <a data-toggle="modal"  title=".icon-plus-square-o" class="tooltip-button btn small bg-yellow" title="添加" href="${pageContext.request.contextPath }/orderin_detailPage.do">
 							<i class="glyph-icon icon-plus-square-o"></i>
 						</a><br><br>
-
 						<table class="table table-condensed">
 							<thead>
 								<tr>
@@ -168,13 +170,13 @@
 								<s:iterator value="list" status="status" >
 									<tr>
 									<td>${(pageNum-1)*10+status.count }</td>
-									<td id="numberText_${id }"><a href="${pageContext.request.contextPath }/orderin_detailList.do?id=${id}">${number}</a></td>
+									<td id="numberText_${id }"><a href="${pageContext.request.contextPath }/orderin_detailList.do?number=${number}">${number}</a></td>
 									<td id="nameText_${id }">${storage.name}</td>
 									<td id="storageNumText_${id }">${time}</td>
 									<td id="storageNumText_${id }">${user.userName}</td>
 									<td id="storageNumText_${id }">${site}</td>
 									<td>
-									<a data-toggle="modal"  data-target="#updateModal" href="" class="btn small bg-blue-alt tooltip-button" data-placement="top" title="更新" onclick="showText(${id},'${contacts }','${contacts_phone }')">  
+									<a data-toggle="modal"  data-target="#updateModal" href="" class="btn small bg-blue-alt tooltip-button" data-placement="top" title="更新" onclick="reshow(${id})">  
 									<i class="glyph-icon icon-edit"></i> </a>
 									<a data-toggle="modal"  data-target="#deleteModal" href="#" class="btn small bg-red tooltip-button" data-placement="top" title="删除" onclick="showId(${id})">
 									<i class="glyph-icon icon-remove"></i> </a>
@@ -291,33 +293,40 @@
 <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
-      <form class="form-horizontal" action="${pageContext.request.contextPath }/storage_edit.do" method="post">
+      <form class="form-horizontal" action="${pageContext.request.contextPath }/orderin_edit.do" method="post">
       <div class="modal-header" >
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">更新仓库</h4>
+        <h4 class="modal-title" id="myModalLabel">更新订单</h4>
       </div>
       <div class="modal-body" style="margin:20px;">
-		 <input type="hidden" name="pageNum" value="${pageNum }" >
-		 <input type="hidden" name="id" id="editId">
-		  <div class="form-group">
-		    <label for="storageNum">仓库编号</label>
-		    <input type="text" class="form-control" id="shownumber" name="number" placeholder="请输入仓库编号">
+      	<input type="hidden" name="pageNum" value="${pageNum}" >
+		  
+		  <div class="form-group form-input">
+		    <label for="storageName">所入仓库</label>
+		   <!--  <input type="text" class="form-control" id="storageName" name="storage.name" placeholder="请输入所入仓库"> -->
+		    <select  class="form-control" id="storage_name" name="storage.name">
+		    <option value="">请选择仓库</option>
+		    <s:iterator value="#session.storages" status="status" >
+			<option value="${name}">${name}</option>
+			</s:iterator>
+			</select> 
+		  </div>
+		  <div class="form-group  form-input">
+		    <label for="contactsName">入库日期</label>
+			<input type="text" name="time" id="order_time">
+		  </div>
+		   <div class="form-group form-input">
+		    <label for="contacts_phone">经办人</label>
+		    <select  class="form-control" id="user_userName" name="user.userName" >
+		    <option value="">请选择经办人</option>
+		    <s:iterator value="#session.users" status="status" >
+			<option value="${userName}">${userName}</option>
+			</s:iterator>
+			</select> 
 		  </div>
 		  <div class="form-group">
-		    <label for="storageName">仓库名称</label>
-		    <input type="text" class="form-control" id="showname" name="name" placeholder="请数据仓库名称">
-		  </div>
-		   <div class="form-group">
-		    <label for="contactsName">联系人</label>
-		    <input type="text" class="form-control" id="showcontactsName" name="contacts" placeholder="请输入联系人姓名">
-		  </div>
-		   <div class="form-group">
-		    <label for="contacts_phone">联系电话</label>
-		    <input type="text" class="form-control" id="showphone" name="contacts_phone" placeholder="请输入联系电话">
-		  </div>
-		    <div class="form-group">
-		    <label for="storage_num">仓储量</label>
-		    <input type="text" class="form-control" id="shownum" name="storage_num" placeholder="请输入仓库容量">
+		    <label for="storage_num">来源 </label>
+		    <input type="text" class="form-control" id="order_site" name="site" placeholder="请输入来源">
 		  </div> 
       </div>
       <div class="modal-footer">
@@ -366,7 +375,19 @@
 		$( "#date" ).datepicker({format: 'yyyy-mm-dd'});
 	}); 
 	
-	
+	function reshow(id){
+		var url = "orderin_getJsonById.do";
+		var params ={
+			id:id
+		};
+		$.getJSON(url,params,function(data){
+			var order = data.order;
+			$("#storage_name").val(order.storage.name);
+			$("#order_time").val(order.time);
+			$("#user_userName").val(order.user.userName);
+			$("#order_site").val(order.site);
+		});
+	 }
 	function showId(id){
 		$("#deleteId").val(id);
 	}
@@ -381,6 +402,7 @@
 		$("#showcontactsName").val(contacts);
 		$("#showphone").val(contacts_phone);
 	}
+	
 	
 </script>
 

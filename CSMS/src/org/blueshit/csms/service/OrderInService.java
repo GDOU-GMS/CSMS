@@ -15,4 +15,6 @@ public interface OrderInService  extends DaoSupport<Order> {
 	public abstract void detailList(List<OrderList> list,int pageNum);
 	
 	public abstract void query(int pageNum,Order model,Date timeDate);
+	
+	public abstract Order getOrderByNumber(String number);
 }

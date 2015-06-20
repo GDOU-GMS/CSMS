@@ -93,41 +93,58 @@
 				<!-- 表格 -->
 				<div class="example-box">
 					<div class="example-code">
-						<form action="${pageContext.request.contextPath }/orderin_edit.do?" method="post">
+						<form action="${pageContext.request.contextPath }/orderin_add.do" method="post">
 						<div class="form-row">
-							<div class="form-label col-md-2 width:100px;" >
+							<%-- <div class="form-label col-md-2 width:100px;" >
 								<label for="" >单据号 :</label>
 							</div>
 							<div class="form-input col-md-3 textstyle">
 								<input style="width:200px;height:28px;" type="text" name="number" id="" value="${order.number}" readonly="readonly">
-							</div>
+							</div> --%>
 							<div class="form-label col-md-2 labelstyle" >
 								<label for=""> 入库日期: </label>
 							</div>
 							<div class="form-input col-md-3">
-								<input type="text" style="width:200px;height:28px;" name="time" id="dateFirst" value="${order.time}" >
+								<input type="text" style="width:200px;height:28px;" name="time" id="dateFirst" value="${order.time}" readonly="readonly">
 							</div>
-
-						</div>
-						<div class="form-row">
 							<div class="form-label col-md-2 labelstyle">
 								<label for=""> 所入仓库: </label>
 							</div>
 							<div class="form-input col-md-3">
-								<input type="text" style="width:200px;height:28px;" name="time" id="dateFirst" value="${order.storage.name}"  >
+								 <select  class="form-control"  name="storage.name">
+								    <option value="">请选择仓库</option>
+								    <s:iterator value="#session.storages" status="status" >
+									<option value="${name}">${name}</option>
+									</s:iterator>
+								 </select> 
+							</div>
+
+						</div>
+						<div class="form-row">
+							<div class="form-label  col-md-2 labelstyle">
+								<label for=""> 经办人: </label>
+							</div>
+							<div class="form-input col-md-3">
+								<select  class="form-control" id="user_userName" name="user.userName" >
+								    <option value="">请选择经办人</option>
+								    <s:iterator value="#session.users" status="status" >
+									<option value="${userName}">${userName}</option>
+									</s:iterator>
+								</select>
 							</div>
 							<div class="form-label  col-md-2 labelstyle">
 								<label for=""> 来源: </label>
 							</div>
 							<div class="form-input col-md-3">
-								<input type="text" style="width:200px;height:28px;" name="site" id="dateFirst"value="${order.site}">
+								<input type="text" style="width:200px;height:28px;" name="site" id="dateFirst"value="${order.site}" >
 							</div>
+								<button type="submit" class="btn medium primary-bg" style="margin-left:10px;" title="">
+							<span class="button-content">添加</span>
+							</button>
 								<%-- <button type="submit" class="btn medium primary-bg" style="margin-left:10px;" title="">
 								<span class="button-content">查询</span>
 								</button> --%>
-							<button type="submit" class="btn medium primary-bg" style="margin-left:10px;" title="">
-							<span class="button-content">更新</span>
-							</button>
+							
 						</div>
 							
 						<%-- <div class="form-row">	
@@ -150,12 +167,12 @@
 					</div>
 					<div class="example-code">
 					
-						<a data-toggle="modal"  data-target="#addModal" title="添加" class="tooltip-button btn small bg-yellow" title="添加" href="#">
-								<i class="glyph-icon icon-plus-square-o"></i></a>
-						<br><br>
+						<a  title=".icon-plus-square-o" class="tooltip-button btn small bg-yellow" title="添加" >
+							<i class="glyph-icon icon-plus-square-o"></i>
+						</a><br><br>
 						
 						
-						<table class="table table-condensed">
+						<table class="table table-condensed"> 
 							<thead>
 								<tr>
 									<th>序号</th>
@@ -215,7 +232,7 @@
 										<a href="${pageContext.request.contextPath }/storage_list.do?pageNum=${pageNum-1}" class="btn large ui-state-default" <s:if test="pageNum == 1 ">disabled="disabled"</s:if>>
 										<i class="glyph-icon icon-chevron-left"></i> </a>
 										<s:iterator begin="%{startPage}" end="%{endPage}" var="i">
-											<a href="${pageContext.request.contextPath}/storage_list.do?pageNum=${i}" class="btn large ui-state-default" <s:if test="pageNum==#i">disabled="disabled"</s:if>>${i }</a>
+											<a href="${pageContext.request.contextPath }/storage_list.do?pageNum=${i}" class="btn large ui-state-default" <s:if test="pageNum==#i">disabled="disabled"</s:if>>${i }</a>
 										</s:iterator>
 										<a href="${pageContext.request.contextPath }/storage_list.do?pageNum=${pageNum+1}" class="btn large ui-state-default" <s:if test="pageNum == totalPage">disabled="disabled"</s:if>>
 										<i class="glyph-icon icon-chevron-right"></i> </a>
@@ -224,52 +241,45 @@
 							</s:if> 
 							<!-- end 分页 -->
 						</s:else>
+						
 					</div>
 
 				</div>
 			</div>
 			<!-- #page-content -->
 			
+			
 					
-
-
- <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"  >
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"  >
   <div class="modal-dialog">
     <div class="modal-content">
-     <form class="form-horizontal" action="${pageContext.request.contextPath }/orderin_detailAdd.do" method="post">
-      <div class="modal-header">
+      <form class="form-horizontal" action="${pageContext.request.contextPath }/orderin_detailAdd.do" method="post">
+      <div class="modal-header" >
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="myModalLabel">添加货物</h4>
       </div>
       <div class="modal-body" style="margin:20px;">
-      	<input type="hidden" name="pageNum" value="${pageNum}">
+      	<input type="hidden" name="pageNum" value="${pageNum }" >
 		  <div class="form-group">
-		    <label for="storageNum">货号</label>
-		    <input type="text" class="form-control" id="storageNum" name="" placeholder="请输入单据编号">
+		    <label for="storageNum">仓库编号</label>
+		    <input type="text" class="form-control" id="storageNum" name="number" placeholder="请输入仓库编号">
 		  </div>
-		  <div class="form-group form-input">
-		    <label for="storageName">尺码</label>
-		   <!--  <input type="text" class="form-control" id="storageName" name="storage.name" placeholder="请输入所入仓库"> -->
-		    <select  class="form-control" id="" name="">
-		    <option value="">请选择尺码</option>
-		    <s:iterator value="sizes" status="status">
-			<option value="num">${num}</option>
-			</s:iterator>
-			</select> 
+		  <div class="form-group">
+		    <label for="storageName">仓库名称</label>
+		    <input type="text" class="form-control" id="storageName" name="name" placeholder="请数据仓库名称">
 		  </div>
-		  <div class="form-group  form-input">
-		    <label for="contactsName">色号</label>
-			<select  class="form-control" id="" name="" >
-		    <option value="">请选择色号</option>
-		    <s:iterator value="colors" status="status" >
-			<option value="name">${name}</option>
-			</s:iterator>
-			</select> 
+		   <div class="form-group">
+		    <label for="contactsName">联系人</label>
+		    <input type="text" class="form-control" id="contactsName" name="contacts" placeholder="请输入联系人姓名">
 		  </div>
-		  <div class="form-group form-input">
-		    <label for="contacts_phone">数量</label>
-		    <input type="text" class="form-control" id="storage_num" name="" placeholder="请输入来源">
+		   <div class="form-group">
+		    <label for="contacts_phone">联系电话</label>
+		    <input type="text" class="form-control" id="contacts_phone" name="contacts_phone" placeholder="请输入联系电话">
 		  </div>
+		    <div class="form-group">
+		    <label for="storage_num">仓储量</label>
+		    <input type="text" class="form-control" id="storage_num" name="storage_num" placeholder="请输入仓库容量">
+		  </div> 
       </div>
       <div class="modal-footer">
        	<button type="submit"class="btn medium primary-bg" style="margin-left:10px;" title="">
@@ -281,6 +291,7 @@
     </div>
   </div>
 </div>
+
 
 
 
@@ -298,11 +309,11 @@
 		 <input type="hidden" name="pageNum" value="${pageNum }" >
 		 <input type="hidden" name="id" id="editId">
 		  <div class="form-group">
-		    <label for="storageNum">货号</label>
+		    <label for="storageNum">仓库编号</label>
 		    <input type="text" class="form-control" id="shownumber" name="number" placeholder="请输入仓库编号">
 		  </div>
 		  <div class="form-group">
-		    <label for="storageName"></label>
+		    <label for="storageName">仓库名称</label>
 		    <input type="text" class="form-control" id="showname" name="name" placeholder="请数据仓库名称">
 		  </div>
 		   <div class="form-group">
@@ -364,7 +375,7 @@
 		//$( "#dateSecond" ).datepicker({format: 'yyyy-mm-dd'});
 	}); 
 	
-
+	
 	function showId(id){
 		$("#deleteId").val(id);
 	}
