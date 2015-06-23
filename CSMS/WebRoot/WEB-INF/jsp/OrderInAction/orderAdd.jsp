@@ -95,26 +95,21 @@
 					<div class="example-code">
 						<form action="${pageContext.request.contextPath }/orderin_add.do" method="post">
 						<div class="form-row">
-							<%-- <div class="form-label col-md-2 width:100px;" >
-								<label for="" >单据号 :</label>
-							</div>
-							<div class="form-input col-md-3 textstyle">
-								<input style="width:200px;height:28px;" type="text" name="number" id="" value="${order.number}" readonly="readonly">
-							</div> --%>
+							
 							<div class="form-label col-md-2 labelstyle" >
 								<label for=""> 入库日期: </label>
 							</div>
 							<div class="form-input col-md-3">
-								<input type="text" style="width:200px;height:28px;" name="time" id="dateFirst" value="${order.time}" readonly="readonly">
+								<input type="text" style="width:200px;height:28px;" name="time" id="dateFirst" value="${order.time}" >
 							</div>
 							<div class="form-label col-md-2 labelstyle">
 								<label for=""> 所入仓库: </label>
 							</div>
 							<div class="form-input col-md-3">
-								 <select  class="form-control"  name="storage.name">
+								 <select  class="form-control"  name="storage.id" >
 								    <option value="">请选择仓库</option>
 								    <s:iterator value="#session.storages" status="status" >
-									<option value="${name}">${name}</option>
+									<option value="${id}">${name}</option>
 									</s:iterator>
 								 </select> 
 							</div>
@@ -125,10 +120,10 @@
 								<label for=""> 经办人: </label>
 							</div>
 							<div class="form-input col-md-3">
-								<select  class="form-control" id="user_userName" name="user.userName" >
+								<select  class="form-control" id="user_userName" name="user.id" >
 								    <option value="">请选择经办人</option>
 								    <s:iterator value="#session.users" status="status" >
-									<option value="${userName}">${userName}</option>
+									<option value="${id}">${userName}</option>
 									</s:iterator>
 								</select>
 							</div>

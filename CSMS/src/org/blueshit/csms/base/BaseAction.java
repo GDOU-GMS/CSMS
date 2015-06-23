@@ -21,6 +21,7 @@ import org.blueshit.csms.entity.User;
 import org.blueshit.csms.service.ColorService;
 import org.blueshit.csms.service.ItemService;
 import org.blueshit.csms.service.OrderInService;
+import org.blueshit.csms.service.OrderListService;
 import org.blueshit.csms.service.PrivilegeService;
 import org.blueshit.csms.service.RoleService;
 import org.blueshit.csms.service.SizeService;
@@ -56,7 +57,10 @@ public class BaseAction<T> extends ActionSupport implements ModelDriven<T>{
 	protected ItemService itemService;
 	@Autowired
 	protected OrderInService orderInService;
-	
+	@Autowired
+	protected OrderInService orderOutService;
+	@Autowired
+	protected OrderListService orderListService;
 	//声明model
 	protected T model;
 	

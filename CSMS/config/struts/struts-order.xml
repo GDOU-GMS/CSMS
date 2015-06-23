@@ -12,7 +12,7 @@
 			<result name="list">/WEB-INF/jsp/OrderInAction/list.jsp</result>
 		    <result name="detailList">/WEB-INF/jsp/OrderInAction/detailList.jsp</result>
 		    <result name="toList" type="redirectAction">orderin_list?pageNum=${pageNum}</result>
-		    <result name="todetailList" type="redirectAction">orderin_detailList?number=${number}</result>
+		    <result name="toDetailList" type="redirectAction">orderin_detailList?number=${number}</result>
 		    <result name="getJsonById" type="json">
 				<param name="root">jsonMap</param>
 			</result>

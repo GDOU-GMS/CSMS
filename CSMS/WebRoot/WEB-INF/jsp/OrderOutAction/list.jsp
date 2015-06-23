@@ -81,7 +81,7 @@
 	</div>
 			<div id="page-title">
 				<h3>
-					Welcome to 入库管理 <small></small>
+					Welcome to 出库管理 <small></small>
 				</h3>
 
 			</div>
@@ -92,10 +92,10 @@
 				<!-- 表格 -->
 				<div class="example-box">
 					<div class="example-code">
-						<form action="${pageContext.request.contextPath }/orderin_query.do" method="post">
+						<form action="${pageContext.request.contextPath }/orderout_query.do" method="post">
 						<div class="form-row">
 							<div class="form-label col-md-2 width:100px;">
-								<label for="" > 所入仓库 :</label>
+								<label for="" > 所出仓库 :</label>
 							</div>
 							<div class="form-input col-md-3" style="width:220px;display:inline;float:left;">
 								<select id="" class="" name="storage.name">
@@ -120,7 +120,7 @@
 						</div>
 						<div class="form-row">
 							<div class="form-label col-md-1 labelstyle">
-								<label for=""> 日期: </label>
+								<label for=""> 出库日期: </label>
 							</div>
 							<div class="form-input col-md-3">
 								<input type="text" style="width:200px;height:28px;" name="time" id="dateFirst">
@@ -151,7 +151,7 @@
 					<!-- 	<a data-toggle="modal"  data-target="#addModal" title=".icon-plus-square-o" class="tooltip-button btn small bg-yellow" title="添加" href="#">
 							<i class="glyph-icon icon-plus-square-o"></i>
 						</a><br><br> -->
-					    <a data-toggle="modal"  title=".icon-plus-square-o" class="tooltip-button btn small bg-yellow" title="添加" href="${pageContext.request.contextPath }/orderin_detailPage.do">
+					    <a data-toggle="modal"  title=".icon-plus-square-o" class="tooltip-button btn small bg-yellow" title="添加" href="${pageContext.request.contextPath }/orderout_detailPage.do">
 							<i class="glyph-icon icon-plus-square-o"></i>
 						</a><br><br>
 						<table class="table table-condensed">
@@ -159,10 +159,10 @@
 								<tr>
 									<th>序号</th>
 									<th>单据编号</th>
-									<th>所入仓库</th>
-									<th>入库日期</th>
-									<th>经办人</th>
-									<th>来源</th>
+									<th>所出仓库</th>
+									<th>出库日期</th>
+									<th>接收人</th>
+									<th>发往地址</th>
 									<th>操作</th>
 								</tr>
 							</thead>
@@ -170,7 +170,7 @@
 								<s:iterator value="list" status="status" >
 									<tr>
 									<td>${(pageNum-1)*10+status.count }</td>
-									<td id="numberText_${id }"><a href="${pageContext.request.contextPath }/orderin_detailList.do?number=${number}">${number}</a></td>
+									<td id="numberText_${id }"><a href="${pageContext.request.contextPath }/orderout_detailList.do?number=${number}">${number}</a></td>
 									<td id="nameText_${id }">${storage.name}</td>
 									<td id="storageNumText_${id }">${time}</td>
 									<td id="storageNumText_${id }">${user.userName}</td>
@@ -193,12 +193,12 @@
 							<s:if test="totalRecord>0">
 								<div class="col-md-3" style="float:right; margin-bottom:20px; width:500px;">
 									<div class="button-group center-div">
-										<a href="${pageContext.request.contextPath }/orderin_list.do?pageNum=${pageNum-1}" class="btn large ui-state-default" <s:if test="pageNum == 1 ">disabled="disabled"</s:if>>
+										<a href="${pageContext.request.contextPath }/orderout_query.do?pageNum=${pageNum-1}&storage.name=${storageName}&number=${number}&time=${time}&timedate=${timedate}" class="btn large ui-state-default" <s:if test="pageNum == 1 ">disabled="disabled"</s:if>>
 										<i class="glyph-icon icon-chevron-left"></i> </a>
 										<s:iterator begin="%{startPage}" end="%{endPage}" var="i">
-											<a href="${pageContext.request.contextPath }/orderin_list.do?pageNum=${i}" class="btn large ui-state-default" <s:if test="pageNum==#i">disabled="disabled"</s:if>>${i}</a>
+											<a href="${pageContext.request.contextPath }/orderout_query.do?pageNum=${i}&storage.name=${storageName}&number=${number}&time=${time}&timedate=${timedate}" class="btn large ui-state-default" <s:if test="pageNum==#i">disabled="disabled"</s:if>>${i }</a>
 										</s:iterator>
-										<a href="${pageContext.request.contextPath }/orderin_list.do?pageNum=${pageNum+1}" class="btn large ui-state-default" <s:if test="pageNum == totalPage">disabled="disabled"</s:if>>
+										<a href="${pageContext.request.contextPath }/orderout_query.do?pageNum=${pageNum+1}&storage.name=${storageName}&number=${number}&time=${time}&timedate=${timedate}" class="btn large ui-state-default" <s:if test="pageNum == totalPage">disabled="disabled"</s:if>>
 										<i class="glyph-icon icon-chevron-right"></i> </a>
 									</div>
 								</div>
@@ -211,12 +211,12 @@
 							<s:if test="totalRecord>0">
 								<div class="col-md-3" style="float:right; margin-bottom:20px; width:500px;">
 									<div class="button-group center-div">
-										<a href="${pageContext.request.contextPath }/orderin_list.do?pageNum=${pageNum-1}" class="btn large ui-state-default" <s:if test="pageNum == 1 ">disabled="disabled"</s:if>>
+										<a href="${pageContext.request.contextPath }/orderout_list.do?pageNum=${pageNum-1}" class="btn large ui-state-default" <s:if test="pageNum == 1 ">disabled="disabled"</s:if>>
 										<i class="glyph-icon icon-chevron-left"></i> </a>
 										<s:iterator begin="%{startPage}" end="%{endPage}" var="i">
-											<a href="${pageContext.request.contextPath }/orderin_list.do?pageNum=${i}" class="btn large ui-state-default" <s:if test="pageNum==#i">disabled="disabled"</s:if>>${i }</a>
+											<a href="${pageContext.request.contextPath }/orderout_list.do?pageNum=${i}" class="btn large ui-state-default" <s:if test="pageNum==#i">disabled="disabled"</s:if>>${i }</a>
 										</s:iterator>
-										<a href="${pageContext.request.contextPath }/orderin_list.do?pageNum=${pageNum+1}" class="btn large ui-state-default" <s:if test="pageNum == totalPage">disabled="disabled"</s:if>>
+										<a href="${pageContext.request.contextPath }/orderout_list.do?pageNum=${pageNum+1}" class="btn large ui-state-default" <s:if test="pageNum == totalPage">disabled="disabled"</s:if>>
 										<i class="glyph-icon icon-chevron-right"></i> </a>
 									</div>
 								</div>
@@ -235,22 +235,20 @@
 <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"  >
   <div class="modal-dialog">
     <div class="modal-content">
-      <form class="form-horizontal" action="${pageContext.request.contextPath }/orderin_add.do" method="post">
+      <form class="form-horizontal" action="${pageContext.request.contextPath }/orderout_add.do" method="post">
       <div class="modal-header" >
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="myModalLabel">添加订单</h4>
       </div>
       <div class="modal-body" style="margin:20px;">
       	<input type="hidden" name="pageNum" value="${pageNum}" >
-      	
 		  <div class="form-group">
 		    <label for="storageNum">单据编号</label>
 		    <input type="text" class="form-control" id="storageNum" name="number" placeholder="请输入单据编号">
 		  </div>
 		  <div class="form-group form-input">
-		    <label for="storageName">所入仓库</label>
+		    <label for="storageName">所出仓库</label>
 		   <!--  <input type="text" class="form-control" id="storageName" name="storage.name" placeholder="请输入所入仓库"> -->
-		    
 		    <select  class="form-control"  name="storage.name">
 		    <option value="">请选择仓库</option>
 		    <s:iterator value="#session.storages" status="status" >
@@ -295,7 +293,7 @@
 <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
-      <form class="form-horizontal" action="${pageContext.request.contextPath }/orderin_edit.do" method="post">
+      <form class="form-horizontal" action="${pageContext.request.contextPath }/orderout_edit.do" method="post">
       <div class="modal-header" >
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="myModalLabel">更新订单</h4>
@@ -305,9 +303,9 @@
 		  <div class="form-group">
 		    <label for="storage_num">单据号 </label>
 		    <input type="text" class="form-control" id="order_number" name="number" placeholder="请输入来源"  readonly="readonly">
-		  </div>
+		  </div> 
 		  <div class="form-group form-input">
-		    <label for="storageName">所入仓库</label>
+		    <label for="storageName">所出仓库</label>
 		   <!--  <input type="text" class="form-control" id="storageName" name="storage.name" placeholder="请输入所入仓库"> -->
 		    <select  class="form-control" id="storage_name" name="storage.id">
 		    <option value="">请选择仓库</option>
@@ -317,11 +315,11 @@
 			</select> 
 		  </div>
 		  <div class="form-group  form-input">
-		    <label for="contactsName">入库日期</label>
+		    <label for="contactsName">出库日期</label>
 			<input type="text" name="time" id="order_time">
 		  </div>
 		   <div class="form-group form-input">
-		    <label for="contacts_phone">经办人</label>
+		    <label for="contacts_phone">接收人</label>
 		    <select  class="form-control" id="user_userName" name="user.id" >
 		    <option value="">请选择经办人</option>
 		    <s:iterator value="#session.users" status="status" >
@@ -330,7 +328,7 @@
 			</select> 
 		  </div>
 		  <div class="form-group">
-		    <label for="storage_num">来源 </label>
+		    <label for="storage_num">发往地址 </label>
 		    <input type="text" class="form-control" id="order_site" name="site" placeholder="请输入来源">
 		  </div> 
       </div>
@@ -351,7 +349,7 @@
 <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
-      <form class="form-horizontal" action="${pageContext.request.contextPath }/orderin_delete.do">
+      <form class="form-horizontal" action="${pageContext.request.contextPath }/orderout_delete.do">
       <div class="modal-header" >
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="myModalLabel">删除仓库</h4>
@@ -382,7 +380,7 @@
 	}); 
 	
 	function reshow(id){
-		var url = "orderin_getJsonById.do";
+		var url = "orderout_getJsonById.do";
 		var params ={
 			id:id
 		};
