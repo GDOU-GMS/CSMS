@@ -5,6 +5,7 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -44,7 +45,7 @@ public class Role implements Serializable{
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	@ManyToMany(mappedBy = "roles",cascade={CascadeType.MERGE, CascadeType.PERSIST})
+	@ManyToMany(mappedBy = "roles",cascade={CascadeType.MERGE, CascadeType.PERSIST},fetch=FetchType.EAGER)
 	public Set<User> getUsers() {
 		return users;
 	}
@@ -52,7 +53,7 @@ public class Role implements Serializable{
 		this.users = users;
 	}
 	
-	@ManyToMany(cascade={CascadeType.MERGE, CascadeType.PERSIST})
+	@ManyToMany(cascade={CascadeType.MERGE, CascadeType.PERSIST},fetch=FetchType.EAGER)
 	@JoinTable(name="tb_role_privilege",
 			joinColumns = @JoinColumn(name="role_id"),
 			inverseJoinColumns = @JoinColumn(name="privilege_id"))

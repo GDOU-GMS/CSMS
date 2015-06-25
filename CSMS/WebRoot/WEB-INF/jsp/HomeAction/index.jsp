@@ -133,14 +133,14 @@
 				<!-- 遍历 -->
 				<ul>
 					<s:iterator value="#application.topPrivilegeList">
-						<s:if test="#session.user.hasPrivilegeByUrl(url)">
+						<s:if test="#session.user.hasPrivilegeByName(name)">
 						<li>
 							<a href="javascript:;" title="Components">
 								<i class="glyph-icon icon-folder-open"></i>${name }
 							</a>
 							<ul>
 								<s:iterator value="children">
-								<s:if test="#session.user.hasPrivilegeByUrl(url)">
+								<s:if test="#session.user.hasPrivilegeByName(name)">
 									<li>
 										<a href="${pageContext.request.contextPath }/${url }.do" title="${name }" target="main-frame">
 											<i class="glyph-icon icon-chevron-right"></i>${name }

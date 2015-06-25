@@ -59,7 +59,7 @@ public class Privilege {
 	public void setUrl(String url) {
 		this.url = url;
 	}
-	@ManyToMany(mappedBy="privileges",cascade={CascadeType.MERGE, CascadeType.PERSIST})
+	@ManyToMany(mappedBy="privileges",cascade={CascadeType.MERGE, CascadeType.PERSIST},fetch=FetchType.EAGER)
 	public Set<Role> getRoles() {
 		return roles;
 	}
