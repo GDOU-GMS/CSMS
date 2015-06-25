@@ -47,9 +47,8 @@ public class User implements Serializable{
 		if(testAdmin()){
 			return true;
 		}
-		
 		//如果不是
-		for(Role role:roles){
+		for(Role role:this.roles){
 			for(Privilege p : role.getPrivileges()){
 				if(p.getName().equals(privilegeName)){
 					return true;
@@ -145,7 +144,7 @@ public class User implements Serializable{
 		this.orders = orders;
 	}
 
-	@ManyToMany(cascade={CascadeType.MERGE, CascadeType.PERSIST})
+	@ManyToMany(cascade={CascadeType.MERGE, CascadeType.PERSIST},fetch=FetchType.EAGER)
 	@JoinTable(name="tb_user_role",
 				joinColumns=@JoinColumn(name="user_id"),
 				inverseJoinColumns = @JoinColumn(name="role_id"))
