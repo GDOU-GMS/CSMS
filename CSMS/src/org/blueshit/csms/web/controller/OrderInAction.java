@@ -28,12 +28,14 @@ import org.blueshit.csms.entity.User;
 import org.blueshit.csms.utils.QueryHelper;
 import org.hibernate.ejb.criteria.expression.function.AggregationFunction.MAX;
 
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.opensymphony.xwork2.ActionContext;
 
 
 @Controller
+@Scope("prototype")
 public class OrderInAction extends BaseAction<Order> {
 	
 	
@@ -41,6 +43,7 @@ public class OrderInAction extends BaseAction<Order> {
 	private int pageNum = 1;
     private Item item;
     private int num;
+  
     
     public int getNum() {
 		return num;
@@ -116,6 +119,7 @@ public class OrderInAction extends BaseAction<Order> {
 		dateAll[1]=getTimeDate();
 		if(dateAll[0]!=null){
 			new QueryHelper(Order.class, "o")
+			.addWhereCondition(true,"o.remark = ?", "入库")
 			.addWhereCondition(model.getStorage().getName()!=null||"".equals(model.getStorage().getName()),"o.storage.name like ?", "%"+model.getStorage().getName()+"%")
 			.addWhereCondition(model.getNumber()!=null||"".equals(model.getNumber()),"o.number like ?", "%"+model.getNumber()+"%")
 			.addWhereCondition(dateAll[1]!=null,"o.time between ? and ?",dateAll)
@@ -124,6 +128,7 @@ public class OrderInAction extends BaseAction<Order> {
 		}
 		else{
 			new QueryHelper(Order.class, "o")
+			.addWhereCondition(true,"o.remark = ?", "入库")
 			.addWhereCondition(model.getStorage().getName()!=null||"".equals(model.getStorage().getName()),"o.storage.name like ?", "%"+model.getStorage().getName()+"%")
 			.addWhereCondition(model.getNumber()!=null||"".equals(model.getNumber()),"o.number like ?", "%"+model.getNumber()+"%")
 			.addWhereCondition(dateAll[1]!=null&&"".equals(dateAll[1]),"o.time = ?",dateAll[1])
@@ -139,18 +144,20 @@ public class OrderInAction extends BaseAction<Order> {
 		
 	}
 	public String detailList(){
-
+		
 		Map request = (Map)ActionContext.getContext().get("request");
         String number=(String) request.get("number");
+        System.out.println(number);
         Order order=orderInService.getOrderByNumber(number);
         ActionContext.getContext().put("order", order);
-        new QueryHelper(Order.class, "o")
-		.addWhereCondition(number!=null||number!="","o.number = ? ", number)
+        new QueryHelper(OrderList.class, "ol")
+		.addWhereCondition(number!=null||number!="","ol.order.number = ? ", number)
 		.preparePageBean(orderInService, pageNum);
         List<Color> colors=colorService.findAll();
         ActionContext.getContext().put("colors", colors);
         List<Size> sizes=sizeService.findAll();
         ActionContext.getContext().put("sizes", sizes);
+        ActionContext.getContext().put("number", number);
 		return "detailList";
 		
 	}
@@ -159,6 +166,7 @@ public class OrderInAction extends BaseAction<Order> {
 	 * @return
 	 */
 	public String add(){
+	
 		Date date=new Date();
 		String number=new SimpleDateFormat("yyyymmdd").format(date);
 		String all=new String();
@@ -170,11 +178,11 @@ public class OrderInAction extends BaseAction<Order> {
 		number=all+number;
 		model.setNumber(number);
 		model.setRemark("入库");
-		String storageName=model.getStorage().getName();
-		Storage storage=storageService.getStorageByName(storageName);
+		Long storageId=model.getStorage().getId();
+		Storage storage=storageService.findById(storageId);
 		model.setStorage(storage);
-		String userName=model.getUser().getUserName();
-		User user=userService.getUserByUserName(userName);
+		Long userId=model.getUser().getId();
+		User user=userService.findById(userId);
 		model.setUser(user);
 		model.setOrderLists(null);
 		orderInService.save(model);
@@ -183,6 +191,7 @@ public class OrderInAction extends BaseAction<Order> {
 		return "toDetailList";
 		
 	}
+	
 	/**
 	 * 删除订单
 	 * @return
@@ -200,56 +209,53 @@ public class OrderInAction extends BaseAction<Order> {
 		
 		System.out.println(model.getNumber());
 	    Order order=orderInService.getOrderByNumber(model.getNumber());
-	    order.setTime(model.getTime());
+		System.out.println(model.getSite());
 	    order.setSite(model.getSite());
-		String storageName=model.getStorage().getName();
-		Storage storage=storageService.getStorageByName(storageName);
+	    order.setTime(model.getTime());
+		Long storageId=model.getStorage().getId();
+		System.out.println(storageId);
+		Storage storage=storageService.findById(storageId);
 		order.setStorage(storage);
-		String userName=model.getUser().getUserName();
-		User user=userService.getUserByUserName(userName);
+		Long userId=model.getUser().getId();
+		User user=userService.findById(userId);
 		order.setUser(user);
 		orderInService.save(order);
 		ActionContext.getContext().put("number", model.getNumber());
-		return "toDetailList";
-	    		
+		return "toList";
+		
 	}
 	 
 	
 	 
      public String getJsonById() throws Exception{
-    	 
     	Order order=orderInService.findById(model.getId());
     	Map<String,Object> map = new HashMap<String, Object>();
     	map.put("order", order);
     	this.setJsonMap(map);
     	return "getJsonById";
-    	 
+    	/*Order order=orderInService.getOrderByNumber(model.getNumber());
+    	Map<String,Object> map = new HashMap<String, Object>();
+    	map.put("order", order);
+    	this.setJsonMap(map);
+    	return "getJsonById";*/
+    	
      }
-     
+    
      public String detailQuery(){
-    	 
-     	System.out.println("测试"+model.getId());
+     	
      	return "list";
       }
      
-     public String detailAdd(){
-       System.out.println("货物添加");
-       String number=model.getNumber();
-       Order order=orderInService.getOrderByNumber(number);
-       Set<OrderList> orderLists=new HashSet<OrderList>();
-       orderLists=order.getOrderLists();
-       OrderList orderList=new OrderList();
-       orderList.setNum(num);
-       orderList.setOrder(order);
-       orderLists.add(orderList);
-       item.setOrderLists(orderLists);
-       itemService.save(item);
-   	   return "todetailList";
-     }
+
+     
+     
      
      public String  detailPage(){
     	 return "detailPage";
      }
 	
+     
+     
+     
 	
 }

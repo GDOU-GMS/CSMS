@@ -82,7 +82,7 @@
 	</div>
 			<div id="page-title">
 				<h3>
-					Welcome to 入库管理 <small></small>
+					Welcome to 出库管理 <small></small>
 				</h3>
 
 			</div>
@@ -93,7 +93,7 @@
 				<!-- 表格 -->
 				<div class="example-box">
 					<div class="example-code">
-						<form action="${pageContext.request.contextPath }/orderin_edit.do?id=${order.id}" method="post">
+						<form action="${pageContext.request.contextPath }/orderout_edit.do?id=${order.id}" method="post">
 						<div class="form-row">
 							<div class="form-label col-md-2 width:100px;" >
 								<label for="" >单据号 :</label>
@@ -102,7 +102,7 @@
 								<input style="width:200px;height:28px;" type="text" name="number" id="order_number" readonly="readonly" value="${order.number}">
 							</div>
 							<div class="form-label col-md-2 labelstyle" >
-								<label for=""> 入库日期: </label>
+								<label for=""> 出库日期: </label>
 							</div>
 							<div class="form-input col-md-3">
 								<input type="text" style="width:200px;height:28px;" name="time"value="${order.time}"   readonly="readonly" >
@@ -111,14 +111,14 @@
 						</div>
 						<div class="form-row">
 							<div class="form-label col-md-2 labelstyle">
-								<label for=""> 所入仓库: </label>
+								<label for=""> 所出仓库: </label>
 							</div>
 							<div class="form-input col-md-3">
 								 <input type="text" style="width:200px;height:28px;" name="time"value="${order.storage.name}" id="" readonly="readonly" >
 								  
 							</div>
 							<div class="form-label  col-md-2 labelstyle">
-								<label for=""> 来源: </label>
+								<label for=""> 发往地址: </label>
 							</div>
 							<div class="form-input col-md-3">
 								<input type="text" style="width:200px;height:28px;"value="${order.site}" name="site" id="order_site"  readonly="readonly">
@@ -129,7 +129,7 @@
 								<span class="button-content">查询</span>
 								</button> --%>
 							<div class="form-label  col-md-2 labelstyle">
-								<label for=""> 经办人: </label>
+								<label for=""> 接收人: </label>
 							</div>
 							<div class="form-input col-md-3">
 							     <input type="text" style="width:200px;height:28px;" name="site" id="" value="${order.user.userName}"  readonly="readonly">
@@ -210,12 +210,12 @@
 							<s:if test="totalRecord>0">
 								<div class="col-md-3" style="float:right; margin-bottom:20px; width:500px;">
 									<div class="button-group center-div">
-										<a href="${pageContext.request.contextPath }/orderin_query.do?pageNum=${pageNum-1}&storage.name=${storageName}&number=${number}&time=${time}&timedate=${timedate}" class="btn large ui-state-default" <s:if test="pageNum == 1 ">disabled="disabled"</s:if>>
+										<a href="${pageContext.request.contextPath }/order_query.do?pageNum=${pageNum-1}&storage.name=${storageName}&number=${number}&time=${time}&timedate=${timedate}" class="btn large ui-state-default" <s:if test="pageNum == 1 ">disabled="disabled"</s:if>>
 										<i class="glyph-icon icon-chevron-left"></i> </a>
 										<s:iterator begin="%{startPage}" end="%{endPage}" var="i">
-											<a href="${pageContext.request.contextPath }/orderin_query.do?pageNum=${i}&storage.name=${storageName}&number=${number}&time=${time}&timedate=${timedate}" class="btn large ui-state-default" <s:if test="pageNum==#i">disabled="disabled"</s:if>>${i }</a>
+											<a href="${pageContext.request.contextPath }/orderout_query.do?pageNum=${i}&storage.name=${storageName}&number=${number}&time=${time}&timedate=${timedate}" class="btn large ui-state-default" <s:if test="pageNum==#i">disabled="disabled"</s:if>>${i }</a>
 										</s:iterator>
-										<a href="${pageContext.request.contextPath }/orderin_query.do?pageNum=${pageNum+1}&storage.name=${storageName}&number=${number}&time=${time}&timedate=${timedate}" class="btn large ui-state-default" <s:if test="pageNum == totalPage">disabled="disabled"</s:if>>
+										<a href="${pageContext.request.contextPath }/orderout_query.do?pageNum=${pageNum+1}&storage.name=${storageName}&number=${number}&time=${time}&timedate=${timedate}" class="btn large ui-state-default" <s:if test="pageNum == totalPage">disabled="disabled"</s:if>>
 										<i class="glyph-icon icon-chevron-right"></i> </a>
 									</div>
 								</div>
@@ -228,12 +228,12 @@
 							<s:if test="totalRecord>0">
 								<div class="col-md-3" style="float:right; margin-bottom:20px; width:500px;">
 									<div class="button-group center-div">
-										<a href="${pageContext.request.contextPath }/orderin_detailList.do?pageNum=${pageNum-1}&number=${order.number}" class="btn large ui-state-default" <s:if test="pageNum == 1 ">disabled="disabled"</s:if>>
+										<a href="${pageContext.request.contextPath }/orderout_list.do?pageNum=${pageNum-1}&number=${order.number}" class="btn large ui-state-default" <s:if test="pageNum == 1 ">disabled="disabled"</s:if>>
 										<i class="glyph-icon icon-chevron-left"></i> </a>
 										<s:iterator begin="%{startPage}" end="%{endPage}" var="i">
-											<a href="${pageContext.request.contextPath}/orderin_detailList.do?pageNum=${i}&number=${order.number}" class="btn large ui-state-default" <s:if test="pageNum==#i">disabled="disabled"</s:if>>${i }</a>
+											<a href="${pageContext.request.contextPath}/orderout_list.do?pageNum=${i}&number=${order.number}" class="btn large ui-state-default" <s:if test="pageNum==#i">disabled="disabled"</s:if>>${i }</a>
 										</s:iterator>
-										<a href="${pageContext.request.contextPath }/orderin_detailList.do?pageNum=${pageNum+1}&number=${order.number}" class="btn large ui-state-default" <s:if test="pageNum == totalPage">disabled="disabled"</s:if>>
+										<a href="${pageContext.request.contextPath }/orderout_list.do?pageNum=${pageNum+1}&number=${order.number}" class="btn large ui-state-default" <s:if test="pageNum == totalPage">disabled="disabled"</s:if>>
 										<i class="glyph-icon icon-chevron-right"></i> </a>
 									</div>
 								</div>
@@ -417,7 +417,6 @@
 		};
 		$.getJSON(url,params,function(data){
 			var orderList = data.orderList;
-			
 			$("#itemNumber").val(orderList.item.item_number);
 			$("#dateFirst").val(orderList.order.time);
 			$("#user_userName").val(orderList.order.user.userName);

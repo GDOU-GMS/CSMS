@@ -1,12 +1,18 @@
 package org.blueshit.csms.web.controller;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+
+import javax.swing.tree.DefaultTreeCellEditor.EditorContainer;
 
 import org.blueshit.csms.base.BaseAction;
 import org.blueshit.csms.entity.Color;
 import org.blueshit.csms.entity.Item;
+import org.blueshit.csms.entity.Order;
+import org.blueshit.csms.entity.OrderList;
 import org.blueshit.csms.entity.Size;
 import org.blueshit.csms.entity.Storage;
 import org.blueshit.csms.utils.QueryHelper;
@@ -28,6 +34,48 @@ public class ItemAction extends BaseAction<Item>{
 	
 	public Map<String, Object> jsonMap;
 	
+    private Long orderId;
+	private int num;
+	private String  item_number;
+	private Long orderListId;
+	
+	
+	
+	
+	public Long getOrderId() {
+		return orderId;
+	}
+
+	public void setOrderId(Long orderId) {
+		this.orderId = orderId;
+	}
+
+	public Long getOrderListId() {
+		return orderListId;
+	}
+
+	public void setOrderListId(Long orderListId) {
+		this.orderListId = orderListId;
+	}
+
+	public String getItem_number() {
+		return item_number;
+	}
+
+	public void setItem_number(String item_number) {
+		this.item_number = item_number;
+	}
+
+	public int getNum() {
+		return num;
+	}
+
+	public void setNum(int num) {
+		this.num = num;
+	}
+
+	
+
 	public Map<String, Object> getJsonMap() {
 		return jsonMap;
 	}
@@ -134,4 +182,85 @@ public class ItemAction extends BaseAction<Item>{
 		this.setJsonMap(map);
 		return "getItemById";
 	}
+	
+	
+    /**
+     * 添加货物   
+     * @return
+     */
+	public String addItem(){
+		System.out.println(orderId);
+	    Order order=orderInService.findById(orderId);
+	    String number=order.getNumber();
+		Set<OrderList> orderLists=new HashSet<OrderList>();
+	    OrderList orderList=new OrderList();
+	    orderList.setOrder(order);
+	    orderList.setNum(num);
+	    orderList.setItem(model);
+	    orderLists.add(orderList);
+	    model.setOrderLists(orderLists);
+	    itemService.save(model);
+	    ActionContext.getContext().put("number", number);
+		return "toDetailList";
+		
+	}
+	
+	
+	
+	 public String getJsonItemId() throws Exception{
+		 	System.out.println(orderListId);
+    	    OrderList orderList=orderListService.findById(orderListId);
+    	    Map<String,Object> map = new HashMap<String, Object>();
+    	    map.put("orderList", orderList);
+    	    this.setJsonMap(map);
+    	    return "getJsonById";
+	 }
+	     
+	 
+	 public String deleteItem(){
+		 
+		 Order order=orderInService.findById(orderId);
+		 String number=order.getNumber();
+		 ActionContext.getContext().put("number", number);
+		 itemService.delete(model.getId());
+		 ActionContext.getContext().put("pageNum", pageNum);
+		 return "toDetailList";
+		 
+	 }
+	 
+	 public String getJsonById(){
+		
+		 
+		 OrderList orderList=itemService.getByOrderListId(orderListId);
+		 Map<String,Object> map = new HashMap<String, Object>();
+  	     map.put("orderList", orderList);
+  	     this.setJsonMap(map);
+		 return "getItemById";
+		 
+	 }
+	 
+	 public String editItem(){
+		 
+		 System.out.println(orderId);
+		 OrderList orderList=itemService.getByOrderListId(orderId);
+		 Item item =orderList.getItem();
+		 item.setItem_number(model.getItem_number());
+		 item.setBrand(model.getBrand());
+		 item.setSize(model.getSize());
+		 item.setColor_number(model.getColor_number());
+		 item.setFactory_price(model.getFactory_price());
+		 item.setRetail_price(model.getRetail_price());
+		 orderList.setNum(num);
+		 Set<OrderList> orderLists=item.getOrderLists();
+		 orderLists.add(orderList);
+		 item.setOrderLists(orderLists);
+		 itemService.save(item);
+		 String number=orderList.getOrder().getNumber();
+		 ActionContext.getContext().put("number", number);
+		 return "toDetailList";
+		 
+	 }
+	 
+	 
+	 
 }

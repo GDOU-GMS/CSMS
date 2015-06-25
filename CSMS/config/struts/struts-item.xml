@@ -4,7 +4,7 @@
     "http://struts.apache.org/dtds/struts-2.0.dtd">
 
 <struts>
-
+	
 	
 	
 	<package name="itemAction" namespace="/" extends="base">
@@ -15,6 +15,7 @@
 			<result name="getItemById" type="json">
 				<param name="root">jsonMap</param>
 			</result>
+			<result name="toDetailList" type="redirectAction">orderin_detailList?number=${number}</result>
 		</action>
 		
 	</package>
