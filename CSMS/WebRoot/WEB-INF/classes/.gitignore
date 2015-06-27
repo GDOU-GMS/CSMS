@@ -1,1 +1,9 @@
 /org
+/struts
+/struts.xml
+/.gitignore
+/struts.xml
+/applicationContext.xml
+/default.properties
+/hibernate.cfg.xml
+/jdbc.properties

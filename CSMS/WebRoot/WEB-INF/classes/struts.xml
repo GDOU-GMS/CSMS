@@ -16,7 +16,7 @@
 	<constant name="struts.multipart.maxSize" value="10000000" />
 	<constant name="struts.multipart.saveDir" value="/tmp" />
 	
-	<package name="base" namespace="/" extends="struts-default">
+	<package name="base" namespace="/" extends="struts-default,json-default">
 	
 		<!-- 配置拦截器 -->
 		<interceptors>
@@ -42,7 +42,7 @@
 		
 		<!-- loginoutAction -->
 		<action name="loginout_*" class="loginoutAction" method="{1}">
-			<result name="logout">/WEB-INF/jsp/LoginoutAction/logout.jsp</result>
+			<result name="logout">/WEB-INF/jsp/LoginoutAction/loginUI.jsp</result>
 			<result name="toIndex" type="redirectAction">home_index</result>
 		</action>
 		
@@ -55,4 +55,9 @@
 	<include file="struts/struts-size.xml"></include>
 	<include file="struts/struts-color.xml"></include>
 	<include file="struts/struts-storage.xml"></include>
+	<include file="struts/struts-item.xml"></include>
+	<include file="struts/struts-json.xml"></include>
+	<include file="struts/struts-order.xml"></include>
+	<include file="struts/struts-orderout.xml"></include>
+	<include file="struts/struts-assist.xml"></include>
 </struts>
