@@ -18,6 +18,7 @@ import org.apache.struts2.ServletActionContext;
 
 
 import org.blueshit.csms.entity.User;
+import org.blueshit.csms.service.AssistService;
 import org.blueshit.csms.service.ColorService;
 import org.blueshit.csms.service.ItemService;
 import org.blueshit.csms.service.OrderInService;
@@ -61,6 +62,7 @@ public class BaseAction<T> extends ActionSupport implements ModelDriven<T>{
 	protected OrderInService orderOutService;
 	@Autowired
 	protected OrderListService orderListService;
+	protected AssistService assistService;
 	//声明model
 	protected T model;
 	
