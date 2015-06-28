@@ -132,6 +132,7 @@ public class UserAction extends BaseAction<User>{
 	 * @throws Exception
 	 */
 	public String query() throws Exception{
+		System.out.println(model.getUserName()+"---------------------");
 		//准备分页数据,模糊查询.
 		new QueryHelper(User.class, "u")
 			.addWhereCondition(model.getUserName()!=null&&!"".equals(model.getUserName()),"u.userName like ?", "%"+model.getUserName()+"%")
@@ -147,7 +148,7 @@ public class UserAction extends BaseAction<User>{
 		return "list";
 	}
 	/**
-	 * 根据ID获取json'数据.
+	 * 根据ID获取json数据.
 	 * @return
 	 * @throws Exception
 	 */
