@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-import org.junit.Test;
 
 public class Configuration {
 
@@ -41,11 +40,6 @@ public class Configuration {
 
 	public static void setPageSize(int pageSize) {
 		Configuration.pageSize = pageSize;
-	}
-	
-	@Test
-	public void test(){
-		System.out.println(getPageSize());
 	}
 	
 }

@@ -57,6 +57,11 @@ public class SizeAction extends BaseAction<Size>{
 	 * @throws Exception
 	 */
 	public String add() throws Exception{
+		Size s = sizeService.getSizeByNum(model.getNum());
+		if(s!=null){
+			ActionContext.getContext().put("message", "该尺码已经存在！");
+			return "message";
+		}
 		sizeService.save(model);
 		ActionContext.getContext().put("pageNum", pageNum);
 		return "toList";
@@ -79,6 +84,11 @@ public class SizeAction extends BaseAction<Size>{
 	 * @throws Exception
 	 */
 	public String edit() throws Exception{
+		Size s = sizeService.getSizeByNum(model.getNum());
+		if(s!=null){
+			ActionContext.getContext().put("message", "该尺码已经存在！");
+			return "message";
+		}
 		//先找出原来数据
 		Size size = sizeService.findById(model.getId());
 		//设置要修改的属性

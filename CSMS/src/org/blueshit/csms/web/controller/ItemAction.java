@@ -106,6 +106,11 @@ public class ItemAction extends BaseAction<Item>{
 	 * @throws Exception
 	 */
 	public String add() throws Exception{
+		Item item = itemService.getByItemNumber(model.getItem_number());
+		if(item!=null){
+			ActionContext.getContext().put("message", "该货号已经存在！");
+			return "message";
+		}
 		itemService.save(model);
 		ActionContext.getContext().put("pageNum", pageNum);//维持页码.
 		return "toList";
@@ -126,6 +131,11 @@ public class ItemAction extends BaseAction<Item>{
 	 * @throws Exception
 	 */
 	public String edit() throws Exception{
+		Item  i= itemService.getByItemNumber(model.getItem_number());
+		if(i!=null){
+			ActionContext.getContext().put("message", "该货号已经存在！");
+			return "message";
+		}
 		//找出原来的数据
 		Item item = itemService.findById(model.getId());
 		//设置新数据

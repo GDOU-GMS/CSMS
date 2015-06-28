@@ -58,6 +58,11 @@ public class ColorAction extends BaseAction<Color>{
 	 * @throws Exception
 	 */
 	public String add() throws Exception{
+		Color c = colorService.findByName(model.getName());
+		if(c!=null){
+			ActionContext.getContext().put("message", "该颜色已经存在！");
+			return "message";
+		}
 		colorService.save(model);
 		ActionContext.getContext().put("pageNum", pageNum);
 		return "toList";
@@ -69,6 +74,11 @@ public class ColorAction extends BaseAction<Color>{
 	 * @throws Exception
 	 */
 	public String edit() throws Exception{
+		Color c = colorService.findByName(model.getName());
+		if(c!=null){
+			ActionContext.getContext().put("message", "该颜色已经存在！");
+			return "message";
+		}
 		//找出原来的数据
 		Color color = colorService.findById(model.getId());
 		//更新新的数据

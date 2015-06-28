@@ -60,6 +60,11 @@ public class StorageAction extends BaseAction<Storage> {
 	 * @throws Exception
 	 */
 	public String add() throws Exception{
+		Storage s = storageService.getStorageByName(model.getName());
+		if(s!=null){
+			ActionContext.getContext().put("message", "该仓库已经存在！");
+			return "message";
+		}
 		storageService.save(model);
 		ActionContext.getContext().put("pageNum", pageNum);//维护页码.
 		return "toList";
@@ -81,6 +86,11 @@ public class StorageAction extends BaseAction<Storage> {
 	 * @throws Exception
 	 */
 	public String edit() throws Exception{
+		Storage s = storageService.getStorageByName(model.getName());
+		if(s!=null){
+			ActionContext.getContext().put("message", "该仓库已经存在！");
+			return "message";
+		}
 		//找出原来的数据
 		Storage storage = storageService.findById(model.getId());
 		//更新要更新的字段

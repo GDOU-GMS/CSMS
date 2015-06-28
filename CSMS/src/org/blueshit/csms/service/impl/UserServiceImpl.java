@@ -46,6 +46,13 @@ public class UserServiceImpl extends DaoSupportImpl<User> implements UserService
 				.setParameter(0, userName)
 				.uniqueResult();
 	}
+	
+	public User getUserByLoginName(String loginName){
+		return (User)getSession()
+				.createQuery("from User u where loginName = ?")
+				.setParameter(0, loginName)
+				.uniqueResult();
+	}
 
 	
 	

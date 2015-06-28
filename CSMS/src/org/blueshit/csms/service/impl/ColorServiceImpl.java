@@ -11,6 +11,10 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class ColorServiceImpl extends DaoSupportImpl<Color> implements ColorService {
 
-
+	public Color findByName(String name){
+		return (Color)getSession().createQuery("from Color c where c.name = ?")
+					.setParameter(0, name)
+					.uniqueResult();
+	}
 
 }

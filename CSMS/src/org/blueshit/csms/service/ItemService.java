@@ -7,5 +7,7 @@ import org.blueshit.csms.entity.OrderList;
 public interface ItemService extends DaoSupport<Item> {
 
 	public Item getByItemNumber(String itemNumber);
+	
 	public OrderList getByOrderListId(Long id);
+
 }

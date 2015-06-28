@@ -57,4 +57,11 @@ public class TestServer {
 		colorService.update(color);
 	}
 	
+	@Test
+	public void testColorFind(){
+		Color color = colorService.findById(new Long(15));
+		System.out.println(color.getName());
+	}
+	
+	
 }

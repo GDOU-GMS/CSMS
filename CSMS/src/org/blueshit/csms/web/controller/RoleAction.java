@@ -86,6 +86,11 @@ public class RoleAction extends BaseAction<Role>{
 	 * @throws Exception
 	 */
 	public String add() throws Exception{
+		Role r = roleService.getRoleByName(model.getName());
+		if(r!=null){
+			ActionContext.getContext().put("message", "该角色已经存在！");
+			return "message";
+		}
 		roleService.save(model);
 		ActionContext.getContext().put("pageNum", pageNum);
 		return "toList";

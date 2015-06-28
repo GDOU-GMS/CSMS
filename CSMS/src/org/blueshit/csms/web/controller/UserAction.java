@@ -79,6 +79,16 @@ public class UserAction extends BaseAction<User>{
 	 * @return
 	 */
 	public String add() throws Exception{
+		User u1 = userService.getUserByUserName(model.getUserName());
+		if(u1!=null){
+			ActionContext.getContext().put("message", "该用户名已经存在！");
+			return "message";
+		}
+		User u2 = userService.getUserByLoginName(model.getLoginName());
+		if(u2!=null){
+			ActionContext.getContext().put("message", "该账号已经存在！");
+			return "message";
+		}
 		List<Role> roleList = roleService.findByIds(roleIds);
 		model.setRoles(new HashSet<Role>(roleList));
 		userService.save(model);
@@ -91,6 +101,16 @@ public class UserAction extends BaseAction<User>{
 	 * @return
 	 */
 	public String edit() throws Exception{
+		User u1 = userService.getUserByUserName(model.getUserName());
+		if(u1!=null){
+			ActionContext.getContext().put("message", "该用户名已经存在！");
+			return "message";
+		}
+		User u2 = userService.getUserByLoginName(model.getLoginName());
+		if(u2!=null){
+			ActionContext.getContext().put("message", "该账号已经存在！");
+			return "message";
+		}
 		//找出原来的用户
 		User user = userService.findById(model.getId());
 		//设置新的属性
