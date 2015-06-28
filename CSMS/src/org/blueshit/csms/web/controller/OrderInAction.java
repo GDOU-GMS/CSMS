@@ -110,9 +110,8 @@ public class OrderInAction extends BaseAction<Order> {
 	 * @throws Exception
 	 */
 	public String query() throws Exception{
-	    if(model.getStorage().getName()==null){
-	    	System.out.println("为空");
-	    }
+	   System.out.println("测试一"+model.getStorage().getName());
+	   System.out.println("测试二"+pageNum);
 		//准备分页数据,模糊查询.
 	    Object[] dateAll=new Object[2];
 		dateAll[0]=model.getTime();

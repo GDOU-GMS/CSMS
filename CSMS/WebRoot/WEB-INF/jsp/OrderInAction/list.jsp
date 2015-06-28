@@ -193,12 +193,12 @@
 							<s:if test="totalRecord>0">
 								<div class="col-md-3" style="float:right; margin-bottom:20px; width:500px;">
 									<div class="button-group center-div">
-										<a href="${pageContext.request.contextPath }/orderin_list.do?pageNum=${pageNum-1}" class="btn large ui-state-default" <s:if test="pageNum == 1 ">disabled="disabled"</s:if>>
+										<a href="${pageContext.request.contextPath }/orderin_query.do?pageNum=${pageNum-1}&storage.name=${storageName}&number=${number}&time=${time}&timeDate=${timeDate}" class="btn large ui-state-default" <s:if test="pageNum == 1 ">disabled="disabled"</s:if>>
 										<i class="glyph-icon icon-chevron-left"></i> </a>
 										<s:iterator begin="%{startPage}" end="%{endPage}" var="i">
-											<a href="${pageContext.request.contextPath }/orderin_list.do?pageNum=${i}" class="btn large ui-state-default" <s:if test="pageNum==#i">disabled="disabled"</s:if>>${i}</a>
+											<a href="${pageContext.request.contextPath }/orderin_query.do?pageNum=${i}&storage.name=${storageName}&number=${number}&time=${time}&timeDate=${timeDate}" class="btn large ui-state-default" <s:if test="pageNum==#i">disabled="disabled"</s:if>>${i}</a>
 										</s:iterator>
-										<a href="${pageContext.request.contextPath }/orderin_list.do?pageNum=${pageNum+1}" class="btn large ui-state-default" <s:if test="pageNum == totalPage">disabled="disabled"</s:if>>
+										<a href="${pageContext.request.contextPath }/orderin_query.do?pageNum=${pageNum+1}&storage.name=${storageName}&number=${number}&time=${time}&timeDate=${timeDate}" class="btn large ui-state-default" <s:if test="pageNum == totalPage">disabled="disabled"</s:if>>
 										<i class="glyph-icon icon-chevron-right"></i> </a>
 									</div>
 								</div>
