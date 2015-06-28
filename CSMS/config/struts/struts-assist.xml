@@ -9,11 +9,14 @@
 	
 	<package name="assistAction" namespace="/" extends="base">
 		
-		<action name="user_*" class="assistAction" method="{1}">
-		<result name="updatePwd">/WEB-INF/jsp/AssistAction/updatePwd.jsp</result>
-		<result name="success">/WEB-INF/jsp/AssistAction/message.jsp</result>
-	    <result name="error">/WEB-INF/jsp/AssistAction/error.jsp</result> 
-	 	 </action>
+		<action name="user_updatePwd" class="assistAction" method="updatePwd">
+			<result name="updatePwd">/WEB-INF/jsp/AssistAction/updatePwd.jsp</result>
+	 	</action>
+	 	
+	 	<action name="user_renewPwd" class="assistAction" method="renewPwd">
+			<result name="success">/WEB-INF/jsp/AssistAction/message.jsp</result>
+		    <result name="error">/WEB-INF/jsp/AssistAction/error.jsp</result> 
+	 	</action>
 		
 	</package>
 

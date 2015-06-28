@@ -137,7 +137,7 @@
 <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
-      <form class="form-horizontal" action="${pageContext.request.contextPath }/size_add.do" method="post">
+      <form class="form-horizontal" action="${pageContext.request.contextPath }/size_add.do" method="post" onsubmit="return validate('add')">
       <div class="modal-header" >
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="myModalLabel">添加尺码</h4>
@@ -146,7 +146,8 @@
        	  <input type="hidden" class="form-control" name="pageNum" value="${pageNum }" >
 		  <div class="form-group">
 		    <label for="exampleInputEmail1">名称</label>
-		    <input type="text" class="form-control" name="num" placeholder="请输入尺码">
+            <span style="color:red;margin-left:20px;" id="SizeText"></span>
+		    <input type="text" class="required form-control" id="Size" name="num" placeholder="请输入尺码" onchange="removeSizeText()">
 		  </div>
 		  </br>
       </div>
@@ -169,7 +170,7 @@
 <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
-      <form class="form-horizontal" action="${pageContext.request.contextPath }/size_edit.do" method="post">
+      <form class="form-horizontal" action="${pageContext.request.contextPath }/size_edit.do" method="post" onsubmit="return validate('update')">
       <div class="modal-header" >
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="myModalLabel">更新尺码</h4>
@@ -183,7 +184,8 @@
 		  </br>
 		  <div class="form-group">
 		    <label for="updateName">尺码名称</label>
-		    <input type="text" class="form-control" placeholder="尺码" id="updateName" name="num">
+		    <span style="color:red;margin-left:20px;" id="updateSizeText"></span>
+		    <input type="text" class="required form-control" placeholder="请输入尺码" id="updateSize" name="num"onchange="removeupdateSizeText()">
 		  </div>
       </div>
       <div class="modal-footer">
@@ -239,6 +241,48 @@
 	//用户删除
 	function getId(id){
 		$("#deleteId").val(id);
+	}
+	function validate(method){
+	
+		var reg = /^[1-9]\d{2}$/;
+		
+			if(method=='add'){
+			
+				var Size = $("#Size").val();	
+				
+				{
+					if(Size == null || Size ==""){
+						$("#SizeText").text("尺码不能为空！");
+						return false;
+					}else if(!reg.test(Size)){
+						$("#SizeText").text("您输入的尺码不符合格式！");
+						return false;
+					}else {
+						return true;
+					}
+				}
+			}
+
+	if (method == 'update') {
+			var updateSize = $("#updateSize").val();
+			{
+				if (updateSize == null || updateSize == "") {
+					$("#updateSizeText").text("尺码不能为空！");
+					return false;
+				} else {
+					return true;
+				}
+			}
+		}
+
+	}
+
+	//移除提示
+	function removeSizeText() {
+		$("#SizeText").text("");
+	}
+	function removeupdateSizeText() {
+		$("#updateSizeText").text("");
 	}
 </script>
 </body>

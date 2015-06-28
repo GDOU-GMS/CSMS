@@ -78,9 +78,12 @@
 
 					<div class="example-code">
 					
+					<!-- 颜色添加 -->
+					<s:if test="#session.user.hasPrivilegeByName('颜色添加')">
 						<a data-toggle="modal"  data-target="#addModal" title="添加" class="tooltip-button btn small bg-yellow" title="添加" href="#">
-								<i class="glyph-icon icon-plus-square-o"></i></a>
-								<br><br>
+							<i class="glyph-icon icon-plus-square-o"></i>
+						</a><br><br>
+					</s:if>
 									
 						<table class="table table-condensed">
 							<thead>
@@ -137,16 +140,17 @@
 <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
-      <form class="form-horizontal" action="${pageContext.request.contextPath }/color_add.do" method="post">
+      <form class="form-horizontal" action="${pageContext.request.contextPath }/color_add.do" method="post" onsubmit="return validate('add')">
       <div class="modal-header" >
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="myModalLabel">添加颜色</h4>
       </div>
       <div class="modal-body" style="margin:20px;">
        	  <input type="hidden" class="form-control" name="pageNum" value="${pageNum }" >
-		  <div class="form-group">
+		  <div class="form-group" >
 		    <label for="exampleInputEmail1">名称</label>
-		    <input type="text" class="form-control" name="name" placeholder="请输入颜色">
+		    <span style="color:red;margin-left:20px;" id="ColornameText"></span>
+		    <input type="text" class="required form-control" id="ColorName" name="name" placeholder="请输入颜色" onchange="removeColornameText()">
 		  </div>
 		  </br>
       </div>
@@ -169,7 +173,7 @@
 <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
-      <form class="form-horizontal" action="${pageContext.request.contextPath }/color_edit.do" method="post">
+      <form class="form-horizontal" action="${pageContext.request.contextPath }/color_edit.do" method="post" onsubmit="return validate('upadate')">
       <div class="modal-header" >
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="myModalLabel">更新颜色</h4>
@@ -183,7 +187,8 @@
 		  </br>
 		  <div class="form-group">
 		    <label for="updateName">颜色名称</label>
-		    <input type="text" class="form-control" placeholder="角色名" id="updateName" name="name">
+		    <span style="color:red;margin-left:20px;" id="updateNameText"></span>
+		    <input type="text" class="required form-control" placeholder="请输入颜色名" id="updateName" name="name" onchange="removeupdateNameText()">
 		  </div>
       </div>
       <div class="modal-footer">
@@ -224,7 +229,6 @@
   </div>
 </div>
 
-
 <script type="text/javascript">
 	
 	//用于更新回显
@@ -243,6 +247,45 @@
 	//用户删除
 	function getId(id){
 		$("#deleteId").val(id);
+	}
+	
+	//添加颜色不能为空
+	function validate(method){
+			if(method=='add'){
+			
+				var ColorName = $("#ColorName").val();	
+				{
+					if(ColorName == null || ColorName ==""){
+						$("#ColornameText").text("颜色名不能为空！");
+						return false;
+					}else {
+						return true;
+					}
+				}
+			}
+
+	if (method == 'upadate') {
+			var updateName = $("#updateName").val();
+			{
+				if (updateName == null || updateName == "") {
+					$("#updateNameText").text("颜色名不能为空！");
+					return false;
+				} else {
+					return true;
+				}
+			}
+		}
+
+	}
+
+	//移除提示
+	function removeColornameText() {
+		ss
+		$("#ColornameText").text("");
+	}
+	function removeupdateNameText() {
+		ss
+		$("#updateNameText").text("");
 	}
 </script>
 </body>

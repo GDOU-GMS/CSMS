@@ -156,7 +156,7 @@
 <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
-      <form class="form-horizontal" action="${pageContext.request.contextPath }/role_add.do" method="post">
+      <form class="form-horizontal" action="${pageContext.request.contextPath }/role_add.do" method="post"onsubmit="return validate('add')">
       <div class="modal-header" >
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="myModalLabel">添加角色</h4>
@@ -165,7 +165,8 @@
       <input type="hidden" class="form-control" name="pageNum" value="${pageNum }" >
 		  <div class="form-group">
 		    <label for="exampleInputEmail1">名称</label>
-		    <input type="text" class="form-control" name="name" placeholder="请输入角色名称">
+		    <span style="color:red;margin-left:20px;" id="RolenameText"></span>
+		    <input type="text" class="form-control" id="RoleName"name="name" placeholder="请输入角色名称"onchange="removeRolenameText()">
 		  </div>
 		  </br>
 		  <div class="form-group">
@@ -193,7 +194,7 @@
 <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
-      <form class="form-horizontal" action="${pageContext.request.contextPath }/role_edit.do" method="post">
+      <form class="form-horizontal" action="${pageContext.request.contextPath }/role_edit.do" method="post"onsubmit="return validate('upadate')">
       <div class="modal-header" >
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="myModalLabel">更新角色</h4>
@@ -207,7 +208,8 @@
 		  </br>
 		  <div class="form-group">
 		    <label for="updateName">角色名称</label>
-		    <input type="text" class="form-control" placeholder="角色名" id="updateName" name="name">
+		    <span style="color:red;margin-left:20px;" id="updateNameText"></span>
+		    <input type="text" class="required form-control" placeholder="角色名" id="updateName" name="name" onchange="removeupdateNameText()">
 		  </div>
 		   </br>
 		  <div class="form-group">
@@ -340,9 +342,43 @@
 		$("#deleteId").val(id);
 	}
 	//显示权限树
-	$(function(){
-		$("#PrivilegeTree").treeview();
-	});
+function validate(method){
+			if(method=='add'){
+			
+				var RoleName = $("#RoleName").val();	
+				{
+					if(RoleName == null || RoleName ==""){
+						$("#RolenameText").text("角色名不能为空！");
+						return false;
+					}else {
+						return true;
+					}
+				}
+			}
+
+	if (method == 'upadate') {
+			var updateName = $("#updateName").val();
+			{
+				if (updateName == null || updateName == "") {
+					$("#updateNameText").text("角色名不能为空！");
+					return false;
+				} else {
+					return true;
+				}
+			}
+		}
+
+	}
+
+	//移除提示
+	function removeRolenameText() {
+
+		$("#RolenameText").text("");
+	}
+	function removeupdateNameText() {
+
+		$("#updateNameText").text("");
+	}
 </script>
 </body>
 

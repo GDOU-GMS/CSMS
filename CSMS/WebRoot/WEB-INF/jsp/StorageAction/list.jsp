@@ -193,7 +193,7 @@
 <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"  >
   <div class="modal-dialog">
     <div class="modal-content">
-      <form class="form-horizontal" action="${pageContext.request.contextPath }/storage_add.do" method="post">
+      <form class="form-horizontal" action="${pageContext.request.contextPath }/storage_add.do" method="post" onsubmit="return validate('add')">
       <div class="modal-header" >
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="myModalLabel">添加仓库</h4>
@@ -202,23 +202,28 @@
       	<input type="hidden" name="pageNum" value="${pageNum }" >
 		  <div class="form-group">
 		    <label for="storageNum">仓库编号</label>
-		    <input type="text" class="form-control" id="storageNum" name="number" placeholder="请输入仓库编号">
+		    <span style="color:red;margin-left:20px;" id="storageNumText"></span>
+		    <input type="text" class="form-control" id="storageNum" name="number" placeholder="请输入仓库编号"onchange="removestorageNumText()">
 		  </div>
 		  <div class="form-group">
 		    <label for="storageName">仓库名称</label>
-		    <input type="text" class="form-control" id="storageName" name="name" placeholder="请数据仓库名称">
+		       <span style="color:red;margin-left:20px;" id="storageNameText"></span>
+		    <input type="text" class="form-control" id="storageName" name="name" placeholder="请数据仓库名称" onchange="removestorageNameText()">
 		  </div>
 		   <div class="form-group">
 		    <label for="contactsName">联系人</label>
-		    <input type="text" class="form-control" id="contactsName" name="contacts" placeholder="请输入联系人姓名">
+		       <span style="color:red;margin-left:20px;" id="contactsNameText"></span>
+		    <input type="text" class="form-control" id="contactsName" name="contacts" placeholder="请输入联系人姓名"onchange="removecontactsNameText()">
 		  </div>
 		   <div class="form-group">
 		    <label for="contacts_phone">联系电话</label>
-		    <input type="text" class="form-control" id="contacts_phone" name="contacts_phone" placeholder="请输入联系电话">
+		     <span style="color:red;margin-left:20px;" id="contacts_phoneText"></span>
+		    <input type="text" class="form-control" id="contacts_phone" name="contacts_phone" placeholder="请输入联系电话"onchange="removecontacts_phoneText()">
 		  </div>
 		    <div class="form-group">
 		    <label for="storage_num">仓储量</label>
-		    <input type="text" class="form-control" id="storage_num" name="storage_num" placeholder="请输入仓库容量">
+		      <span style="color:red;margin-left:20px;" id="storage_numText"></span>
+		    <input type="text" class="form-control" id="storage_num" name="storage_num" placeholder="请输入仓库容量"onchange="removestorage_numText()">
 		  </div> 
       </div>
       <div class="modal-footer">
@@ -240,7 +245,7 @@
 <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
-      <form class="form-horizontal" action="${pageContext.request.contextPath }/storage_edit.do" method="post">
+      <form class="form-horizontal" action="${pageContext.request.contextPath }/storage_edit.do" method="post"onsubmit="return validate('update')">
       <div class="modal-header" >
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="myModalLabel">更新仓库</h4>
@@ -250,23 +255,28 @@
 		 <input type="hidden" name="id" id="editId">
 		  <div class="form-group">
 		    <label for="storageNum">仓库编号</label>
-		    <input type="text" class="form-control" id="shownumber" name="number" placeholder="请输入仓库编号">
+		     <span style="color:red;margin-left:20px;" id="shownumberText"></span>
+		    <input type="text" class="form-control" id="shownumber" name="number" placeholder="请输入仓库编号"onchange="removershownumberText()">
 		  </div>
 		  <div class="form-group">
 		    <label for="storageName">仓库名称</label>
-		    <input type="text" class="form-control" id="showname" name="name" placeholder="请数据仓库名称">
+		    <span style="color:red;margin-left:20px;" id="shownameText"></span>
+		    <input type="text" class="form-control" id="showname" name="name" placeholder="请数据仓库名称"onchange="removeshownameText()">
 		  </div>
 		   <div class="form-group">
 		    <label for="contactsName">联系人</label>
-		    <input type="text" class="form-control" id="showcontactsName" name="contacts" placeholder="请输入联系人姓名">
+		    <span style="color:red;margin-left:20px;" id="showcontactsNameText"></span>
+		    <input type="text" class="form-control" id="showcontactsName" name="contacts" placeholder="请输入联系人姓名"onchange="removeshowcontactsNameText()">
 		  </div>
 		   <div class="form-group">
 		    <label for="contacts_phone">联系电话</label>
-		    <input type="text" class="form-control" id="showphone" name="contacts_phone" placeholder="请输入联系电话">
+		    <span style="color:red;margin-left:20px;" id="showphoneText"></span>
+		    <input type="text" class="form-control" id="showphone" name="contacts_phone" placeholder="请输入联系电话"onchange="removeshowphoneText()">
 		  </div>
 		    <div class="form-group">
 		    <label for="storage_num">仓储量</label>
-		    <input type="text" class="form-control" id="shownum" name="storage_num" placeholder="请输入仓库容量">
+		    <span style="color:red;margin-left:20px;" id="shownumText"></span>
+		    <input type="text" class="form-control" id="shownum" name="storage_num" placeholder="请输入仓库容量"onchange="removeshownumText()">
 		  </div> 
       </div>
       <div class="modal-footer">
@@ -286,7 +296,7 @@
 <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
-      <form class="form-horizontal" action="${pageContext.request.contextPath }/storage_delete.do">
+      <form class="form-horizontal" action="${pageContext.request.contextPath }/storage_delete.do" method="post">
       <div class="modal-header" >
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="myModalLabel">删除仓库</h4>
@@ -312,6 +322,7 @@
 	function showId(id){
 		$("#deleteId").val(id);
 	}
+	
 	function showText(id){
 		var url = "storage_getJsonById.do";
 		var params = {
@@ -328,9 +339,113 @@
 			$("#showcontactsName").val(storage.contacts);
 			$("#showphone").val(storage.contacts_phone);
 		});
-		
-		
+	
 	}
+	
+	function validate(method) {
+		if (method == 'add') {
+			var storageNum = $("#storageNum").val();
+			var storageName = $("#storageName").val();
+			var contactsName = $("#contactsName").val();
+			var contacts_phone = $("#contacts_phone").val();
+			var storage_num = $("#storage_num").val();
+			{
+				if (storageNum == null || storageNum == "") {
+					$("#storageNumText").text("仓库编号不能为空！");
+					return false;
+				} else if (storageName == null || storageName == "") {
+					$("#storageNameText").text("仓库名称不能为空！");
+					return false;
+				} else if (contactsName == null || contactsName == "") {
+					$("#contactsNameText").text("联系人不能为空！");
+					return false;
+				} else if (contacts_phone == null || contacts_phone == "") {
+					$("#contacts_phoneText").text("联系电话不能为空！");
+					return false;
+				} else if (storage_num == null || storage_num == "") {
+					$("#storage_numText").text("仓储量不能为空！");
+					return false;
+				} else {
+					return true;
+				}
+
+			}
+		}
+		if (method == 'update') {
+			var shownumber = $("#shownumber").val();
+			var showname = $("#showname").val();
+			var showcontactsName = $("#showcontactsName").val();
+			var shownum = $("#shownum").val();
+			var showphone = $("#showphone").val();
+          {
+			if (shownumber == null || shownumber == "") {
+				$("#shownumberText").text("仓库编号不能为空！");
+				return false;
+			} else if (showname == null || showname == "") {
+				$("#shownameText").text("仓库名称不能为空！");
+				return false;
+			} else if (showcontactsName == null || showcontactsName == "") {
+				$("#showcontractsNameText").text("联系人不能为空！");
+				return false;
+			} else if (showphone == null || showphone == "") {
+				$("#showphoneText").text("联系电话不能为空！");
+				return false;
+			} else if (shownum == null || shownum == "") {
+				$("#shownumText").text("仓储量不能为空！");
+				return false;
+			} else {
+				return true;
+			}
+		}
+	}
+	}
+
+	//移除提示
+
+	function removestorageNumText() {
+		
+		$("#storageNumText").text("");
+	}
+	function removestorageNameText() {
+
+		$("#storageNameText").text("");
+	}
+	function removecontactsNameText() {
+
+		$("#contactsNameText").text("");
+	}
+	function removecontacts_phoneText() {
+
+		$("#contacts_phoneText").text("");
+	}
+	function removestorage_numText() {
+
+		$("#storage_numText").text("");
+	}
+
+
+		function removeshownumberText() {
+
+		$("#shownumberText").text("");
+	}
+		function removeshownameText() {
+
+		$("#shownameText").text("");
+	}
+		function removeshowcontractsNameText() {
+
+		$("#showcontractsNameText").text("");
+	}
+		function removeshowphoneText() {
+
+		$("#showphoneText").text("");
+	}
+		function removeshownumText() {
+
+		$("#shownumText").text("");
+	}
+	
+
 	/* function showText(id,contacts,contacts_phone){
 		var number = $("#numberText_"+id).text();
 		var name = $("#nameText_"+id).text();

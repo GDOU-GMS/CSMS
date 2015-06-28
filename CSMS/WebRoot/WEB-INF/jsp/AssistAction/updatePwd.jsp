@@ -127,7 +127,7 @@
 								</div>
 								<div 
 									class="form-input col-md-3 textstyle">
-									<input type="text" style="width:200px;height:28px;" name="newpwd1"/ >
+									<input type="password" style="width:200px;height:28px;" name="newpwd1"/ >
 								</div>
 
 							</div>
@@ -137,7 +137,7 @@
 									<label for="">确认新密码: </label>
 								</div>
 								<div class="form-input col-md-3" >
-									<input  type="text"style="width:200px;height:28px;" name="newpwd2"/ >
+									<input  type="password"style="width:200px;height:28px; margin-left:-10px;" name="newpwd2"/ >
 								</div>
 								<!-- <a href="#" class="btn medium primary-bg"
 									style="margin-left:10px;" title=""> <span
