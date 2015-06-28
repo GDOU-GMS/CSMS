@@ -55,6 +55,7 @@ public class Installer {
 		session.save(new Privilege("角色删除", "/role_delete", menu4));
 		session.save(new Privilege("角色添加", "/role_add", menu4));
 		session.save(new Privilege("角色修改", "/role_edit", menu4));
+		session.save(new Privilege("设置权限", "/role_setPrivilege", menu4));
 			//用户管理
 		session.save(new Privilege("用户列表", "/user_list", menu1));
 		session.save(new Privilege("用户修改", "/user_edit", menu1));

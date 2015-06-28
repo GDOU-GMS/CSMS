@@ -51,7 +51,6 @@
 		<!-- Fides Admin JS -->
 		 <script type="text/javascript" src="${pageContext.request.contextPath}/manage/documentation/assets/js/minified/aui-production.min.js"></script> 
 		<script type="text/javascript" src="${pageContext.request.contextPath}/manage/documentation/assets/js/minified/core/raphael.min.js"></script>
-		<script type="text/javascript" src="${pageContext.request.contextPath}/manage/documentation/assets/js/minified/widgets/charts-justgage.min.js"></script>
 
 		<%-- <script type="text/javascript" src="${pageContext.request.contextPath}/manage/documentation/assets/js/DialogBySHF.js"></script> --%>
 		<script type="text/javascript" src="${pageContext.request.contextPath }/manage/documentation/js/jquery-2.0.0.min.js"></script>
@@ -84,7 +83,6 @@
 				<h3>
 					Welcome to 入库管理 <small></small>
 				</h3>
-
 			</div>
 	
 			<div id="page-content">
@@ -136,36 +134,13 @@
 								<button type="submit" class="btn medium primary-bg" style="margin-left:10px;" title="">
 							<span class="button-content">添加</span>
 							</button>
-								<%-- <button type="submit" class="btn medium primary-bg" style="margin-left:10px;" title="">
-								<span class="button-content">查询</span>
-								</button> --%>
-							
-						</div>
-							
-						<%-- <div class="form-row">	
-							
-							<!-- <a href="#" class="btn medium primary-bg"
-									style="margin-left:10px;" title=""> <span
-									class="button-content">查询</span> </a> --> 
-							<button type="submit" class="btn medium primary-bg" style="margin-left:10px;" title="">
-								<span class="button-content">查询</span>
-							</button>
-
 						</div>
 						<div>
-
-							<!--  <a href="#" class="btn medium ui-state-default" title="">
-					            <span class="button-content">取消</span>
-					        	</a> -->
-						</div> --%>
+						</div>
 					</form>
 					</div>
-					<div class="example-code">
 					
-						<a  title=".icon-plus-square-o" class="tooltip-button btn small bg-yellow" title="添加" >
-							<i class="glyph-icon icon-plus-square-o"></i>
-						</a><br><br>
-						
+					<div class="example-code">
 						
 						<table class="table table-condensed"> 
 							<thead>

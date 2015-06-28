@@ -90,6 +90,8 @@
 				<!-- 主要表格 -->
 				<!-- 表格 -->
 				<div class="example-box">
+				<!-- 查询 -->
+				<s:if test="#session.user.hasPrivilegeByName('入库查询')">
 					<div class="example-code">
 						<form action="${pageContext.request.contextPath }/orderin_query.do" method="post">
 						<div class="form-row">
@@ -129,30 +131,25 @@
 								<input type="text" name="timeDate" id="dateSecond" style="width:200px;height:28px;">
 							</div>
 						
-							<!-- <a href="#" class="btn medium primary-bg"
-									style="margin-left:10px;" title=""> <span
-									class="button-content">查询</span> </a> --> 
 							<button type="submit" class="btn medium primary-bg" style="margin-left:10px;" title="">
 								<span class="button-content">查询</span>
 							</button>
 
 						</div>
 						<div>
-
-							<!--  <a href="#" class="btn medium ui-state-default" title="">
-					            <span class="button-content">取消</span>
-					        	</a> -->
 						</div>
 					</form>
 					</div>
-					<div class="example-code">
+					</s:if>
 					
-					<!-- 	<a data-toggle="modal"  data-target="#addModal" title=".icon-plus-square-o" class="tooltip-button btn small bg-yellow" title="添加" href="#">
-							<i class="glyph-icon icon-plus-square-o"></i>
-						</a><br><br> -->
-					    <a data-toggle="modal"  title=".icon-plus-square-o" class="tooltip-button btn small bg-yellow" title="添加" href="${pageContext.request.contextPath }/orderin_detailPage.do">
-							<i class="glyph-icon icon-plus-square-o"></i>
-						</a><br><br>
+					<div class="example-code">
+						<!-- 入库添加 -->
+						<s:if test="#session.user.hasPrivilegeByName('入库添加')">
+						    <a data-toggle="modal"  title=".icon-plus-square-o" class="tooltip-button btn small bg-yellow" title="添加" href="${pageContext.request.contextPath }/orderin_detailPage.do">
+								<i class="glyph-icon icon-plus-square-o"></i>
+							</a><br><br>
+						</s:if>
+						
 						<table class="table table-condensed">
 							<thead>
 								<tr>
@@ -175,10 +172,14 @@
 									<td id="storageNumText_${id }">${user.userName}</td>
 									<td id="storageNumText_${id }">${site}</td>
 									<td>
-									<a data-toggle="modal"  data-target="#updateModal" href="" class="btn small bg-blue-alt tooltip-button" data-placement="top" title="更新" onclick="reshow(${id})">  
-									<i class="glyph-icon icon-edit"></i> </a>
-									<a data-toggle="modal"  data-target="#deleteModal" href="#" class="btn small bg-red tooltip-button" data-placement="top" title="删除" onclick="showId(${id})">
-									<i class="glyph-icon icon-remove"></i> </a>
+									<s:if test="#session.user.hasPrivilegeByName('入库修改')">
+										<a data-toggle="modal"  data-target="#updateModal" href="" class="btn small bg-blue-alt tooltip-button" data-placement="top" title="更新" onclick="reshow(${id})">  
+										<i class="glyph-icon icon-edit"></i> </a>
+									</s:if>
+									<s:if test="#session.user.hasPrivilegeByName('入库删除')">
+										<a data-toggle="modal"  data-target="#deleteModal" href="#" class="btn small bg-red tooltip-button" data-placement="top" title="删除" onclick="showId(${id})">
+										<i class="glyph-icon icon-remove"></i> </a>
+									</s:if>
 									</td>
 									</tr>
 								</s:iterator>

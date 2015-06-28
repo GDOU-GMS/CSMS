@@ -52,7 +52,6 @@
 		<script type="text/javascript" src="${pageContext.request.contextPath }/manage/documentation/assets/js/minified/aui-production.min.js"></script>
 
 		<script type="text/javascript" src="${pageContext.request.contextPath }/manage/documentation/assets/js/minified/core/raphael.min.js"></script>
-		<script type="text/javascript" src="${pageContext.request.contextPath }/manage/documentation/assets/js/minified/widgets/charts-justgage.min.js"></script>
 
 		<script type="text/javascript" src="${pageContext.request.contextPath }/manage/documentation/assets/js/DialogBySHF.js"></script>
 		<!--<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>-->
@@ -92,6 +91,8 @@
 				<!-- 主要表格 -->
 				<!-- 表格 -->
 				<div class="example-box">
+					<!-- 入库单添加 -->
+					<s:if test="#session.user.hasPrivilegeByName('出库单添加')">
 					<div class="example-code">
 						<form action="${pageContext.request.contextPath }/orderout_edit.do?id=${order.id}" method="post">
 						<div class="form-row">
@@ -135,30 +136,13 @@
 							     <input type="text" style="width:200px;height:28px;" name="site" id="" value="${order.user.userName}"  readonly="readonly">
 								
 							</div>
-							<%-- <button type="submit" class="btn medium primary-bg" style="margin-left:10px;" title="">
-							<span class="button-content">更新</span>
-							</button> --%>
-							</div>
 						</div>
 							
-						<%-- <div class="form-row">	
-							
-							<!-- <a href="#" class="btn medium primary-bg"
-									style="margin-left:10px;" title=""> <span
-									class="button-content">查询</span> </a> --> 
-							<button type="submit" class="btn medium primary-bg" style="margin-left:10px;" title="">
-								<span class="button-content">查询</span>
-							</button>
-
-						</div>
-						<div>
-
-							<!--  <a href="#" class="btn medium ui-state-default" title="">
-					            <span class="button-content">取消</span>
-					        	</a> -->
-						</div> --%>
+						
 					</form>
 					</div>
+					</s:if>
+					
 					<div class="example-code">
 					
 						<a data-toggle="modal"  data-target="#addModal" title="添加" class="tooltip-button btn small bg-yellow" title="添加" href="#">
@@ -192,11 +176,14 @@
 									<td id="storageNumText_${id }">${item.retail_price}</td>
 									<td id="storageNumText_${id }">${num}</td>
 									<td>
-									
-									<a data-toggle="modal"  data-target="#updateModal" href="" class="btn small bg-blue-alt tooltip-button" data-placement="top" title="更新" onclick="reshow(${id})">  
-									<i class="glyph-icon icon-edit"></i> </a>
-									<a data-toggle="modal"  data-target="#deleteModal" href="#" class="btn small bg-red tooltip-button" data-placement="top" title="删除" onclick="showId(${item.id})">
-									<i class="glyph-icon icon-remove"></i> </a>
+									<s:if test="#session.user.hasPrivilegeByName('出库单修改')">
+										<a data-toggle="modal"  data-target="#updateModal" href="" class="btn small bg-blue-alt tooltip-button" data-placement="top" title="更新" onclick="reshow(${id})">  
+										<i class="glyph-icon icon-edit"></i> </a>
+									</s:if>
+									<s:if test="#session.user.hasPrivilegeByName('出库单删除')">
+										<a data-toggle="modal"  data-target="#deleteModal" href="#" class="btn small bg-red tooltip-button" data-placement="top" title="删除" onclick="showId(${item.id})">
+										<i class="glyph-icon icon-remove"></i> </a>
+									</s:if>
 									</td>
 									</tr>
 								</s:iterator>

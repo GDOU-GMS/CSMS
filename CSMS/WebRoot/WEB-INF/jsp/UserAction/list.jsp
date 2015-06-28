@@ -89,6 +89,7 @@
 				<!-- 主要表格 -->
 				<!-- 表格 -->
 				<div class="example-box">
+					<s:if test="#session.user.hasPrivilegeByName('用户查询')">
 					<div class="example-code">
 						<form action="${pageContext.request.contextPath }/user_query.do" method="post">
 							<div class="form-row">
@@ -110,21 +111,18 @@
 								<button type="submit"class="btn medium primary-bg" style="margin-left:10px;">
 									<span class="button-content">查询 </span>
 								</button>
-								
 							</div>
-							
 							<div>
-
-								
 							</div>
 						</form>
 					</div>
+					</s:if>
 					<div class="example-code">
-					
-						<a data-toggle="modal"  data-target="#addModal" title=".icon-plus-square-o" class="tooltip-button btn small bg-yellow" title="添加" href="#">
-							<i class="glyph-icon icon-plus-square-o"></i>
-						</a><br><br>
-
+						<s:if test="#session.user.hasPrivilegeByName('用户添加')">
+							<a data-toggle="modal"  data-target="#addModal" title=".icon-plus-square-o" class="tooltip-button btn small bg-yellow" title="添加" href="#">
+								<i class="glyph-icon icon-plus-square-o"></i>
+							</a><br><br>
+						</s:if>
 						<table class="table table-condensed">
 							<thead>
 								<tr>
@@ -150,12 +148,18 @@
 									</td>
 									<td>
 									<s:if test="loginName != 'admin'">
-										<a data-toggle="modal"  data-target="#updateModal" href="#" class="btn small bg-blue-alt tooltip-button" data-placement="top" title="更新" onclick="getDetail(${id},'${intro }')">  
-										<i class="glyph-icon icon-edit"></i> </a>
-										<a data-toggle="modal"  data-target="#deleteModal" href="#" class="btn small bg-red tooltip-button" data-placement="top" title="删除" onclick="showDeleteId(${id})">
-										<i class="glyph-icon icon-remove"></i> </a>
-										<a href="${pageContext.request.contextPath }/user_resetPwd.do?id=${id}&pageNum=${pageNum}" class="btn small bg-green tooltip-button"  title="重置密码" onclick="confirm('你确定要将该用户密码重置为123456吗？')">  
-										<i class="glyph-icon icon-refresh"></i> </a>
+										<s:if test="#session.user.hasPrivilegeByName('用户修改')">
+											<a data-toggle="modal"  data-target="#updateModal" href="#" class="btn small bg-blue-alt tooltip-button" data-placement="top" title="更新" onclick="getDetail(${id},'${intro }')">  
+											<i class="glyph-icon icon-edit"></i> </a>
+										</s:if>
+										<s:if test="#session.user.hasPrivilegeByName('用户删除')">
+											<a data-toggle="modal"  data-target="#deleteModal" href="#" class="btn small bg-red tooltip-button" data-placement="top" title="删除" onclick="showDeleteId(${id})">
+											<i class="glyph-icon icon-remove"></i> </a>
+										</s:if>
+										<s:if test="#session.user.hasPrivilegeByName('重置密码')">
+											<a href="${pageContext.request.contextPath }/user_resetPwd.do?id=${id}&pageNum=${pageNum}" class="btn small bg-green tooltip-button"  title="重置密码" onclick="confirm('你确定要将该用户密码重置为123456吗？')">  
+											<i class="glyph-icon icon-refresh"></i> </a>
+										</s:if>
 									</s:if>
 									</td>
 								</tr>

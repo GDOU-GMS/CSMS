@@ -88,6 +88,7 @@
 				<!-- 主要表格 -->
 				<!-- 表格 -->
 				<div class="example-box">
+					<s:if test="#session.user.hasPrivilegeByName('仓库查询')">
 					<div class="example-code">
 						<form action="${pageContext.request.contextPath }/storage_query.do" method="post">
 							<div class="form-row">
@@ -107,15 +108,16 @@
 								<span class="button-content">查询</span></button>
 								
 							</div>
-						
-							
 						</form>
 					</div>
+					</s:if>
 					<div class="example-code">
 					
-						<a data-toggle="modal"  data-target="#addModal" title=".icon-plus-square-o" class="tooltip-button btn small bg-yellow" title="添加" href="#">
-							<i class="glyph-icon icon-plus-square-o"></i>
-						</a><br><br>
+						<s:if test="#session.user.hasPrivilegeByName('仓库添加')">
+							<a data-toggle="modal"  data-target="#addModal" title=".icon-plus-square-o" class="tooltip-button btn small bg-yellow" title="添加" href="#">
+								<i class="glyph-icon icon-plus-square-o"></i>
+							</a><br><br>
+						</s:if>
 
 						<table class="table table-condensed">
 							<thead>
@@ -135,10 +137,14 @@
 									<td id="nameText_${id }">${name }</td>
 									<td id="storageNumText_${id }">${storage_num }</td>
 									<td>
-									<a data-toggle="modal"  data-target="#updateModal" href="#" class="btn small bg-blue-alt tooltip-button" data-placement="top" title="更新" onclick="showText(${id},'${contacts }','${contacts_phone }')">  
-									<i class="glyph-icon icon-edit"></i> </a>
-									<a data-toggle="modal"  data-target="#deleteModal" href="#" class="btn small bg-red tooltip-button" data-placement="top" title="删除" onclick="showId(${id})">
-									<i class="glyph-icon icon-remove"></i> </a>
+									<s:if test="#session.user.hasPrivilegeByName('仓库修改')">
+										<a data-toggle="modal"  data-target="#updateModal" href="#" class="btn small bg-blue-alt tooltip-button" data-placement="top" title="更新" onclick="showText(${id},'${contacts }','${contacts_phone }')">  
+										<i class="glyph-icon icon-edit"></i> </a>
+									</s:if>
+									<s:if test="#session.user.hasPrivilegeByName('仓库删除')">
+										<a data-toggle="modal"  data-target="#deleteModal" href="#" class="btn small bg-red tooltip-button" data-placement="top" title="删除" onclick="showId(${id})">
+										<i class="glyph-icon icon-remove"></i> </a>
+									</s:if>
 									</td>
 									</tr>
 								</s:iterator>

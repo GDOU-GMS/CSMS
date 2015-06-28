@@ -148,6 +148,8 @@
 			<!-- 主要表格 -->
 			<!-- 表格 -->
 			<div class="example-box">
+			<!-- 查询 -->
+			<s:if test="#session.user.hasPrivilegeByName('货号查询')">
 				<div class="example-code">
 					<form action="${pageContext.request.contextPath }/item_query.do" method="post">
 						<div class="form-row">
@@ -184,6 +186,8 @@
 						</div>
 					</form>
 				</div>
+				</s:if>
+				
 				<div class="example-code">
 				
 				<!-- 	<a data-toggle="modal" data-target="#addModal" title=".icon-plus-square-o" class="tooltip-button btn small bg-yellow" title="添加" href="#" onclick="getColorAndSize()">
@@ -219,11 +223,18 @@
 								</td>
 
 								<td>
-									
-									<a data-toggle="modal" data-target="#updateModal" href="#" class="btn small bg-blue-alt tooltip-button" data-placement="top" title="更新" onclick="getItemById(${id})">
-										<i class="glyph-icon icon-edit"></i> </a>
-									<a data-toggle="modal" data-target="#deleteModal"  class="btn small bg-red tooltip-button" data-placement="top" title="删除"  href="#" onclick="getDeleteId(${id})">
-										<i class="glyph-icon icon-remove"></i> </a>
+									<!-- 货号修改 -->
+									<s:if test="#session.user.hasPrivilegeByName('货号修改')">
+										<a data-toggle="modal" data-target="#updateModal" href="#" class="btn small bg-blue-alt tooltip-button" data-placement="top" title="更新" onclick="getItemById(${id})">
+											<i class="glyph-icon icon-edit"></i> 
+										</a>
+									</s:if>
+									<!-- 货号删除 -->
+									<s:if test="#session.user.hasPrivilegeByName('货号删除 ')">
+										<a data-toggle="modal" data-target="#deleteModal"  class="btn small bg-red tooltip-button" data-placement="top" title="删除"  href="#" onclick="getDeleteId(${id})">
+											<i class="glyph-icon icon-remove"></i>
+										 </a>
+									</s:if>
 								</td>
 							</tr>
 							

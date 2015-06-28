@@ -90,6 +90,7 @@
 				<!-- 主要表格 -->
 				<!-- 表格 -->
 				<div class="example-box">
+				<s:if test="#session.user.hasPrivilegeByName('出库查询')">
 					<div class="example-code">
 						<form action="${pageContext.request.contextPath }/orderout_query.do" method="post">
 						<div class="form-row">
@@ -129,22 +130,16 @@
 								<input type="text" name="timeDate" id="dateSecond" style="width:200px;height:28px;">
 							</div>
 						
-							<!-- <a href="#" class="btn medium primary-bg"
-									style="margin-left:10px;" title=""> <span
-									class="button-content">查询</span> </a> --> 
 							<button type="submit" class="btn medium primary-bg" style="margin-left:10px;" title="">
 								<span class="button-content">查询</span>
 							</button>
 
 						</div>
 						<div>
-
-							<!--  <a href="#" class="btn medium ui-state-default" title="">
-					            <span class="button-content">取消</span>
-					        	</a> -->
 						</div>
 					</form>
 					</div>
+					</s:if>
 					<div class="example-code">
 					
 					<!-- 	<a data-toggle="modal"  data-target="#addModal" title=".icon-plus-square-o" class="tooltip-button btn small bg-yellow" title="添加" href="#">
@@ -175,11 +170,16 @@
 									<td id="storageNumText_${id }">${user.userName}</td>
 									<td id="storageNumText_${id }">${site}</td>
 									<td>
-									<a data-toggle="modal"  data-target="#updateModal" href="" class="btn small bg-blue-alt tooltip-button" data-placement="top" title="更新" onclick="reshow(${id})">  
-									<i class="glyph-icon icon-edit"></i> </a>
-									<a data-toggle="modal"  data-target="#deleteModal" href="#" class="btn small bg-red tooltip-button" data-placement="top" title="删除" onclick="showId(${id})">
-									<i class="glyph-icon icon-remove"></i> </a>
+									<s:if test="#session.user.hasPrivilegeByName('出库修改')">
+										<a data-toggle="modal"  data-target="#updateModal" href="" class="btn small bg-blue-alt tooltip-button" data-placement="top" title="更新" onclick="reshow(${id})">  
+										<i class="glyph-icon icon-edit"></i> </a>
+									</s:if>
+									<s:if test="#session.user.hasPrivilegeByName('出库删除')">
+										<a data-toggle="modal"  data-target="#deleteModal" href="#" class="btn small bg-red tooltip-button" data-placement="top" title="删除" onclick="showId(${id})">
+										<i class="glyph-icon icon-remove"></i> </a>
+									</s:if>
 									</td>
+									
 									</tr>
 								</s:iterator>
 								

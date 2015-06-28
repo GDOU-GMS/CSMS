@@ -99,10 +99,16 @@
 									<td>${(pageNum-1)*10+status.count }</td>
 									<td class="font-bold text-left" id="name_${id }">${name}</td>
 									<td>
-									<a data-toggle="modal"  data-target="#updateModal" href="#" class="btn small bg-blue-alt tooltip-button" data-placement="top"  title="更新" onclick="reshow(${id})">  
-									<i class="glyph-icon icon-edit"></i> </a>
-									<a data-toggle="modal"  data-target="#deleteModal" href="#" class="btn small bg-red tooltip-button" data-placement="top" title="删除" onclick="getId(${id})">
-									<i class="glyph-icon icon-remove"></i> </a>
+									<s:if test="#session.user.hasPrivilegeByName('颜色修改')">
+										<a data-toggle="modal"  data-target="#updateModal" href="#" class="btn small bg-blue-alt tooltip-button" data-placement="top"  title="更新" onclick="reshow(${id})">  
+											<i class="glyph-icon icon-edit"></i> 
+										</a>
+									</s:if>
+									<s:if test="#session.user.hasPrivilegeByName('颜色删除')">
+										<a data-toggle="modal"  data-target="#deleteModal" href="#" class="btn small bg-red tooltip-button" data-placement="top" title="删除" onclick="getId(${id})">
+											<i class="glyph-icon icon-remove"></i> 
+										</a>
+									</s:if>
 									</td>
 								</tr>
 								</s:iterator>
