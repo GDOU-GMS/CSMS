@@ -118,13 +118,13 @@
 
 						</div>
 						<div class="form-row">
-							<div class="form-label col-md-1 labelstyle">
+							<div class="form-label col-md-2 labelstyle">
 								<label for=""> 出库日期: </label>
 							</div>
 							<div class="form-input col-md-3">
-								<input type="text" style="width:200px;height:28px;" name="time" id="dateFirst">
+								<input type="text" style="width:200px;height:30px;" name="time" id="dateFirst">
 							</div>
-							<span style="display:inline;float:left;padding-right:15px;">至</span>
+							<span style="display:inline;float:left;padding-right:32px;">至</span>
 							<div class="form-input col-md-3 textstyle">
 								<input type="text" name="timeDate" id="dateSecond" style="width:200px;height:28px;">
 							</div>
