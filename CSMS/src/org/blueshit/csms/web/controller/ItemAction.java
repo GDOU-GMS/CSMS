@@ -158,12 +158,13 @@ public class ItemAction extends BaseAction<Item>{
 	 * @throws Exception
 	 */
 	public String query() throws Exception{
+		
 		//准备分页数据,模糊查询.
 		new QueryHelper(Item.class, "i")
 			.addWhereCondition(model.getItem_number()!=null&&!"".equals(model.getItem_number()),"i.item_number like ?", "%"+model.getItem_number()+"%")
 			.addWhereCondition(model.getBrand()!=null&&!"".equals(model.getBrand()),"i.brand like ?", "%"+model.getBrand()+"%")
 			.addWhereCondition(model.getColor_number()!=null&&!"".equals(model.getColor_number()),"i.color_number like ?", "%"+model.getColor_number()+"%")
-			.addWhereCondition(model.getSize()!=0,"i.size =", model.getSize())
+			.addWhereCondition(model.getSize()!=0,"i.size= ?", new Integer(model.getSize()))
 			.preparePageBean(itemService, pageNum);
 		//参数重传，解决分页链接问题.
 		ActionContext.getContext().put("querystatue", "querystatue");
@@ -182,11 +183,14 @@ public class ItemAction extends BaseAction<Item>{
 	public String getItemById() throws Exception{
 		//获取数据
 		Item item = itemService.findById(model.getId());
+		Item i = new Item();
+		i = item;
+		i.setOrderLists(null);
 		List<Color> colorList = colorService.findAll();
 		List<Size> sizeList = sizeService.findAll();
 		//封装到map
 		Map<String, Object> map = new HashMap<String,Object>();
-		map.put("item", item);
+		map.put("item", i);
 		map.put("colors", colorList);
 		map.put("sizes", sizeList);
 		this.setJsonMap(map);
@@ -238,10 +242,13 @@ public class ItemAction extends BaseAction<Item>{
 		 
 	 }
 	 
-	 public String getJsonById(){
-		
-		 
+	 public String getJsonById(){	 
 		 OrderList orderList=itemService.getByOrderListId(orderListId);
+		 Item item = new Item();
+		 item = orderList.getItem();
+		 item.setOrderLists(null);
+		 orderList.setOrder(null);
+		 orderList.setItem(item);
 		 Map<String,Object> map = new HashMap<String, Object>();
   	     map.put("orderList", orderList);
   	     this.setJsonMap(map);

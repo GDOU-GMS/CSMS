@@ -136,7 +136,7 @@ public class User implements Serializable{
 	public void setIntro(String intro) {
 		this.intro = intro;
 	}
-	@OneToMany(cascade={CascadeType.MERGE, CascadeType.PERSIST},fetch=FetchType.LAZY,mappedBy="user")
+	@OneToMany(cascade={CascadeType.MERGE, CascadeType.PERSIST},fetch=FetchType.EAGER,mappedBy="user")
 	public Set<Order> getOrders() {
 		return orders;
 	}

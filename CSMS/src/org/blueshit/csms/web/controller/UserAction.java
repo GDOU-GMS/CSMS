@@ -1,5 +1,6 @@
 package org.blueshit.csms.web.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -174,8 +175,22 @@ public class UserAction extends BaseAction<User>{
 	 */
 	public String getJsonById() throws Exception{
 		User user = userService.findById(model.getId());
+		User u = new User();
+		u.setId(user.getId());
+		u.setIntro(user.getIntro());
+		u.setLoginName(user.getLoginName());
+		u.setUserName(user.getUserName());
+		List<Role> list = new ArrayList<Role>();
+		for(Role r : user.getRoles()){
+			Role role = new Role();
+			role.setId(r.getId());
+			role.setName(r.getName());
+			list.add(role);
+		}
+		u.setRoles(new HashSet(list));
+		
 		Map<String , Object> map = new HashMap<String, Object>();
-		map.put("user", user);
+		map.put("user", u);
 		this.setJsonMap(map);
 		return "getJsonById";
 	}

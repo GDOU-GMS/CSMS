@@ -239,7 +239,7 @@
 		$.getJSON(url,{date:new Date(),id:id},function(data){
 			var size = data.size;
 			$("#updateId").val(id);
-			$("#updateName").val(size.num);
+			$("#updateSize").val(size.num);
 		});
 	}
 	//用户删除

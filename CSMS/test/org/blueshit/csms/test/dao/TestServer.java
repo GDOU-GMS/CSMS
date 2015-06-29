@@ -12,6 +12,8 @@ import org.blueshit.csms.service.RoleService;
 import org.blueshit.csms.service.SizeService;
 import org.blueshit.csms.service.StorageService;
 import org.blueshit.csms.service.UserService;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
@@ -20,6 +22,9 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("/applicationContext.xml")
 public class TestServer {
+	
+	@Resource
+	private SessionFactory sessionFactory;
 	
 	@Resource
 	private ColorService colorService;
@@ -62,6 +67,7 @@ public class TestServer {
 		Color color = colorService.findById(new Long(15));
 		System.out.println(color.getName());
 	}
+	
 	
 	
 }

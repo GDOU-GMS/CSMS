@@ -43,6 +43,7 @@ public class QueryHelper {
 	 * @param args
 	 */
 	public QueryHelper addWhereCondition(String condition, Object... args) {
+		
 		// 拼接
 		if (whereClause.length() == 0) {
 			whereClause = " WHERE " + condition;

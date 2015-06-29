@@ -20,11 +20,11 @@ public class Item implements Serializable{
 	private Long id;
 	private String item_number;
 	private String color_number;
-	private int size;
+	private Integer size;
 	private String brand;
 	private Long factory_price;
 	private Long retail_price;
-	private  String shell;
+	private String shell;
 	private String lining;
 	
 	private Set<OrderList> orderLists;
@@ -55,11 +55,13 @@ public class Item implements Serializable{
 		this.color_number = color_number;
 	}
 
-	public int getSize() {
+	
+
+	public Integer getSize() {
 		return size;
 	}
 
-	public void setSize(int size) {
+	public void setSize(Integer size) {
 		this.size = size;
 	}
 

@@ -92,7 +92,6 @@
 				<!-- 表格 -->
 				<div class="example-box">
 					<!-- 入库单添加 -->
-					<s:if test="#session.user.hasPrivilegeByName('出库单添加')">
 					<div class="example-code">
 						<form action="${pageContext.request.contextPath }/orderout_edit.do?id=${order.id}" method="post">
 						<div class="form-row">
@@ -141,7 +140,6 @@
 						
 					</form>
 					</div>
-					</s:if>
 					
 					<div class="example-code">
 					
@@ -248,11 +246,11 @@
       	<input type="hidden" name="pageNum" value="${pageNum}">
 		  <div class="form-group">
 		    <label for="storageNum">货号</label>
-		    <input type="text" class="form-control" name="item_number" placeholder="请输入单据编号">
+		    <input type="text" class="form-control" name="item_number" placeholder="请输入单据编号" required>
 		  </div>
 		  <div class="form-group">
 		    <label for="storageNum">品名</label>
-		    <input type="text" class="form-control" name="brand" placeholder="请输入单据编号">
+		    <input type="text" class="form-control" name="brand" placeholder="请输入单据品名" required>
 		  </div>
 		  <div class="form-group form-input">
 		    <label for="storageName">尺码</label>
@@ -274,15 +272,15 @@
 		  </div>
 		  <div class="form-group form-input">
 		    <label for="contacts_phone">进价</label>
-		    <input type="text" class="form-control"  name="factory_price" placeholder="请输入来源">
+		    <input type="text" class="form-control"  name="factory_price" placeholder="请输入进价" required>
 		  </div>
 		  <div class="form-group form-input">
 		    <label for="contacts_phone">售价</label>
-		    <input type="text" class="form-control"  name="retail_price" placeholder="请输入来源">
+		    <input type="text" class="form-control"  name="retail_price" placeholder="请输入售价" required>
 		  </div>
 		  <div class="form-group form-input">
 		    <label for="contacts_phone">数量</label>
-		    <input type="text" class="form-control"  name="num" placeholder="请输入来源">
+		    <input type="text" class="form-control"  name="num" placeholder="请输入数量" required>
 		  </div>
       </div>
       <div class="modal-footer">
@@ -313,11 +311,11 @@
       	<input type="hidden"  name="orderId" id="orderId">
 		  <div class="form-group">
 		    <label for="storageNum">货号</label>
-		    <input type="text" class="form-control" id="itemNumber" name="item_number" >
+		    <input type="text" class="form-control" id="itemNumber" name="item_number" required>
 		  </div>
 		  <div class="form-group">
 		    <label for="storageNum">品名</label>
-		    <input type="text" class="form-control" id="itemBrand" name="brand"  >
+		    <input type="text" class="form-control" id="itemBrand" name="brand" required >
 		  </div>
 		  <div class="form-group form-input">
 		    <label for="storageName">尺码</label>
@@ -339,15 +337,15 @@
 		  </div>
 		  <div class="form-group form-input">
 		    <label for="contacts_phone">进价</label>
-		    <input type="text" class="form-control" id="factoryPrice"  name="factory_price">
+		    <input type="text" class="form-control" id="factoryPrice"  name="factory_price" required>
 		  </div>
 		  <div class="form-group form-input">
 		    <label for="contacts_phone">售价</label>
-		    <input type="text" class="form-control" id="retailPrice" name="retail_price"  >
+		    <input type="text" class="form-control" id="retailPrice" name="retail_price" required >
 		  </div>
 		  <div class="form-group form-input">
 		    <label for="contacts_phone">数量</label>
-		    <input type="text" class="form-control" id="num" name="num"  >
+		    <input type="text" class="form-control" id="num" name="num" required >
 		  </div>
       </div>
       <div class="modal-footer">

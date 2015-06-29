@@ -51,7 +51,6 @@
 		<!-- Fides Admin JS -->
 		 <script type="text/javascript" src="${pageContext.request.contextPath}/manage/documentation/assets/js/minified/aui-production.min.js"></script> 
 		<script type="text/javascript" src="${pageContext.request.contextPath}/manage/documentation/assets/js/minified/core/raphael.min.js"></script>
-		<script type="text/javascript" src="${pageContext.request.contextPath}/manage/documentation/assets/js/minified/widgets/charts-justgage.min.js"></script>
 
 		<%-- <script type="text/javascript" src="${pageContext.request.contextPath}/manage/documentation/assets/js/DialogBySHF.js"></script> --%>
 		<script type="text/javascript" src="${pageContext.request.contextPath }/manage/documentation/js/jquery-2.0.0.min.js"></script>
@@ -131,7 +130,7 @@
 								<label for=""> 发往地址: </label>
 							</div>
 							<div class="form-input col-md-3">
-								<input type="text" style="width:200px;height:28px;" name="site" id="dateFirst"value="${order.site}" >
+								<input type="text" style="width:200px;height:28px;" name="site" id="dateFirst"value="${order.site}" required>
 							</div>
 								<button type="submit" class="btn medium primary-bg" style="margin-left:10px;" title="">
 							<span class="button-content">添加</span>

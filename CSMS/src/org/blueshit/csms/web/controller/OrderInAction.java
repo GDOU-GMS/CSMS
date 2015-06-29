@@ -228,6 +228,10 @@ public class OrderInAction extends BaseAction<Order> {
 	 
      public String getJsonById() throws Exception{
     	Order order=orderInService.findById(model.getId());
+    	order.setOrderLists(null);
+    	User user = new User();
+    	user.setUserName(order.getUser().getUserName());
+    	order.setUser(user);
     	Map<String,Object> map = new HashMap<String, Object>();
     	map.put("order", order);
     	this.setJsonMap(map);

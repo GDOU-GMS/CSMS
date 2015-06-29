@@ -119,9 +119,15 @@ public class RoleAction extends BaseAction<Role>{
 	 * @throws Exception
 	 */
 	public String delete() throws Exception{
-		roleService.delete(model.getId());
-		ActionContext.getContext().put("pageNum", pageNum);
-		return "toList";
+		try{
+			roleService.delete(model.getId());
+			ActionContext.getContext().put("pageNum", pageNum);
+			return "toList";
+		}catch(Exception e){
+			e.printStackTrace();
+			ActionContext.getContext().put("message", "你无法删除正在使用的角色！");
+			return "message";
+		}
 	}
 	
 	/**
@@ -171,8 +177,12 @@ public class RoleAction extends BaseAction<Role>{
 	 */
 	public String getJsonById() throws Exception{
 		Role role = roleService.findById(model.getId());
+		Role r = new Role();
+		r.setId(role.getId());
+		r.setName(role.getName());
+		r.setDescription(role.getDescription());
 		Map<String,Object> map = new HashMap<String,Object>();
-		map.put("role", role);
+		map.put("role", r);
 		this.setJsonMap(map);
 		return "getJsonById";
 	}

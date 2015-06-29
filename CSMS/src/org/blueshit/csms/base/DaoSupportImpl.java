@@ -101,7 +101,7 @@ public class  DaoSupportImpl<T> implements DaoSupport<T>{
 		
 		//获取数据列表
 		Query query  = getSession().createQuery(queryHelper.getQueryListHql());
-		List args = queryHelper.getParameters();
+		List<Object> args = queryHelper.getParameters();
 		//设置参数
 		if(args != null || args.size()>0){
 			for(int i=0;i<args.size();i++){

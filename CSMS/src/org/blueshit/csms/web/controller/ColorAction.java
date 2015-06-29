@@ -62,10 +62,11 @@ public class ColorAction extends BaseAction<Color>{
 		if(c!=null){
 			ActionContext.getContext().put("message", "该颜色已经存在！");
 			return "message";
+		}else{
+			colorService.save(model);
+			ActionContext.getContext().put("pageNum", pageNum);
+			return "toList";
 		}
-		colorService.save(model);
-		ActionContext.getContext().put("pageNum", pageNum);
-		return "toList";
 	}
 
 	/**
