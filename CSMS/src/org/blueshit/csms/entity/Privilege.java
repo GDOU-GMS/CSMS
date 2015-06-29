@@ -1,5 +1,6 @@
 package org.blueshit.csms.entity;
 
+import java.io.Serializable;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -16,7 +17,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="tb_privilege")
-public class Privilege {
+public class Privilege implements Serializable{
 
 	private Long id;
 	private String name;

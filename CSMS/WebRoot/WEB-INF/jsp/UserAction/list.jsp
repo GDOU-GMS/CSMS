@@ -324,7 +324,6 @@
       <div class="modal-body" style="margin:20px;">
       	<input type="hidden" name="id" id="deleteId">
       	 <input type="hidden" class="form-control" name="pageNum" value="${pageNum }" >
-      	 <input type="hidden" class="form-control" name="pageNum" id="${pageNum }" >
 		  <p>确认删除吗？</p>
       </div>
       <div class="modal-footer">

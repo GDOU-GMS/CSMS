@@ -98,7 +98,7 @@
 								<label for=""> 入库日期: </label>
 							</div>
 							<div class="form-input col-md-3">
-								<input type="text" style="width:200px;height:28px;" name="time" id="dateFirst" value="${order.time}" >
+								<input type="text" style="width:200px;height:28px;" name="time" id="dateFirst" value="${order.time}" required >
 							</div>
 							<div class="form-label col-md-2 labelstyle">
 								<label for=""> 所入仓库: </label>
@@ -129,7 +129,7 @@
 								<label for=""> 来源: </label>
 							</div>
 							<div class="form-input col-md-3">
-								<input type="text" style="width:200px;height:28px;" name="site" id="dateFirst"value="${order.site}" >
+								<input type="text" style="width:200px;height:28px;" name="site" id="dateFirst" value="${order.site}" required>
 							</div>
 								<button type="submit" class="btn medium primary-bg" style="margin-left:10px;" title="">
 							<span class="button-content">添加</span>

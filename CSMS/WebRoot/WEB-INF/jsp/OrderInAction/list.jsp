@@ -245,7 +245,7 @@
       	
 		  <div class="form-group">
 		    <label for="storageNum">单据编号</label>
-		    <input type="text" class="form-control" id="storageNum" name="number" placeholder="请输入单据编号">
+		    <input type="text" class="form-control" id="storageNum" name="number" placeholder="请输入单据编号" required>
 		  </div>
 		  <div class="form-group form-input">
 		    <label for="storageName">所入仓库</label>
@@ -273,7 +273,7 @@
 		  </div>
 		  <div class="form-group">
 		    <label for="storage_num">来源 </label>
-		    <input type="text" class="form-control" id="storage_num" name="site" placeholder="请输入来源">
+		    <input type="text" class="form-control" id="storage_num" name="site" placeholder="请输入来源" required>
 		  </div> 
       </div>
       <div class="modal-footer">
