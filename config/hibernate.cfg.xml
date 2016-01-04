@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+    "-//Hibernate/Hibernate Configuration DTD//EN"
+    "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+  <session-factory>
+      
+
+    <!-- 方言 -->
+    <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+    <!-- 设置自动创建|更新|验证数据库表结构 -->
+    <property name="hibernate.hbm2ddl.auto">update</property>
+    <!-- 是否在控制台显示sql -->
+    <property name="hibernate.show_sql">true</property>
+    
+    <!-- 是否格式化sql，优化显示 -->
+    <!-- <property name="hibernate.format_sql">true</property> -->
+    <!-- 是否开启二级缓存 -->
+    <property name="hibernate.cache.use_second_level_cache">false</property>
+    <!-- 是否开启查询缓存 -->
+   	<property name="hibernate.cache.use_query_cache">false</property>
+    <!-- 数据库批量查询最大数 -->
+    <property name="hibernate.jdbc.fetch_size">50</property>
+    <!-- 数据库批量更新、添加、删除操作最大数 -->
+    <property name="hibernate.jdbc.batch_size">50</property>
+    <!-- 指定hibernate在何时释放JDBC连接 -->
+    <property name="hibernate.connection.release_mode">auto</property>
+    <!-- 创建session方式 hibernate4.x 的方式,与spring整合的时候，默认就是以下方式，所以不用配 -->
+    <!-- <property name="hibernate.current_session_context_class">org.springframework.orm.hibernate4.SpringSessionContext</property> -->
+    <!-- javax.persistence.validation.mode默认情况下是auto的，就是说如果不设置的话它是会自动去你的classpath下面找一个bean-validation**包 所以把它设置为none即可 -->
+    <!-- <property name="javax.persistence.validation.mode">none</property> -->
+		
+	<mapping class="org.blueshit.csms.entity.User"/>
+	<mapping class="org.blueshit.csms.entity.Role"/>
+	<mapping class="org.blueshit.csms.entity.Privilege"/>
+	<mapping class="org.blueshit.csms.entity.Order"/>
+	<mapping class="org.blueshit.csms.entity.OrderList"/>
+	<mapping class="org.blueshit.csms.entity.Storage"/>
+	<mapping class="org.blueshit.csms.entity.Item"/>
+	<mapping class="org.blueshit.csms.entity.Color"/>
+	<mapping class="org.blueshit.csms.entity.Size"/>
+	
+  </session-factory>
+</hibernate-configuration>

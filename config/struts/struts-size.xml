@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+
+	
+	
+	<package name="sizeAction" namespace="/" extends="base">
+		
+		<action name="size_*" class="sizeAction" method="{1}">
+			<result name="list">/WEB-INF/jsp/SizeAction/list.jsp</result>
+			<result name="toList" type="redirectAction">size_list</result>
+			<result name="getJsonById" type="json">
+				<param name="root">jsonMap</param>
+			</result>
+		</action>
+		
+	</package>
+
+
+
+
+</struts>

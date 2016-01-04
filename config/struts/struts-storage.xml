@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+
+	
+	
+	<package name="storageAction" namespace="/" extends="base">
+		
+		<action name="storage_*" class="storageAction" method="{1}">
+			<result name="list">/WEB-INF/jsp/StorageAction/list.jsp</result>
+			<result name="toList" type="redirectAction">storage_list?pageNum=${pageNum}</result>
+			<result name="getJsonById" type="json">
+				<param name="root">jsonMap</param>
+			</result>
+		</action>
+		
+	</package>
+
+
+
+
+</struts>
